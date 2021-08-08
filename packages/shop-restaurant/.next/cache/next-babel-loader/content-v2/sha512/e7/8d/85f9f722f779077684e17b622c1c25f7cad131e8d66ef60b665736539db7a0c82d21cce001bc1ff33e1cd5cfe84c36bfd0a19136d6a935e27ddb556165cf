@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { gql } from '@apollo/client';\nexport const ADD_VISITA = gql`\n    mutation push_visitas ($clientid: String!,$cliente: Int!){\n        insert_visitas(objects: {cliente: $cliente, clientid: $clientid}) {\n        affected_rows\n        returning {\n            id\n        }\n        }\n    }\n`;","map":null,"metadata":{},"sourceType":"module"}

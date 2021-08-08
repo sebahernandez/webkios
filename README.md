@@ -1,3 +1,2 @@
 # web
-
-Web Shop 
+SHOP / ADMIN

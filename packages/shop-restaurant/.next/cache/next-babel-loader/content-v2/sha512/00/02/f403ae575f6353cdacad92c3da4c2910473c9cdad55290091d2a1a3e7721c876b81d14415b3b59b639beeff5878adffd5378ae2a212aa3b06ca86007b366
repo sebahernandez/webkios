@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { gql } from '@apollo/client';\nexport const GET_CATEGORIAS = gql`\n  query categorias_view_cid($clientid: String!) {\n    categorias_view_cid(where: {clientid: {_eq: $clientid}}) {\n      id\n      name \n      value\n      imageURL\n    }\n  }\n`;","map":null,"metadata":{},"sourceType":"module"}
