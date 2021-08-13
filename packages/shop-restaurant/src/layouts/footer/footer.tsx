@@ -37,7 +37,6 @@ export const Footer = ( ) => {
             <FooterLink href="#">Nuestro Blog</FooterLink>
             <FooterLink href="#">Seguimiento Pedido</FooterLink>
             <FooterLink href="#">Chat</FooterLink>
-            <FooterLink href="#">Conoce nuestros locales</FooterLink>
           </Column>
           <Column>
             <Heading>Servicio al Cliente</Heading>
