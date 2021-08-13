@@ -40,7 +40,7 @@ export const Footer = ( ) => {
             <FooterLink href="#">Conoce nuestros locales</FooterLink>
           </Column>
           <Column>
-            <Heading>Información Importante</Heading>
+            <Heading>Servicio al Cliente</Heading>
             <FooterLink href="#">Políticas de privacidad</FooterLink>
             <FooterLink href="#">Términos y condiciones</FooterLink>
             <FooterLink href="#">Ayuda</FooterLink>
