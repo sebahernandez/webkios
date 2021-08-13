@@ -34,15 +34,15 @@ export const Footer = ( ) => {
           </Column>
           <Column>
             <Heading>Enlaces</Heading>
-            <FooterLink href="#">Lee nuestro blog</FooterLink>
+            <FooterLink href="#">Nuestro Blog</FooterLink>
             <FooterLink href="#">Seguir mi pedido</FooterLink>
             <FooterLink href="#">Chat</FooterLink>
             <FooterLink href="#">Conoce nuestros locales</FooterLink>
           </Column>
           <Column>
             <Heading>Información Importante</Heading>
-            <FooterLink href="#">Politicas de privacidad</FooterLink>
-            <FooterLink href="#">Terminos y condiciones</FooterLink>
+            <FooterLink href="#">Políticas de privacidad</FooterLink>
+            <FooterLink href="#">Términos y condiciones</FooterLink>
             <FooterLink href="#">Ayuda</FooterLink>
             <FooterLink href="#">Contacto</FooterLink>
           </Column>
