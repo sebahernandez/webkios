@@ -31,6 +31,8 @@ export const Footer = ( ) => {
             <Heading>{data && data.info_shop_view[0].site_name}</Heading>
             <FooterLink href="#">Facebook</FooterLink>
             <FooterLink href="#">Instagram</FooterLink>
+            <FooterLink href="#">Youtube</FooterLink>
+            <FooterLink href="#">Linkedin</FooterLink>
           </Column>
           <Column>
             <Heading>Enlaces</Heading>
