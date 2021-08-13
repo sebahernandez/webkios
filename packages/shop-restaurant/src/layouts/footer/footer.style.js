@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Box = styled.div`
+export const Box = styled.div `
   padding: 80px 60px;
   background: #313131;
   position: flex;
@@ -12,7 +12,7 @@ export const Box = styled.div`
   }
 `;
 
-export const Container = styled.div`
+export const Container = styled.div `
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,24 +21,26 @@ export const Container = styled.div`
   /* background: red; */
 `;
 
-export const Column = styled.div`
+export const Column = styled.div `
   display: flex;
   flex-direction: column;
   text-align: left;
   margin-left: 60px;
 `;
 
-export const Row = styled.div`
+export const Row = styled.div `
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
-  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 
   @media (max-width: 1000px) {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 `;
 
-export const FooterLink = styled.a`
+export const FooterLink = styled.a `
   color: #fff;
   margin-bottom: 20px;
   font-size: 18px;
@@ -50,7 +52,7 @@ export const FooterLink = styled.a`
   }
 `;
 
-export const Heading = styled.p`
+export const Heading = styled.p `
   font-size: 24px;
   color: #fff;
   margin-bottom: 40px;
