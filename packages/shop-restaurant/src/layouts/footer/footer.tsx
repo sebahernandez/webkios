@@ -33,14 +33,14 @@ export const Footer = ( ) => {
             <FooterLink href="#">Instagram</FooterLink>
           </Column>
           <Column>
-            <Heading>Acerca de {data && data.info_shop_view[0].site_name}</Heading>
+            <Heading>Enlaces</Heading>
             <FooterLink href="#">Lee nuestro blog</FooterLink>
             <FooterLink href="#">Seguir mi pedido</FooterLink>
             <FooterLink href="#">Chat</FooterLink>
             <FooterLink href="#">Conoce nuestros locales</FooterLink>
           </Column>
           <Column>
-            <Heading>Información</Heading>
+            <Heading>Información Importante</Heading>
             <FooterLink href="#">Politicas de privacidad</FooterLink>
             <FooterLink href="#">Terminos y condiciones</FooterLink>
             <FooterLink href="#">Ayuda</FooterLink>
