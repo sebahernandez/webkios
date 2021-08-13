@@ -37,12 +37,11 @@ export const Footer = ( ) => {
           <Column>
             <Heading>Enlaces</Heading>
             <FooterLink href="#">Nuestro Blog</FooterLink>
-            <FooterLink href="#">Seguir mi pedido</FooterLink>
+            <FooterLink href="#">Seguimiento Pedido</FooterLink>
             <FooterLink href="#">Chat</FooterLink>
-            <FooterLink href="#">Conoce nuestros locales</FooterLink>
           </Column>
           <Column>
-            <Heading>Información Importante</Heading>
+            <Heading>Servicio al Cliente</Heading>
             <FooterLink href="#">Políticas de privacidad</FooterLink>
             <FooterLink href="#">Términos y condiciones</FooterLink>
             <FooterLink href="#">Ayuda</FooterLink>
