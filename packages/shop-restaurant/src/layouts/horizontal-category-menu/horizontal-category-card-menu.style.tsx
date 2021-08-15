@@ -28,7 +28,7 @@ export const ImageWrapper = styled.div<any>({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: 120,
+  height: 'auto',
   width: '100%',
   position: 'relative',
   overflow: 'hidden',

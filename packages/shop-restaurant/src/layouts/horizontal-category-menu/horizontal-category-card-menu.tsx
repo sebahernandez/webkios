@@ -92,9 +92,7 @@ export const HorizontalCategoryCardMenu = ({ type }: Props) => {
                 onClick={() => onCategoryClick(category.name)}
                 active={selectedQueries === category.name}
               >
-                <ImageWrapper>
-                  <Image url={category.imageURL} alt={category.name} />
-                </ImageWrapper>
+                <ImageWrapper></ImageWrapper>
                 <Title>{category.name}</Title>
               </ItemCard>
             </SwiperSlide>
