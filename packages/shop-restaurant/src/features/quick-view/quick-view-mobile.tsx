@@ -63,13 +63,8 @@ const QuickViewMobile: React.FunctionComponent<QuickViewProps> = ({
     categories,
   } = modalProps;
 
-  const { isRtl } = useLocale();
-
-  console.log('::: 666 ::::', gallery)
-  let gallery2 = JSON.parse(gallery)
-  console.log('::: 666 2::::', gallery2)
-  
- 
+  const { isRtl } = useLocale(); 
+  let gallery2 =  gallery.split(",")
   const handleAddClick = (e: any) => {
     e.stopPropagation();
     addItem(modalProps);

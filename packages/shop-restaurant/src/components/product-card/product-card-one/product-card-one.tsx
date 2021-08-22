@@ -144,7 +144,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <ProductCardWrapper onClick={handleQuickViewModal} className="product-card">
       <ProductImageWrapper>
         <Image
-          url={image}
+          url={ gallery.split(",")[0] }
           className="product-image"
           style={{ position: 'relative' }}
           alt={title}
