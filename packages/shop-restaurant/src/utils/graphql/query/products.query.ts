@@ -3,8 +3,8 @@ import { gql } from '@apollo/client';
 
 
 export const GET_PRODUCTS_X_CATEGORIA = gql`
-query n1($clientid: String!, $categoria: String) {
-  producto(where: {clientid: {_eq: $clientid}, _and: {categorias: {name: {_eq: $categoria} }}}) {
+query n1($clientid: String!, $categoria: String, $titulo: String) {
+  producto(where: {clientid: {_eq: $clientid}, _and: {categorias: {name: {_like: $categoria}}, nombre: {_like: $titulo}}}) {
     id
     clientid
     nombre
