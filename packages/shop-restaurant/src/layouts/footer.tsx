@@ -27,11 +27,11 @@ const Footer = () => {
     <Box>
       <FormattedMessage
         id='siteFooter'
-        defaultMessage='PickBazar is a product of'
+        defaultMessage='Tu Ecommerce'
       />
       &nbsp;
       <a href='#' target='_blank'>
-        RedQ, Inc.
+       Eserp corp.
       </a>
     </Box>
   );

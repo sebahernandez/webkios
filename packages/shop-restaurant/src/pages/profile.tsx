@@ -11,8 +11,7 @@ import {
   ContentBox,
 } from 'features/user-profile/user-profile.style';
 import Sidebar from 'features/user-profile/sidebar/sidebar';
-import { SEO } from 'components/seo';
-import Footer from 'layouts/footer/footer';
+import { SEO } from 'components/seo'; 
 import ErrorMessage from 'components/error-message/error-message';
 import config from 'setting/config'; 
 

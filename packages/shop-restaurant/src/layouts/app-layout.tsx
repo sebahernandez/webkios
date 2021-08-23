@@ -55,7 +55,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
 
       {children}
        
-        <Footer />
+       { visible &&  <Footer   /> } 
       
      
 
