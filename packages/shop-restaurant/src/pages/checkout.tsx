@@ -75,7 +75,7 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
         if( localStorage && localStorage.getItem('access_token')) {
 
             let access_token = JSON.parse(localStorage.getItem('access_token'))
-            if(access_token)
+            if(access_token && window.localStorage.getItem('client_logged'))
             {
               setEmail(JSON.parse(window.localStorage.getItem('client_logged')).username)
               if(data2){              

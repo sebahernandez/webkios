@@ -126,7 +126,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
 
   const handleSubmit = async () => {
      
-
+    alert('mierda')
     if ( true
       /*  !existeOrden() && calculatePrice() > 0 &&
          cartItemsCount > 0  */
@@ -158,8 +158,8 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
     if (isValid) {
        
       sessionStorage.setItem('items',JSON.stringify(items))
-      sessionStorage.setItem('address',clienteData.addresses.length > 0 ? clienteData.addresses[0].info: '[]')
-      sessionStorage.setItem('contact',clienteData.contacts.length > 0 ? clienteData.contacts[0].number: '[]')
+      sessionStorage.setItem('address',clienteData && clienteData.addresses.length > 0 ? clienteData.addresses[0].info: '[]')
+      sessionStorage.setItem('contact',clienteData && clienteData.contacts.length > 0 ? clienteData.contacts[0].number: '[]')
       sessionStorage.setItem('order',Date.now().toString())
       sessionStorage.setItem('itemscount',cartItemsCount)
       sessionStorage.setItem('date',date.toString())
