@@ -19,6 +19,7 @@ import { Button } from 'components/button/loadmore-button';
 import config from '../../../setting/config'; 
 import { GET_CATEGORIAS } from 'utils/graphql/query/categorias.query';
 import { GET_PRODUCTS_X_CATEGORIA } from 'utils/graphql/query/products.query';
+import { GET_PRODUCTS_X_TITULO } from 'utils/graphql/query/products.query';
 
 
 const ErrorMessage = dynamic(() =>
@@ -50,6 +51,7 @@ export const Products: React.FC<ProductsProps> = ({
   const router = useRouter();
   const cid =  config().SUBSCRIPTION_ID;
   let categoria = "";
+  let titulo = "";
   const { query } = useRouter();
  
   let { data:data1, loading:loading1, error:error1 } = useQuery(
@@ -66,7 +68,7 @@ export const Products: React.FC<ProductsProps> = ({
     
     categoria = (query.category===undefined?data1.categorias_view_cid[0].name:query.category);    
   }
-   
+ 
   const { data, error, loading, fetchMore, networkStatus } = useQuery(
     GET_PRODUCTS_X_CATEGORIA,
     {
@@ -78,7 +80,23 @@ export const Products: React.FC<ProductsProps> = ({
     }
   );
 
+  
+
+  const { data:data2, error:error2, loading:loading2, fetchMore:fetchMore2, networkStatus:networkStatus2 } = useQuery(
+    GET_PRODUCTS_X_TITULO,
+    {
+      variables: {
+        clientid: cid,
+        titulo: titulo
+      },
+      notifyOnNetworkStatusChange: true,
+    }
+  );
  
+  if(query.titulo !== undefined) {
+    titulo = query.titulo[0]
+    
+  }
 
   const loadingMore = networkStatus === NetworkStatus.fetchMore;
 
@@ -137,7 +155,7 @@ export const Products: React.FC<ProductsProps> = ({
   return (
     <>
       <ProductsRow>
-        {data.producto.map((item: any, index: number) => (
+        {(query.titulo === undefined) && data.producto.map((item: any, index: number) => (
           <ProductsCol
             key={index}
             style={type === 'book' ? { paddingLeft: 0, paddingRight: 1 } : {}}
@@ -154,7 +172,40 @@ export const Products: React.FC<ProductsProps> = ({
           </ProductsCol>
         ))}
       </ProductsRow>
-      {loadMore && data.producto.hasMore && (
+      <ProductsRow>
+        {(query.titulo !== undefined) && data2.producto.map((item: any, index: number) => (
+          <ProductsCol
+            key={index}
+            style={type === 'book' ? { paddingLeft: 0, paddingRight: 1 } : {}}
+          >
+            <ProductCardWrapper>
+              <Fade
+                duration={800}
+                delay={index * 10}
+                style={{ height: '100%' }}
+              >
+                {renderCard(type, item)}
+              </Fade>
+            </ProductCardWrapper>
+          </ProductsCol>
+        ))}
+      </ProductsRow>
+      {(query.titulo === undefined)  && loadMore && data.producto.hasMore && (
+        <ButtonWrapper>
+          <Button
+            onClick={handleLoadMore}
+            loading={loadingMore}
+            variant="secondary"
+            style={{
+              fontSize: 14,
+            }}
+            border="1px solid #f1f1f1"
+          >
+            <FormattedMessage id="loadMoreButton" defaultMessage="Cargar Mas" />
+          </Button>
+        </ButtonWrapper>
+      )}
+      {(query.titulo !== undefined)  && loadMore && data2.producto.hasMore && (
         <ButtonWrapper>
           <Button
             onClick={handleLoadMore}
