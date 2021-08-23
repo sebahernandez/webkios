@@ -15,9 +15,10 @@ import { useQuery, gql } from '@apollo/client';
 import config from 'setting/config';
 type Props = {
   className?: string;
+  visible: boolean;
 };
 
-const Header: React.FC<Props> = ({ className }) => {
+const Header: React.FC<Props> = ({ className, visible }) => {
   const {
     authState: { isAuthenticated },
     authDispatch,
@@ -69,7 +70,7 @@ const Header: React.FC<Props> = ({ className }) => {
     pathname === '/bakery';
   return (
   
-    <HeaderWrapper className={className} id="layout-header">
+   visible && <HeaderWrapper className={className} id="layout-header">
       <LeftMenu logo={data && data.info_shop_view[0].img_site_url} />
       {showSearch && <Search minimal={true} className="headerSearch" />}
       <RightMenu

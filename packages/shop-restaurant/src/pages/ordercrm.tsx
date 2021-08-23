@@ -3,8 +3,7 @@ import { NextPage } from 'next';
 import OrderCRM from 'features/user-profile/order/ordercrm';
 import {
   PageWrapper, 
-} from 'features/user-profile/user-profile.style';
-import Sidebar from 'features/user-profile/sidebar/sidebar';
+} from 'features/user-profile/user-profile.style'; 
 import { Modal } from '@redq/reuse-modal';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

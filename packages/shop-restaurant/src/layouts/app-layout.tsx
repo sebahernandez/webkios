@@ -28,8 +28,15 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
     pathname === '/furniture-two' ||
     pathname === '/grocery-two';
 
+
+
+   
+  let visible : boolean = true;
   const isHomePage = isCategoryPage(query.type) || pathname === '/bakery';
  
+  if(pathname === '/ordercrm') {
+     visible = false 
+  } 
   return (
     <LayoutWrapper className={`layoutWrapper ${className}`}>
       <Sticky enabled={isSticky} innerZ={1001}>
@@ -39,7 +46,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
           } desktop`}
         />
 
-        <Header
+        <Header visible={visible}
           className={`${isSticky ? 'sticky' : 'unSticky'} ${
             isHomePage ? 'home' : ''
           }`}

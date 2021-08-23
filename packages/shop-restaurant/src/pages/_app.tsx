@@ -30,15 +30,6 @@ const DemoSwitcher = dynamic(
   () => import("components/demo-switcher/switcher-btn")
 );
 
-const createApolloClient = () => {
-  return new ApolloClient({
-    link: new HttpLink({
-      uri: 'https://cuddly-hog-22.hasura.app/v1/graphql',
-      headers: {'content-type' : 'application/json', 'x-hasura-admin-secret': `kxUJ2vmT0kihpyf9x7MDVAj1OoURuQzMXhN9O8JuLvMhVk05aSIKL4IdQZ4WXNDN`}     
-   }),
-    cache: new InMemoryCache(),
-  });
- };
 
 const AppLayout = dynamic(() => import("layouts/app-layout"));
 
@@ -48,7 +39,6 @@ export default function ExtendedApp({ Component, pageProps }) {
   const desktop = useMedia("(min-width: 992px)");
   const apolloClient = useApollo(pageProps.initialApolloState);
   
-/*   const client = createApolloClient(); */
   return (
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={defaultTheme}>
