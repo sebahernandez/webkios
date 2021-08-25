@@ -3,7 +3,6 @@ import { Button } from 'components/button/button';
 import { FormattedMessage } from 'react-intl';
 import Popover from 'components/popover/popover';
 import { AuthorizedMenu } from './authorized-menu';
-import { avatar } from 'assets/images/user.jpg';
 
 
 interface Props {

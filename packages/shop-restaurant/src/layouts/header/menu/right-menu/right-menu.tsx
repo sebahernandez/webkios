@@ -10,7 +10,7 @@ const AuthMenu = dynamic(() => import('../auth-menu'), { ssr: false });
 type Props = {
   onLogout: () => void;
   onJoin: () => void;
-  avatar: string;
+  avatar: string | null;
   isAuthenticated: boolean;
 };
 

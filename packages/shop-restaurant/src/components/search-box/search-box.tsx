@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyledForm,
   StyledInput,
@@ -32,6 +32,9 @@ export const SearchBox: React.FC<Props> = ({
   shadow,
   ...rest
 }) => {
+
+  const [q, setQ] = useState("");
+
   return (
     <StyledForm
       onSubmit={onEnter}
@@ -54,11 +57,10 @@ export const SearchBox: React.FC<Props> = ({
         </>
       ) : (
         <>
-          <StyledCategoryName>{categoryType}</StyledCategoryName>
           <StyledInput
             type='search'
-            onChange={onChange}
-            value={value}
+            onChange={(e) => setQ(e.target.value)}
+            value={q}
             name={name}
             {...rest}
           />
