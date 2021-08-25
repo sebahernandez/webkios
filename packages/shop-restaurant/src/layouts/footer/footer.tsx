@@ -1,4 +1,5 @@
 import React from 'react';
+import { SocialIcon } from 'react-social-icons';
 import {
   Box,
   Container,
@@ -28,31 +29,33 @@ export const Footer = ( ) => {
       <Container>
         <Row>
           <Column>
-            <Heading>{data && data.info_shop_view[0].site_name}</Heading>
-            <FooterLink href="#">Facebook</FooterLink>
-            <FooterLink href="#">Instagram</FooterLink>
-            <FooterLink href="#">Youtube</FooterLink>
-            <FooterLink href="#">Linkedin</FooterLink>
+            <Heading>Redes Sociales</Heading>
+           <div className="d-flex">
+            <SocialIcon className="social-icon" url="#" network="whatsapp"/>
+            <SocialIcon className="social-icon" url="#" network="facebook"/>
+            <SocialIcon className="social-icon" url="#" network="instagram"/>
+           </div>
           </Column>
           <Column>
             <Heading>Enlaces</Heading>
-            <FooterLink href="#">Nuestro Blog</FooterLink>
-            <FooterLink href="#">Seguimiento Pedido</FooterLink>
-            <FooterLink href="#">Chat</FooterLink>
+            <FooterLink href="#">¿Donde esta mi pedido?</FooterLink>
+            <FooterLink href="#">Chatea con un ejecutivo</FooterLink>
           </Column>
           <Column>
             <Heading>Servicio al Cliente</Heading>
-            <FooterLink href="#">Políticas de privacidad</FooterLink>
+            <FooterLink href="#">Necesitas ayuda</FooterLink>
+            <FooterLink href="#">Politicas de privacidad</FooterLink>
             <FooterLink href="#">Términos y condiciones</FooterLink>
-            <FooterLink href="#">Ayuda</FooterLink>
-            <FooterLink href="#">Contacto</FooterLink>
+            <FooterLink href="#">Feedback o reaclamos</FooterLink>
           </Column>
+
+          
        
         </Row>
       </Container>
       
       <h6 style={{ color: 'gray', textAlign: 'center', padding: '20px 10px', borderTop: '1px solid #009E7F' }}>
-      {data && data.info_shop_view[0].site_name} | Por Tu-ecommerce.cl
+      www.tu-ecommerce.cl | by Agencia Eserp
       </h6>
      
     </Box>
