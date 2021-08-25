@@ -211,6 +211,10 @@ export const GlobalStyle = createGlobalStyle(({ theme }) =>
       objectFit: 'cover',
       objectPosition: 'center center',
     },
+
+    '.social-icon':{
+      marginRight:'20px',
+     },
     //@ts-ignore
     ...theme.globals,
 
