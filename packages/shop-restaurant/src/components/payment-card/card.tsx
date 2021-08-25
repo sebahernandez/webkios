@@ -33,7 +33,7 @@ const Card: React.FC<Props> = ({
   return (
     <PaymentCardWrapper className="payment-card" color={color}>
       <CardLogo>
-        <img src={logo} alt={`card-${id}`} />
+       {/*  <img src={logo} alt={`card-${id}`} /> */}
       </CardLogo>
       <CardNumTitle>Card Number</CardNumTitle>
       <CardNumber>
