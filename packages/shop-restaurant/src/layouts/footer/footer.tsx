@@ -10,7 +10,8 @@ import {
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query'; 
 import { useQuery, gql } from '@apollo/client';
 import config from 'setting/config';
-
+import {Facebook} from 'assets/icons/facebook';
+import {WhatsApp} from 'assets/icons/wathsapp';
 
 export const Footer = ( ) => {
 
@@ -28,24 +29,21 @@ export const Footer = ( ) => {
       <Container>
         <Row>
           <Column>
-            <Heading>{data && data.info_shop_view[0].site_name}</Heading>
-            <FooterLink href="#">Facebook</FooterLink>
-            <FooterLink href="#">Instagram</FooterLink>
-            <FooterLink href="#">Youtube</FooterLink>
-            <FooterLink href="#">Linkedin</FooterLink>
+            <Heading>Redes Sociales</Heading>
+            <FooterLink href="#"><Facebook /> </FooterLink>
+            <FooterLink href="#"><WhatsApp /></FooterLink> 
           </Column>
           <Column>
             <Heading>Enlaces</Heading>
-            <FooterLink href="#">Nuestro Blog</FooterLink>
-            <FooterLink href="#">Seguimiento Pedido</FooterLink>
-            <FooterLink href="#">Chat</FooterLink>
+            <FooterLink href="#">¿Donde está mi pedido?</FooterLink>
+            <FooterLink href="#">Chatea con un Ejecutivo</FooterLink> 
           </Column>
           <Column>
             <Heading>Servicio al Cliente</Heading>
+            <FooterLink href="#">Necesitas Ayuda</FooterLink>
             <FooterLink href="#">Políticas de privacidad</FooterLink>
             <FooterLink href="#">Términos y condiciones</FooterLink>
-            <FooterLink href="#">Ayuda</FooterLink>
-            <FooterLink href="#">Contacto</FooterLink>
+            <FooterLink href="#">Feedback o Reclamos</FooterLink>
           </Column>
        
         </Row>
