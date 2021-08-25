@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var isClient = !!(true && window.document && window.document.createElement);\nexport var useIsClient = function useIsClient() {\n  return isClient;\n};","map":null,"metadata":{},"sourceType":"module"}
