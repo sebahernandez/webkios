@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { gql } from '@apollo/client';\nexport const GET_CATEGORIES = gql`\n  query getCategories($type: String!) {\n    categories(type: $type) {\n      id\n      title\n      slug\n      icon\n      children {\n        id\n        title\n        slug\n      }\n    }\n  }\n`;","map":null,"metadata":{},"sourceType":"module"}
