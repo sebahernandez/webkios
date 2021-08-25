@@ -6,12 +6,10 @@ import AuthenticationForm from 'features/authentication-form';
 import { RightMenu } from './menu/right-menu/right-menu';
 import { LeftMenu } from './menu/left-menu/left-menu';
 import HeaderWrapper from './header.style';
-import LogoImage from 'assets/images/logo.svg';
-import UserImage from 'assets/images/user.jpg';
 import { isCategoryPage } from '../is-home-page';
 import Search from 'features/search/search';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import config from 'setting/config';
 type Props = {
   className?: string;
@@ -77,7 +75,7 @@ const Header: React.FC<Props> = ({ className, visible }) => {
         isAuthenticated={isAuthenticated}
         onJoin={handleJoin}
         onLogout={handleLogout}
-        avatar={UserImage}
+        avatar='assets/images/user.jpg'
       />
     </HeaderWrapper>
   );

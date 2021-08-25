@@ -22,8 +22,7 @@ import {
   DrawerMenu,
   DrawerMenuItem,
   UserOptionMenu,
-} from './header.style';
-import UserImage from 'assets/images/user.jpg';
+} from './header.style'; 
 import {
   MOBILE_DRAWER_MENU,
   PROFILE_PAGE,
@@ -102,7 +101,7 @@ const MobileDrawer: React.FunctionComponent = () => {
               {isAuthenticated ? (
                 <LoginView>
                   <UserAvatar>
-                    <img src={UserImage} alt='user_avatar' />
+                    <img src={'assets/images/user.jpg'} alt='user_avatar' />
                   </UserAvatar>
                   <UserDetails>
                     <h3>David Kinderson</h3>
