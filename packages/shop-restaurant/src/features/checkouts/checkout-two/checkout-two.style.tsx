@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
 
+
+
 const CheckoutWrapper = styled.div`
   width: 100%;
   display: flex;

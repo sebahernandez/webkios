@@ -65,9 +65,25 @@ type CartItemProps = {
   product: any;
 };
 
+
+let preference = {
+  items: [
+    {
+      title: 'Mi producto',
+      unit_price: 100,
+      quantity: 1,
+    }
+  ]
+};
+
+
 const OrderItem: React.FC<CartItemProps> = ({ product }) => {
+
   const { id, quantity, title, nombre, unit, precio, precio_venta } = product;
   const displayPrice = precio_venta ? precio_venta : precio;
+
+  
+
   return (
     <Items key={id}>
       <Quantity>{quantity}</Quantity>
@@ -123,10 +139,34 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
     }
   );
 
+  // SDK de Mercado Pago
+  const mercadopago = require ('mercadopago');
+  // Agrega credenciales
+  mercadopago.configure({
+      access_token: 'APP_USR-2672568876104049-082402-83e0b9ceb2e982344cd6dfdfd7b48289-659002112'
+  });
+
+
+  mercadopago.preferences.create(preference)
+  .then(function(response){
+    // Este valor reemplazará el string "<%= global.id %>" en tu HTML
+    // global.id = response.body.id;
+  }).catch(function(error){
+    console.log(error);
+  });
+
+  const checkout = mercadopago.checkout({
+    preference
+  });
+
+
+
 
   const handleSubmit = async () => {
      
-    alert('mierda')
+  
+     
+
     if ( true
       /*  !existeOrden() && calculatePrice() > 0 &&
          cartItemsCount > 0  */
@@ -342,7 +382,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
               <CheckoutSubmit>
                 <Button
                   type='button'
-                  onClick={handleSubmit}
+                  onClick={checkout.open()}
                  /*  disabled={!isValid} */
                   size='big'
                   loading={loading}
