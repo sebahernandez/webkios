@@ -140,9 +140,9 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
   );
 
   // SDK de Mercado Pago
-  const mercadopago = require ('mercadopago');
+  // const mercadopago = require ('mercadopago');
   // Agrega credenciales
-  mercadopago.configure({
+  /* mercadopago.configure({
       access_token: 'APP_USR-2672568876104049-082402-83e0b9ceb2e982344cd6dfdfd7b48289-659002112'
   });
 
@@ -157,7 +157,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
 
   const checkout = mercadopago.checkout({
     preference
-  });
+  }); */
 
 
 
@@ -382,7 +382,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
               <CheckoutSubmit>
                 <Button
                   type='button'
-                  onClick={checkout.open()}
+                  onClick={handleSubmit}
                  /*  disabled={!isValid} */
                   size='big'
                   loading={loading}
