@@ -1,8 +1,8 @@
 import React from 'react';
 export const Facebook = ({
-  color = 'currentColor',
-  width = '17px',
-  height = '17px',
+  color = 'white',
+  width = '30px',
+  height = '30px',
 }) => {
   return (
     <svg

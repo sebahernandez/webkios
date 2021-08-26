@@ -211,6 +211,14 @@ export const GlobalStyle = createGlobalStyle(({ theme }) =>
       objectFit: 'cover',
       objectPosition: 'center center',
     },
+
+    '.icon-instagram':{
+      marginLeft:'10px',
+    },
+    
+    '.icon-whatsapp':{
+      marginLeft:'10px',
+    },
     //@ts-ignore
     ...theme.globals,
 

@@ -11,6 +11,9 @@ import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
 import { useQuery, gql } from '@apollo/client';
 import config from 'setting/config';
 import { Facebook } from 'assets/icons/facebook';
+import { Instagram } from 'assets/icons/Instagram';
+import { Whatsapp } from 'assets/icons/Whatsapp';
+import { Heart } from 'assets/icons/Heart';
 
 
 export const Footer = ( ) => {
@@ -29,31 +32,32 @@ export const Footer = ( ) => {
       <Container>
         <Row>
           <Column>
-            <Heading>{data && data.info_shop_view[0].site_name}</Heading>
-             <Facebook />
-            <FooterLink href="#">Instagram</FooterLink>
-            <FooterLink href="#">Youtube</FooterLink>
-            <FooterLink href="#">Linkedin</FooterLink>
+            <Heading>Redes Sociales</Heading>
+            <div className="d-flex">
+              <Facebook/>
+              <Instagram/>
+              <Whatsapp/>
+             </div>
           </Column>
           <Column>
             <Heading>Enlaces</Heading>
-            <FooterLink href="#">Nuestro Blog</FooterLink>
-            <FooterLink href="#">Seguimiento Pedido</FooterLink>
-            <FooterLink href="#">Chat</FooterLink>
+            <FooterLink href="#">¿Donde esta mi pedido?</FooterLink>
+            <FooterLink href="#">Chatea con un ejecutivo</FooterLink>
+   
           </Column>
           <Column>
             <Heading>Servicio al Cliente</Heading>
-            <FooterLink href="#">Políticas de privacidad</FooterLink>
-            <FooterLink href="#">Términos y condiciones</FooterLink>
-            <FooterLink href="#">Ayuda</FooterLink>
-            <FooterLink href="#">Contacto</FooterLink>
+            <FooterLink href="#">Necesito ayuda</FooterLink>
+            <FooterLink href="#">Politicas de privacidad</FooterLink>
+            <FooterLink href="#">Terminos y condiciones</FooterLink>
+            <FooterLink href="#">Feedback o reclamos</FooterLink>
           </Column>
        
         </Row>
       </Container>
       
       <h6 style={{ color: 'gray', textAlign: 'center', padding: '20px 10px', borderTop: '1px solid #009E7F' }}>
-      {data && data.info_shop_view[0].site_name} | Por Tu-ecommerce.cl
+      {data && data.info_shop_view[0].site_name} | <Heart /> Por Tu-ecommerce.cl
       </h6>
      
     </Box>
