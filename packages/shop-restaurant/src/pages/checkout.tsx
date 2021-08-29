@@ -48,7 +48,7 @@ const data1 = {
 
 const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
 
-  const [email, setEmail] = React.useState('');
+  const [email] = React.useState(JSON.parse(localStorage.getItem('user_logged')).email);
   const [client, setClient] = React.useState('');
 
   const { data } = useQuery(GET_INFO_SHOP,
@@ -71,13 +71,17 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
       // document.title = `You clicked ${count} times`;
 
       if (typeof window !== 'undefined') {
+
+        if(data2 !== undefined){           
+          setClient(data2.cliente[0])
+        } 
             
         if( localStorage && localStorage.getItem('access_token')) {
 
             let access_token = JSON.parse(localStorage.getItem('access_token'))
             if(access_token && window.localStorage.getItem('client_logged'))
             {
-              setEmail(JSON.parse(window.localStorage.getItem('client_logged')).username)
+              
               if(data2){              
                 setClient(data2.cliente[0])
               } 

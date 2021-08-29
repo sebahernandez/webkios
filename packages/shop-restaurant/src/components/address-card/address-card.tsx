@@ -68,11 +68,13 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
  */
   const handleSubmit = async () => {
     if (isValid) {
+      alert(JSON.stringify(addressValue) )
     /*   const addressData = await addressMutation({
         variables: { addressInput: JSON.stringify(addressValue) },
       }); */
      /*  console.log(addressData, 'address data'); */
-      dispatch({ type: 'ADD_OR_UPDATE_ADDRESS', payload: addressValue });
+     /* dispatch({ type: 'ADD_OR_UPDATE_ADDRESS', payload: addressValue });  */
+
       closeModal();
     }
   };
