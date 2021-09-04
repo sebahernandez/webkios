@@ -48,7 +48,7 @@ const data1 = {
 
 const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
 
-  const [email] = React.useState(JSON.parse(localStorage.getItem('user_logged')).email);
+  const [email,SetEmail] = React.useState('');
   const [client, setClient] = React.useState('');
 
   const { data } = useQuery(GET_INFO_SHOP,
@@ -72,6 +72,8 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
 
       if (typeof window !== 'undefined') {
 
+        SetEmail(JSON.parse(localStorage.getItem('user_logged')).email)
+        
         if(data2 !== undefined){           
           setClient(data2.cliente[0])
         } 

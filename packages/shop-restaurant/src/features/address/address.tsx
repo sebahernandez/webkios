@@ -7,7 +7,8 @@ import UpdateAddress from 'components/address-card/address-card';
 import { handleModal } from 'features/checkouts/checkout-modal';
 import { ProfileContext } from 'contexts/profile/profile.context';
 import { useMutation } from '@apollo/client';
-import { DELETE_ADDRESS } from 'graphql/mutation/address';
+import { INSERT_ADDRESS } from 'utils/graphql/mutation/address';
+import { DELETE_ADDRESS } from 'utils/graphql/mutation/address';
 import { CardHeader } from 'components/card-header/card-header';
 import { ButtonGroup } from 'components/button-group/button-group';
 import { Box } from 'components/box';
@@ -44,7 +45,7 @@ const Address = ({
   } = useContext(ProfileContext); 
 
   const handleOnDelete = async (item) => {
-    dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
+    dispatch({ type: 'INSERT_ADDRESS', payload: item.id });
     /* return await deleteAddressMutation({
       variables: { addressId: JSON.stringify(item.id) },
     }); */
