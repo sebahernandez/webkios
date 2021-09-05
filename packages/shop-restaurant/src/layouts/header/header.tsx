@@ -13,6 +13,8 @@ import Search from 'features/search/search';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
 import { useQuery, gql } from '@apollo/client';
 import config from 'setting/config';
+import Cookies  from 'universal-cookie';
+
 type Props = {
   className?: string;
   visible: boolean;
@@ -23,12 +25,13 @@ const Header: React.FC<Props> = ({ className, visible }) => {
     authState: { isAuthenticated },
     authDispatch,
   } = React.useContext<any>(AuthContext);
+  const cookie = new Cookies()
   const defaultValue = { first: 'Ron', last: 'Burgundy' };
   const { pathname, query } = useRouter();
   const handleLogout = () => {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('user_logged');
+      cookie.remove('access_token');
+      cookie.remove('user_logged');
       authDispatch({ type: 'SIGN_OUT' });
       Router.push('/');
     }

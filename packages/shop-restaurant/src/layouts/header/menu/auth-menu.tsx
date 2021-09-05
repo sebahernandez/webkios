@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Popover from 'components/popover/popover';
 import { AuthorizedMenu } from './authorized-menu';
 import { avatar } from 'assets/images/user.jpg';
-
+import Cookies  from 'universal-cookie';
 
 interface Props {
   isAuthenticated: boolean;
@@ -14,21 +14,20 @@ interface Props {
 }
  
 const AuthMenu = ({ isAuthenticated, onJoin, onLogout, avatar }: Props) => {
-  let image='/assets/images/user.jpg';
-  let nombre='No Logged';
+  let image='/user.jpg';
+  let nombre='Invitado';
   let user = null;
   let access_token  = null;
+  const cookie = new Cookies()
 
   if(isAuthenticated){
-    if( localStorage && localStorage.getItem('user_logged') && localStorage.getItem('access_token')){
-      user = JSON.parse(localStorage.getItem('user_logged'))
-      access_token = JSON.parse(localStorage.getItem('access_token'))
+    if( cookie.get('user_logged') ){
+      user = cookie.get('user_logged')
+      access_token = cookie.get('access_token')
 
-      console.log(user.imageUrl)
-      console.log(user.name)
       if(user && access_token)  {
-          image =   user.imageUrl;
-          nombre = user.name;// + ' ' + user.display;
+          image =   user.image;
+          nombre = user.name; 
       }
     }
   }
