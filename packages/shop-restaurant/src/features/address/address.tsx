@@ -45,7 +45,7 @@ const Address = ({
   } = useContext(ProfileContext); 
 
   const handleOnDelete = async (item) => {
-    dispatch({ type: 'INSERT_ADDRESS', payload: item.id });
+    dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
     /* return await deleteAddressMutation({
       variables: { addressId: JSON.stringify(item.id) },
     }); */
