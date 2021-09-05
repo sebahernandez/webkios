@@ -1,16 +1,13 @@
 import React, { useContext } from 'react';
 import {
   LinkButton,
-  Button,
-  IconWrapper,
+  Button, 
   Wrapper,
-  Container,
-  LogoWrapper,
+  Container, 
   Heading,
   SubHeading,
   OfferSection,
-  Offer,
-  // Input,
+  Offer, 
   Divider,
 } from './authentication-form.style';
 import { Facebook } from 'assets/icons/facebook';
@@ -19,14 +16,14 @@ import { AuthContext } from 'contexts/auth/auth.context';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { closeModal } from '@redq/reuse-modal';
 import { Input } from 'components/forms/input';
-import { useQuery,useMutation, NetworkStatus } from '@apollo/client';
+import { useQuery,useMutation } from '@apollo/client';
 import { GET_CLIENTE_USERNAME_PASSWORD } from '../../utils/graphql/query/clients.query';
 import { GET_CLIENTE_USERNAME } from '../../utils/graphql/query/clients.query';
 import { SET_CLIENTE } from '../../utils/graphql/mutation/register_client';
 import { ADD_VISITA } from '../../utils/graphql/mutation/visitas';
-import GoogleLogin from 'react-google-login';
-import router from 'next/router';
- 
+import GoogleLogin from 'react-google-login'; 
+import Cookies  from 'universal-cookie';
+
 
 export default function SignInModal({cid}) { 
   const intl = useIntl();
@@ -38,6 +35,7 @@ export default function SignInModal({cid}) {
   const [password, setPassword] = React.useState('');
   const [addVisita] = useMutation(ADD_VISITA );
   const [setCliente] = useMutation(SET_CLIENTE );
+  
   const { data, error,loading } =  useQuery(
     GET_CLIENTE_USERNAME_PASSWORD,
     {
@@ -61,10 +59,16 @@ export default function SignInModal({cid}) {
     function GoogleButton ({isclosed}) {
     
       const responseGoogle = (response) => {
-        
-           setUser(response.profileObj);
-           localStorage.setItem('user_logged', JSON.stringify(response.profileObj));
-           localStorage.setItem('access_token', JSON.stringify(response.accessToken));
+           const cookie = new Cookies()
+           
+           setUser(response.profileObj); 
+           const user = {
+             image: response.profileObj.imageUrl,
+             email: response.profileObj.email,
+             name: response.profileObj.name
+           }
+           cookie.set('user_logged', user,{path: '/'})
+           cookie.set('access_token', JSON.stringify(response.accessToken),{path: '/'})
            authDispatch({ type: 'SIGNIN_SUCCESS' });  
            closeModal(); 
       }

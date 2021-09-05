@@ -1,8 +1,12 @@
 import React, { useReducer } from 'react';
 import { AuthContext } from './auth.context';
 const isBrowser = typeof window !== 'undefined';
+import Cookies  from 'universal-cookie';
+
+const cookie = new Cookies()
+
 const INITIAL_STATE = {
-  isAuthenticated: isBrowser && !!localStorage.getItem('access_token'),
+  isAuthenticated: isBrowser && !!cookie.get('access_token'),
   currentForm: 'signIn',
 };
 

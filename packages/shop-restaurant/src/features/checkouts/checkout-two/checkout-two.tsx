@@ -124,7 +124,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
   } = useCart();
   const [loading, setLoading] = useState(false);
   const [isValid, setIsValid] = useState(false);
-  let { card, schedules } = state; 
+  let { card, schedules } = state;  
   const [address, setAddress] = useState(clienteData.addresses);
   const [contact, setContact] = useState(clienteData.contacts); 
   const size = useWindowSize();
@@ -282,7 +282,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
       <CheckoutWrapper>
         <CheckoutContainer>
           <CheckoutInformation>
-             
+            {/* Direccion  de consumidor */}
             <InformationBox>
               <Address
                 address={clienteData.addresses}

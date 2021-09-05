@@ -9,6 +9,10 @@ import { useMutation } from '@apollo/client';
 import { FieldWrapper, Heading } from './address-card.style';
 import { ProfileContext } from 'contexts/profile/profile.context';
 import { FormattedMessage } from 'react-intl';
+import { UPDATE_ADDRESS } from 'utils/graphql/mutation/address';
+import { INSERT_ADDRESS } from 'utils/graphql/mutation/address';
+
+
 
 // Shape of form values
 interface FormValues {
@@ -64,15 +68,28 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
   };
   const { state, dispatch } = useContext(ProfileContext);
 
-/*   const [addressMutation, { data }] = useMutation(UPDATE_ADDRESS);
- */
+  const [addressMutation, { data }] = useMutation(UPDATE_ADDRESS);
+
+  const [addressInsertMutation] = useMutation(INSERT_ADDRESS);
+
   const handleSubmit = async () => {
     if (isValid) {
-    /*   const addressData = await addressMutation({
-        variables: { addressInput: JSON.stringify(addressValue) },
-      }); */
-     /*  console.log(addressData, 'address data'); */
-      dispatch({ type: 'ADD_OR_UPDATE_ADDRESS', payload: addressValue });
+      console.log(JSON.stringify(addressValue) )
+
+
+      const addressData = await addressMutation({
+          variables: { 
+            clientid: 'XIJX3-WR3EG-N0ZNH-DMS8E',
+            cliente: 41,            
+            name: 'test casa',
+            type: 'secondary',
+            info: 'calle #1231'
+           },
+      }); 
+
+     console.log(addressData, 'address data');
+     /* dispatch({ type: 'ADD_OR_UPDATE_ADDRESS', payload: addressValue });  */
+
       closeModal();
     }
   };
