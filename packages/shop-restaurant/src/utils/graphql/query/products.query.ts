@@ -12,7 +12,6 @@ query n1($clientid: String!, $categoria: String, $titulo: String) {
     precio
     cantidad
     unidad
-    imageURL
     gallery
     categoria
     descripcion
@@ -37,7 +36,6 @@ query n1($clientid: String!, $titulo: String) {
     precio
     cantidad
     unidad
-    imageURL
     gallery
     categoria
     descripcion
