@@ -1,1 +1,0 @@
-{"ast":null,"code":"function config() {\n  const param = {\n    SUBSCRIPTION_ID: 'XIJX3-WR3EG-N0ZNH-DMS8E'\n  };\n  return param;\n}\n\nexport default config;","map":null,"metadata":{},"sourceType":"module"}

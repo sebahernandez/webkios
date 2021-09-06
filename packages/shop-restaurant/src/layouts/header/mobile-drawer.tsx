@@ -9,6 +9,7 @@ import NavLink from 'components/nav-link/nav-link';
 import { CloseIcon } from 'assets/icons/CloseIcon';
 import { AuthContext } from 'contexts/auth/auth.context';
 import AuthenticationForm from 'features/authentication-form';
+import Cookies  from 'universal-cookie';
 import {
   DrawerBody,
   HamburgerIcon,
@@ -33,6 +34,7 @@ import { useAppState, useAppDispatch } from 'contexts/app/app.provider';
 const MobileDrawer: React.FunctionComponent = () => {
   const isDrawerOpen = useAppState('isDrawerOpen');
   const dispatch = useAppDispatch();
+  const cookie = new Cookies()
   const {
     authState: { isAuthenticated },
     authDispatch,
@@ -46,7 +48,7 @@ const MobileDrawer: React.FunctionComponent = () => {
 
   const handleLogout = () => {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('access_token');
+      cookie.remove('access_token');
       authDispatch({ type: 'SIGN_OUT' });
       Router.push('/');
     }

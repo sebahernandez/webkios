@@ -3,12 +3,12 @@ import { NextPage, GetStaticProps } from 'next';
 import { Modal } from '@redq/reuse-modal';
 import { SEO } from 'components/seo';
 import Checkout from 'features/checkouts/checkout-two/checkout-two';
-import { ProfileProvider } from 'contexts/profile/profile.provider';
-import { initializeApollo } from 'utils/apollo';
+import { ProfileProvider } from 'contexts/profile/profile.provider'; 
 import { useQuery, gql } from '@apollo/client';
 import config from 'setting/config';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
 import { GET_CLIENTE_USERNAME } from 'utils/graphql/query/clients.query';
+import Cookies  from 'universal-cookie';
 
 type Props = {
   deviceType: {
@@ -48,8 +48,10 @@ const data1 = {
 
 const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
 
-  const [email, setEmail] = React.useState('');
-  const [client, setClient] = React.useState('');
+  
+  const [client, setClient] = React.useState('')
+  const cookie = new Cookies()
+  const [email] = React.useState(cookie.get('user_logged') && cookie.get('user_logged').email)
 
   const { data } = useQuery(GET_INFO_SHOP,
     {
@@ -66,24 +68,10 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
         }
     }); 
     
-    useEffect(() => {
-      // Actualiza el título del documento usando la API del navegador
-      // document.title = `You clicked ${count} times`;
-
-      if (typeof window !== 'undefined') {
-            
-        if( localStorage && localStorage.getItem('access_token')) {
-
-            let access_token = JSON.parse(localStorage.getItem('access_token'))
-            if(access_token && window.localStorage.getItem('client_logged'))
-            {
-              setEmail(JSON.parse(window.localStorage.getItem('client_logged')).username)
+    useEffect(() => { 
               if(data2){              
                 setClient(data2.cliente[0])
-              } 
-            }
-        }
-    }  
+              }  
     });
 
 

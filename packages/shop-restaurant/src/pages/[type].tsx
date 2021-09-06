@@ -4,13 +4,10 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Modal } from '@redq/reuse-modal';
 import Carousel from 'components/carousel/carousel';
-import { Banner } from 'components/banner/banner';
-import { MobileBanner } from 'components/banner/mobile-banner';
+import { Banner } from 'components/banner/banner'; 
 import { HorizontalCategoryCardMenu } from 'layouts/horizontal-category-menu/horizontal-category-card-menu';
-import { Box } from 'components/box';
 import {
-  MainContentArea,
-  SidebarSection,
+  MainContentArea, 
   ContentSection,
   OfferSection,
   MobileCarouselDropdown,
@@ -24,10 +21,9 @@ import { initializeApollo } from 'utils/apollo';
 import { GET_PRODUCTS } from 'graphql/query/products.query';
 import { GET_CATEGORIES } from 'graphql/query/category.query';
 import { ModalProvider } from 'contexts/modal/modal.provider';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import config from 'setting/config';
-import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
-import { ADD_ORDER } from 'utils/graphql/mutation/order';
+import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query'; 
 
 const Sidebar = dynamic(() => import('layouts/sidebar/sidebar'));
 const Products = dynamic(() =>
