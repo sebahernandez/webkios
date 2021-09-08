@@ -200,7 +200,6 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
       sessionStorage.setItem('items',JSON.stringify(items))
       sessionStorage.setItem('address',clienteData && clienteData.addresses.length > 0 ? clienteData.addresses[0].info: '[]')
       sessionStorage.setItem('contact',clienteData && clienteData.contacts.length > 0 ? clienteData.contacts[0].number: '[]')
-      sessionStorage.setItem('order',Date.now().toString())
       sessionStorage.setItem('itemscount',cartItemsCount)
       sessionStorage.setItem('date',date.toString())
       sessionStorage.setItem('datedelivery',datedelivery.toString())
@@ -227,7 +226,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
                 total: calculatePrice(), 
                 subtotal: calculateSubTotalPrice(), 
                 metodo_pago: 'card', 
-                order: sessionStorage.getItem('order').toString(), 
+                order: Date.now().toString(), 
                 items: JSON.stringify(items),
                 itemcount: cartItemsCount,
                 discount: calculateDiscount(),

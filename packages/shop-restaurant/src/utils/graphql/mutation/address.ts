@@ -16,9 +16,12 @@ mutation deleteAddress($id: Int!, $clientid: String!, $cliente: Int!) {
 `;
 
 export const INSERT_ADDRESS = gql`
-mutation addAddress($clientid: String!, $info: String!, $cliente: Int!, $name: String!,$type: String) {
-  insert_address(objects: {clientid: $clientid, info: $info, cliente: $cliente, name: $name, type: $type}) {
+mutation addAddress($name: String!, $info: String!,$clientid: String!, $type: String!, $cliente: Int!) {
+  insert_address(objects: { clientid: $clientid, info: $info, name: $name, type: $type, cliente: $cliente}) {
     affected_rows
+    returning {
+      id
+    }
   }
 }
 `;
