@@ -23,7 +23,7 @@ type FormValues = {
 };
 
 const ContactValidationSchema = Yup.object().shape({
-  number: Yup.string().required('Number is required'),
+  number: Yup.string().required('Número de Contacto es Requerido'),
 });
 
 const CreateOrUpdateContact: React.FC<Props> = ({ item }) => {

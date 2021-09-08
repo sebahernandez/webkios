@@ -8,10 +8,14 @@ import { ProfileContext } from 'contexts/profile/profile.context';
 import CreateOrUpdateContact from 'components/contact-card/contact-card';
 import { useMutation } from '@apollo/client';
 import { DELETE_CONTACT } from 'graphql/mutation/contact';
+
 import { CardHeader } from 'components/card-header/card-header';
 import { ButtonGroup } from 'components/button-group/button-group';
 import { Box } from 'components/box';
 import { Plus } from 'assets/icons/PlusMinus';
+import config from 'setting/config';
+import Cookies  from 'universal-cookie';
+
 interface Props {
   increment?: boolean;
   flexStart?: boolean;
@@ -39,10 +43,16 @@ const Contact = ({
     dispatch,
   } = useContext(ProfileContext);
 
+  const cookie = new Cookies()
+
   const handleOnDelete = async (item) => {
     dispatch({ type: 'DELETE_CONTACT', payload: item.id });
     return await deleteContactMutation({
-      variables: { contactId: JSON.stringify(item.id) },
+      variables: { 
+        "id": JSON.stringify(item.id),
+        "cliente": cookie.get('customer'),
+        "clientid": config().SUBSCRIPTION_ID
+      },
     });
   };
   return (
@@ -50,7 +60,7 @@ const Contact = ({
       <CardHeader increment={increment}>
         <FormattedMessage
           id='contactNumberText'
-          defaultMessage='Select Your Contact Number'
+          defaultMessage='Seleccionar su número de Contacto'
         />
       </CardHeader>
       <ButtonGroup flexStart={flexStart}>
@@ -88,7 +98,7 @@ const Contact = ({
               )}
               <FormattedMessage
                 id='addContactBtn'
-                defaultMessage='Add Contact'
+                defaultMessage='Agregar Número'
               />
             </Button>
           }
