@@ -4,15 +4,14 @@ import { withFormik, FormikProps, Form } from 'formik';
 import { closeModal } from '@redq/reuse-modal';
 import TextField from 'components/forms/text-field';
 import { Button } from 'components/button/button';
-import { useMutation } from '@apollo/client';
-/* import { UPDATE_ADDRESS } from 'graphql/mutation/address'; */
+import { useMutation } from '@apollo/client'; 
 import { FieldWrapper, Heading } from './address-card.style';
 import { ProfileContext } from 'contexts/profile/profile.context';
 import { FormattedMessage } from 'react-intl';
 import { UPDATE_ADDRESS } from 'utils/graphql/mutation/address';
 import { INSERT_ADDRESS } from 'utils/graphql/mutation/address';
-
-
+import config from 'setting/config';
+import Cookies  from 'universal-cookie';
 
 // Shape of form values
 interface FormValues {
@@ -25,7 +24,7 @@ interface FormValues {
 interface MyFormProps {
   item?: any | null;
 }
-
+const cookie = new Cookies()
 // Wrap our form with the using withFormik HoC
 const FormEnhancer = withFormik<MyFormProps, FormValues>({
   // Transform outer props into form values
@@ -37,11 +36,11 @@ const FormEnhancer = withFormik<MyFormProps, FormValues>({
     };
   },
   validationSchema: Yup.object().shape({
-    name: Yup.string().required('Title is required!'),
-    info: Yup.string().required('Address is required'),
+    name: Yup.string().required('El Título es un dato requerido!'),
+    info: Yup.string().required('La Dirección es Requerida'),
   }),
   handleSubmit: (values) => {
-    console.log(values, 'values');
+ 
     // do submitting things
   },
 });
@@ -55,8 +54,7 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
     errors,
     dirty,
     handleChange,
-    handleBlur,
-
+    handleBlur, 
     handleReset,
     isSubmitting,
   } = props;
@@ -65,33 +63,45 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
     type: 'secondary',
     name: values.name,
     info: values.info,
-  };
+  }; 
   const { state, dispatch } = useContext(ProfileContext);
 
   const [addressMutation, { data }] = useMutation(UPDATE_ADDRESS);
 
-  const [addressInsertMutation] = useMutation(INSERT_ADDRESS);
+  const [addressInsertMutation] = useMutation(INSERT_ADDRESS); 
 
   const handleSubmit = async () => {
-    if (isValid) {
-      console.log(JSON.stringify(addressValue) )
-
-
-      const addressData = await addressMutation({
+    
+    if (isValid && item === 'add-address-modal') { 
+      const addressData = await addressInsertMutation({
           variables: { 
-            clientid: 'XIJX3-WR3EG-N0ZNH-DMS8E',
-            cliente: 41,            
-            name: 'test casa',
-            type: 'secondary',
-            info: 'calle #1231'
-           },
-      }); 
-
-     console.log(addressData, 'address data');
-     /* dispatch({ type: 'ADD_OR_UPDATE_ADDRESS', payload: addressValue });  */
-
+            "name": values.name,
+            "info": values.info,
+            "type": "secondary",
+            "cliente": cookie.get('customer'),
+            "clientid": config().SUBSCRIPTION_ID
+          },
+      });  
       closeModal();
+    }else {
+      if (isValid) { 
+        const addressData = await addressMutation({
+            variables: { 
+              "id": values.id,
+              "name": values.name,
+              "info": values.info,  
+              "type": item.type,
+              "cliente": cookie.get('customer'),
+              "clientid": config().SUBSCRIPTION_ID
+            },
+        }); 
+           /* dispatch({ type: 'ADD_OR_UPDATE_ADDRESS', payload: addressValue });  */
+        closeModal();
+      }
     }
+
+
+
   };
   return (
     <Form>

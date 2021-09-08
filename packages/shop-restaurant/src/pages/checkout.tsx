@@ -4,10 +4,10 @@ import { Modal } from '@redq/reuse-modal';
 import { SEO } from 'components/seo';
 import Checkout from 'features/checkouts/checkout-two/checkout-two';
 import { ProfileProvider } from 'contexts/profile/profile.provider'; 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, useSubscription } from '@apollo/client';
 import config from 'setting/config';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
-import { GET_CLIENTE_USERNAME } from 'utils/graphql/query/clients.query';
+import { SUBSCRIPTION_CLIENTE_USERNAME } from 'utils/graphql/query/clients.query';
 import Cookies  from 'universal-cookie';
 
 type Props = {
@@ -17,9 +17,7 @@ type Props = {
     desktop: boolean;
   };
 };
-
-
-
+ 
 const data1 = {
   me : {
     id:12,
@@ -60,9 +58,9 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
         }
     }); 
 
-  const { data:data2, error, refetch, fetchMore } = useQuery(GET_CLIENTE_USERNAME,
+  const { data:data2, error } = useSubscription(SUBSCRIPTION_CLIENTE_USERNAME,
     {
-        variables: {
+        variables: {  
           clientid: config().SUBSCRIPTION_ID,
           username: email
         }
@@ -71,6 +69,7 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
     useEffect(() => { 
               if(data2){              
                 setClient(data2.cliente[0])
+                cookie.set('customer',data2.cliente[0].id)
               }  
     });
 

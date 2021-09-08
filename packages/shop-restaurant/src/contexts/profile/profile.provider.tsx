@@ -1,8 +1,7 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import schedules from 'features/checkouts/data';
-import { ProfileContext } from './profile.context';
-
+import { ProfileContext } from './profile.context';  
 type Action =
   | { type: 'HANDLE_ON_INPUT_CHANGE'; payload: any }
   | { type: 'ADD_OR_UPDATE_CONTACT'; payload: any }
@@ -16,6 +15,8 @@ type Action =
   | { type: 'SET_PRIMARY_SCHEDULE'; payload: any }
   | { type: 'SET_PRIMARY_CARD'; payload: any };
 function reducer(state: any, action: Action): any {
+
+ 
   switch (action.type) {
     case 'HANDLE_ON_INPUT_CHANGE':
       return { ...state, [action.payload.field]: action.payload.value };
@@ -48,12 +49,13 @@ function reducer(state: any, action: Action): any {
         ),
       };
     case 'ADD_OR_UPDATE_ADDRESS':
+      
       if (action.payload.id) {
         return {
           ...state,
-          address: state.address.map((item: any) =>
+          address: state.schedules.map((item: any) =>
             item.id === action.payload.id
-              ? { ...item, ...action.payload }
+              ? ({ ...item, ...action.payload })
               : item
           ),
         };
@@ -67,10 +69,10 @@ function reducer(state: any, action: Action): any {
         ...state,
         address: [...state.address, newAdress],
       };
-    case 'DELETE_ADDRESS':
-      return {
+    case 'DELETE_ADDRESS':    
+    return {
         ...state,
-        address: state.address.filter(
+        address: state.schedules.filter(
           (item: any) => item.id !== action.payload
         ),
       };
@@ -103,7 +105,7 @@ function reducer(state: any, action: Action): any {
     case 'SET_PRIMARY_ADDRESS':
       return {
         ...state,
-        address: state.address.map((item: any) =>
+        address: state.schedules.map((item: any) =>
           item.id === action.payload
             ? { ...item, type: 'primary' }
             : { ...item, type: 'secondary' }
@@ -139,9 +141,8 @@ type ProfileProviderProps = {
 export const ProfileProvider: React.FunctionComponent<ProfileProviderProps> = ({
   children,
   initData,
-}) => {
+}) => { 
   const [state, dispatch] = useReducer(reducer, { ...initData, schedules });
-  // console.log(state, 'profile provider state');
 
   return (
     <ProfileContext.Provider value={{ state, dispatch }}>
@@ -149,3 +150,5 @@ export const ProfileProvider: React.FunctionComponent<ProfileProviderProps> = ({
     </ProfileContext.Provider>
   );
 };
+ 
+

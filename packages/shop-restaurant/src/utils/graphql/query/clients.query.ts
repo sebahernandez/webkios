@@ -38,6 +38,34 @@ export const GET_CLIENTE_USERNAME_ID = gql`
   
 `;
 
+export const SUBSCRIPTION_CLIENTE_USERNAME = gql`
+    subscription GET_CLIENTE_USERNAME($clientid: String!, $username: String!) {
+    cliente(where: {clientid: {_eq: $clientid}, username: {_eq: $username}}) {
+      id
+      nombre
+      contacto
+      direcciones
+      contactos
+      imageURL
+      payments      
+      username
+      addresses {
+        id
+        type
+        info
+        name      
+      }
+      contacts {
+        id
+        type
+        number
+        name
+      }
+    }
+  }
+  
+`;
+
 
 export const GET_CLIENTE_USERNAME = gql`
     query GET_CLIENTE_USERNAME($clientid: String!, $username: String!) {
