@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
  export const UPDATE_CONTACT = gql`
- mutation editContact($id: Int!, $clientid: String!, $number: Int!, $cliente: Int!, $name: String!, $type: String) {
-  update_contact(_set: {number: $number, type: $type, name: $name}, where: {clientid: {_eq: $clientid}, _and: {cliente: {_eq: $cliente}, _and: {id: {_eq: $id}}}}) {
+ mutation editContact($id: Int!, $clientid: String!, $number: String!, $cliente: Int!, $type: String) {
+  update_contact(_set: {number: $number, type: $type}, where: {clientid: {_eq: $clientid}, _and: {cliente: {_eq: $cliente}, _and: {id: {_eq: $id}}}}) {
     affected_rows
   }
 }
@@ -16,8 +16,8 @@ mutation deleteContact($id: Int!, $clientid: String!, $cliente: Int!) {
 `;
 
 export const INSERT_CONTACT = gql`
-mutation addContact($name: String!, $number: Int!,$clientid: String!, $type: String!, $cliente: Int!) {
-  insert_contact(objects: { clientid: $clientid, number: $number, name: $name, type: $type, cliente: $cliente}) {
+mutation addContact( $number: String!,$clientid: String!, $type: String!, $cliente: Int!) {
+  insert_contact(objects: { clientid: $clientid, number: $number,type: $type, cliente: $cliente}) {
     affected_rows
     returning {
       id

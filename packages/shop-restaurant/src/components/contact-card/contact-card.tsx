@@ -8,9 +8,13 @@ import { useMutation } from '@apollo/client';
 import MaskedInput from 'react-text-mask';
 import { ProfileContext } from 'contexts/profile/profile.context';
 import { Button } from 'components/button/button';
-import { UPDATE_CONTACT } from 'graphql/mutation/contact';
+import { UPDATE_CONTACT } from 'utils/graphql/mutation/contact';
+import { INSERT_CONTACT } from 'utils/graphql/mutation/contact';
 import { FieldWrapper, Heading } from './contact-card.style';
 import { FormattedMessage } from 'react-intl';
+import config from 'setting/config';
+import Cookies  from 'universal-cookie';
+
 
 type Props = {
   item?: any | null;
@@ -32,16 +36,40 @@ const CreateOrUpdateContact: React.FC<Props> = ({ item }) => {
     type: item.type || 'secondary',
     number: item.number || '',
   };
-  const [addContactMutation] = useMutation(UPDATE_CONTACT);
+  const [editContactMutation] = useMutation(UPDATE_CONTACT);
+  const [addContactMutation] = useMutation(INSERT_CONTACT);
   const { state, dispatch } = useContext(ProfileContext);
+  const cookie = new Cookies() 
   const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
-    await addContactMutation({
-      variables: { contactInput: JSON.stringify(values) },
-    });
-    console.log(values, 'formik values');
-    dispatch({ type: 'ADD_OR_UPDATE_CONTACT', payload: values });
-    closeModal();
-    setSubmitting(false);
+
+
+    if (item === 'add-contact-modal') { 
+      let addressData = await addContactMutation({
+          variables: {
+            "number": values.number,
+            "type": "secondary",
+            "cliente": cookie.get('customer'),
+            "clientid": config().SUBSCRIPTION_ID
+          }
+      });  
+     
+    } else {
+       
+        const addressData = await editContactMutation({
+            variables: { 
+              "id": values.id,
+              "number": values.number,
+              "type": "secondary",
+              "cliente": cookie.get('customer'),
+              "clientid": config().SUBSCRIPTION_ID
+            },
+        }); 
+        
+       
+    } 
+
+
+     closeModal();
   };
   return (
     <Formik
@@ -64,12 +92,11 @@ const CreateOrUpdateContact: React.FC<Props> = ({ item }) => {
               mask={[
                 '(',
                 /[1-9]/,
-                /\d/,
-                /\d/,
                 ')',
                 ' ',
-                /\d/,
-                /\d/,
+                /\d/, 
+                /\d/, 
+                /\d/, 
                 /\d/,
                 '-',
                 /\d/,

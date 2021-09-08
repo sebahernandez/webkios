@@ -59,7 +59,6 @@ export const SUBSCRIPTION_CLIENTE_USERNAME = gql`
         id
         type
         number
-        name
       }
     }
   }

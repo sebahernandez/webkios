@@ -94,15 +94,16 @@ function reducer(state: any, action: Action): any {
         card: state.card.filter((item: any) => item.id !== action.payload),
       };
     case 'SET_PRIMARY_CONTACT':
+       
       return {
         ...state,
-        contact: state.contact.map((item: any) =>
+        contact: state.schedules.map((item: any) =>
           item.id === action.payload
             ? { ...item, type: 'primary' }
             : { ...item, type: 'secondary' }
         ),
       };
-    case 'SET_PRIMARY_ADDRESS':
+    case 'SET_PRIMARY_ADDRESS': 
       return {
         ...state,
         address: state.schedules.map((item: any) =>

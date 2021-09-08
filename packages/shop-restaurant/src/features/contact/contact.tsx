@@ -3,12 +3,12 @@ import { FormattedMessage } from 'react-intl';
 import RadioGroup from 'components/radio-group/radio-group';
 import RadioCard from 'components/radio-card/radio-card';
 import { Button } from 'components/button/button';
+import { closeModal } from '@redq/reuse-modal';
 import { handleModal } from 'features/checkouts/checkout-modal';
 import { ProfileContext } from 'contexts/profile/profile.context';
 import CreateOrUpdateContact from 'components/contact-card/contact-card';
 import { useMutation } from '@apollo/client';
-import { DELETE_CONTACT } from 'graphql/mutation/contact';
-
+import { DELETE_CONTACT } from 'utils/graphql/mutation/contact'; 
 import { CardHeader } from 'components/card-header/card-header';
 import { ButtonGroup } from 'components/button-group/button-group';
 import { Box } from 'components/box';
@@ -45,15 +45,16 @@ const Contact = ({
 
   const cookie = new Cookies()
 
-  const handleOnDelete = async (item) => {
-    dispatch({ type: 'DELETE_CONTACT', payload: item.id });
+  const handleOnDelete = async (item) => { 
+ 
     return await deleteContactMutation({
       variables: { 
-        "id": JSON.stringify(item.id),
-        "cliente": cookie.get('customer'),
-        "clientid": config().SUBSCRIPTION_ID
+        id: JSON.stringify(item.id),
+        cliente: cookie.get('customer'),
+        clientid: config().SUBSCRIPTION_ID
       },
     });
+
   };
   return (
     <>
