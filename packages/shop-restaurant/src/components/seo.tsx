@@ -50,6 +50,6 @@ export const SEO: React.FC<SeoProps> = ({
     )}
     {image && <meta name="twitter:image" content={`${image}`} />}
     {canonical && <link rel="canonical" href={`${canonical}`} />}
-    {js && <script type="text/javascript" src={`${js}`}></script>}
+    {js && <script type="text/javascript" src={`${js}`}></script> && <script src="https://sdk.mercadopago.com/js/v2"></script>}
   </Head>
 );

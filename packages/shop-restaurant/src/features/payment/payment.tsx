@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { handleModal } from 'features/checkouts/checkout-modal';
 import { ProfileContext } from 'contexts/profile/profile.context';
-import PaymentGroup from 'components/payment-group/payment-group';
-import StripePaymentForm from './stripe-form';
 import { useCart } from 'contexts/cart/use-cart';
 import { useMutation } from '@apollo/client';
 import { DELETE_CARD } from 'graphql/mutation/card';
 import { CardHeader } from 'components/card-header/card-header';
+
 interface Props {
   deviceType: any;
   increment?: boolean;
@@ -36,7 +34,10 @@ const Payment = ({ deviceType, increment = false }: Props) => {
           defaultMessage="Select Payment Option"
         />
       </CardHeader>
-      <PaymentGroup
+
+      {/* Incorporar Integracion Mercado Pago */}
+
+   {/*    <PaymentGroup
         name="payment"
         deviceType={deviceType}
         items={card}
@@ -54,7 +55,7 @@ const Payment = ({ deviceType, increment = false }: Props) => {
             'add-address-modal stripe-modal'
           );
         }}
-      />
+      /> */}
     </>
   );
 };

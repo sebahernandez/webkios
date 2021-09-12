@@ -63,7 +63,7 @@ const PaymentGroup: React.FunctionComponent<PaymentGroupProps> = ({
     <>
       {/* {deviceType === 'desktop' && ( */}
       <Header>
-        {items.length !== 0 && (
+        {items && items.length && items.length !== 0 && (
           <SavedCard>
             <FormattedMessage id="savedCardsId" defaultMessage="Tarjetas Guardadas" />
           </SavedCard>
@@ -98,10 +98,10 @@ const PaymentGroup: React.FunctionComponent<PaymentGroupProps> = ({
         />
       </PaymentCardList>
 
-      {items.mobileWallet === true || items.cashOnDelivery === true ? (
+      {items && items.mobileWallet === true || items && items.cashOnDelivery === true ? (
         <OtherPayOption>
           {/* Mobile Wallet */}
-          {items.mobileWallet === true ? (
+          {items && items.mobileWallet === true ? (
             <label
               htmlFor="mobile-wallet"
               key="${name}-mobile-wa"
@@ -121,7 +121,7 @@ const PaymentGroup: React.FunctionComponent<PaymentGroupProps> = ({
           )}
 
           {/* Cash On Delivery */}
-          {items.cashOnDelivery === true ? (
+          {items && items.cashOnDelivery === true ? (
             <label
               htmlFor="cash-on-delivery"
               key="${name}-cash"
