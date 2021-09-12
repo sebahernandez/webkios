@@ -167,9 +167,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
       title: 'Torta Keto', 
       price: 12500
   };
-  axios.defaults.baseURL = 'https://cashier-fd4v0acoi-eserplog.vercel.app';
-  axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
-  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+  axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
   await axios.post(`/checkout`, { data })
   .then(res => {
     console.log(':::::::::::::::::', res);
