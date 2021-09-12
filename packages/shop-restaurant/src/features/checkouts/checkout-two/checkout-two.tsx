@@ -237,7 +237,9 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
 
   return (
     
-    <form>
+    <form action="https://cashier-fd4v0acoi-eserplog.vercel.app/checkout" method="POST">
+           <input type="hidden" name="title" value="Remerax de mujer manga corta" />
+            <input type="hidden" name="price" value="1500" />
       <br/>
       <br/>
       <br/>
@@ -343,8 +345,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
             
               <CheckoutSubmit>
                 <Button
-                  type='button'
-                  onClick={handleSubmit}
+                  type='submit'                 
                  /*  disabled={!isValid} */
                   size='big'
                   loading={loading}
