@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Link from 'next/link';
 import OrderReceivedWrapper, {
   OrderReceivedContainer,
@@ -32,21 +32,27 @@ type OrderReceivedProps = {
  */
 
 const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date, datedelivery, itemscount, address, contact, subtotal, discount, total}) => {
+  const [loading, setLoading] = useState(false);
   
-  const title = "Order de Compra: " + order;
+  const handleSubmit = async () => {
+     
+    setLoading(true);
+
+
+  }
   
   return (
     <OrderReceivedWrapper>
       <OrderReceivedContainer>
-   {/*    https://cashier-fd4v0acoi-eserplog.vercel.app */}
-      
-      <form action="https://cashier-38ou0if3w-eserplog.vercel.app/checkout" method="POST">
-           <input type="hidden" name="title" value={title} />
+      <form action="https://cashier-oakce2khi-eserplog.vercel.app/checkout" method="POST">
+           <input type="hidden" name="title" value={order} />
             <input type="hidden" name="price" value={total} />
             
                 <Button
                   type='submit'      
                   size='big' 
+                  loading={loading}
+                  onClick={handleSubmit}
                   style={{ width: '100%' }}
                 >
                   <FormattedMessage
@@ -56,12 +62,8 @@ const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date
                 </Button>
               
       </form>
-      <br/>
-       {/*  <Link href="/order">
-          <a className="home-btn">
-            <FormattedMessage id="pago" defaultMessage="" />
-          </a>
-        </Link> */}
+        <br /> <br />
+        <br />
 
         <OrderInfo>
           <BlockTitle>

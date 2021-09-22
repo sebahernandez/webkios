@@ -204,6 +204,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
  
       
     console.log('ingreando add_order 2')
+    sessionStorage.setItem('order',Date.now().toString())
     await addOrder({
       variables: {
                 clientid: config().SUBSCRIPTION_ID,
@@ -211,7 +212,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
                 total: calculatePrice(), 
                 subtotal: calculateSubTotalPrice(), 
                 metodo_pago: 'card', 
-                order: Date.now().toString(), 
+                order: sessionStorage.getItem('order'), 
                 items: JSON.stringify(items),
                 itemcount: cartItemsCount,
                 discount: calculateDiscount(),
