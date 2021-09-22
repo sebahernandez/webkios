@@ -14,6 +14,7 @@ import OrderReceivedWrapper, {
   ListDes,
 } from './order-received.style';
 import { FormattedMessage } from 'react-intl';
+import { Button } from 'components/button/button';
 
 type OrderReceivedProps = {
   order: any,
@@ -31,14 +32,36 @@ type OrderReceivedProps = {
  */
 
 const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date, datedelivery, itemscount, address, contact, subtotal, discount, total}) => {
+  
+  const title = "Order de Compra: " + order;
+  
   return (
     <OrderReceivedWrapper>
       <OrderReceivedContainer>
-        <Link href="/order">
+   {/*    https://cashier-fd4v0acoi-eserplog.vercel.app */}
+      
+      <form action="https://cashier-38ou0if3w-eserplog.vercel.app/checkout" method="POST">
+           <input type="hidden" name="title" value={title} />
+            <input type="hidden" name="price" value={total} />
+            
+                <Button
+                  type='submit'      
+                  size='big' 
+                  style={{ width: '100%' }}
+                >
+                  <FormattedMessage
+                    id='pago'
+                    defaultMessage=''
+                  />
+                </Button>
+              
+      </form>
+      <br/>
+       {/*  <Link href="/order">
           <a className="home-btn">
-            <FormattedMessage id="backHomeBtn" defaultMessage="Revisar su Pedido" />
+            <FormattedMessage id="pago" defaultMessage="" />
           </a>
-        </Link>
+        </Link> */}
 
         <OrderInfo>
           <BlockTitle>
@@ -51,7 +74,7 @@ const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date
           <Text>
             <FormattedMessage
               id="orderReceivedSuccess"
-              defaultMessage="Felicidades. Su Orden ha sido recepcionada satisfactoriamente"
+              defaultMessage="¡Felicidades! Su Orden ha sido generada satisfactoriamente"
             />
           </Text>
 

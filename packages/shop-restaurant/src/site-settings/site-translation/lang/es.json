@@ -101,6 +101,7 @@
   "selectPaymentText": "Opción de pago",
   "processCheckout": "Procesar Pedido",
   "backHomeBtn": "Revisar Estado de Pedido",
+  "pago": "Pagar mi Orden",
   "orderReceivedText": "Orden Recibida",
   "orderReceivedSuccess": "Felicitaciones. Tu orden ha sido recibida",
   "orderNumberText": "Número de orden",

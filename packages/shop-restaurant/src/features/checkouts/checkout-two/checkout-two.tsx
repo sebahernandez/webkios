@@ -36,7 +36,6 @@ import CheckoutWrapper, {
 } from './checkout-two.style';
 
 import { NoCartBag } from 'assets/icons/NoCartBag';
-
 import Sticky from 'react-stickynode';
 import { ProfileContext } from 'contexts/profile/profile.context';
 import { FormattedMessage } from 'react-intl';
@@ -44,14 +43,12 @@ import { useCart } from 'contexts/cart/use-cart';
 import { useLocale } from 'contexts/language/language.provider';
 import { useWindowSize } from 'utils/useWindowSize';
 import Coupon from 'features/coupon/coupon';
-import Address from 'features/address/address'; 
+import Address from 'features/address/address';
 import Contact from 'features/contact/contact';
-import Payment from 'features/payment/payment'; 
 import { ADD_ORDER } from 'utils/graphql/mutation/order';
 import { GET_ORDERS_OPEN } from 'utils/graphql/query/orders.query';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import config from 'setting/config';
-import axios from 'axios';
 
 // The type of props Checkout Form receives
 interface MyFormProps {
@@ -62,17 +59,6 @@ interface MyFormProps {
 
 type CartItemProps = {
   product: any;
-};
-
-
-let preference = {
-  items: [
-    {
-      title: 'Mi producto',
-      unit_price: 100,
-      quantity: 1,
-    }
-  ]
 };
 
 
@@ -162,19 +148,55 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
 
 
   const handleSubmit = async () => {
-
-    const data = {
-      title: 'Torta Keto', 
-      price: 12500
-  };
-  axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
-  await axios.post(`/checkout`, { data })
-  .then(res => {
-    console.log(':::::::::::::::::', res);
-    console.log(':::::::::::::::::', res.data);
-  })
+     
   
+     
 
+    if ( true
+      /*  !existeOrden() && calculatePrice() > 0 &&
+         cartItemsCount > 0  */
+        /*  address && address.length &&
+          contact && contact.length   */
+       ) {  
+         setIsValid(true);
+       } 
+       
+    setLoading(true);
+    var today = new Date(),
+    date = today.getDate() + "/" +
+    (today.getMonth() + 1) + "/" +
+    today.getFullYear() + "  " +
+    today.getHours() + ":" +
+    today.getMinutes() + ":" +
+    today.getSeconds();
+
+    today.setMinutes(today.getMinutes() + 30);
+   
+  
+    var datedelivery = today.getDate() + "/" +
+    (today.getMonth() + 1) + "/" +
+    today.getFullYear() + "  " +
+    today.getHours() + ":" +
+    today.getMinutes() + ":" +
+    today.getSeconds();
+    console.log('isValid',isValid)
+    if (isValid) {
+       
+      sessionStorage.setItem('items',JSON.stringify(items))
+      sessionStorage.setItem('address',clienteData && clienteData.addresses.length > 0 ? clienteData.addresses[0].info: '[]')
+      sessionStorage.setItem('contact',clienteData && clienteData.contacts.length > 0 ? clienteData.contacts[0].number: '[]')
+      sessionStorage.setItem('itemscount',cartItemsCount)
+      sessionStorage.setItem('date',date.toString())
+      sessionStorage.setItem('datedelivery',datedelivery.toString())
+      sessionStorage.setItem('total',calculatePrice())
+      sessionStorage.setItem('discount',calculateDiscount())
+      sessionStorage.setItem('subtotal',calculateSubTotalPrice()) 
+      await add_order() // backend
+      console.log('viajando a la orden recibida')
+      clearCart();
+      Router.push('/order-received');
+      
+    }
     setLoading(false);
   };
 
@@ -237,9 +259,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
 
   return (
     
-    <form action="https://cashier-fd4v0acoi-eserplog.vercel.app/checkout" method="POST">
-           <input type="hidden" name="title" value="Remerax de mujer manga corta" />
-            <input type="hidden" name="price" value="1500" />
+    <form>
       <br/>
       <br/>
       <br/>
@@ -288,9 +308,9 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
               className='paymentBox'
               style={{ paddingBottom: 30 }}
             >
-            
+             {/*    
               <Payment increment={true} deviceType={deviceType} />
-
+ */}
               
               {coupon ? (
                 <CouponBoxWrapper>
@@ -345,7 +365,8 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
             
               <CheckoutSubmit>
                 <Button
-                  type='submit'                 
+                  type='button'
+                  onClick={handleSubmit}
                  /*  disabled={!isValid} */
                   size='big'
                   loading={loading}
@@ -353,7 +374,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
                 >
                   <FormattedMessage
                     id='processCheckout'
-                    defaultMessage='Pagar Checkout'
+                    defaultMessage='Procesar Checkout'
                   />
                 </Button>
               </CheckoutSubmit>

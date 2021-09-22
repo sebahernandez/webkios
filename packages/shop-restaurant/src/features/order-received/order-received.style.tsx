@@ -36,10 +36,13 @@ export const OrderReceivedContainer = styled.div`
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    background-color: ${themeGet('colors.primary.regular', '#009e7f')};
+    border-color: ${themeGet('colors.primary.regular', '#009e7f')};
+    color: ${themeGet('colors.white', '#ffffff')};
     font-family: ${themeGet('fonts.body', 'Lato')};
-    font-size: ${themeGet('fontSizes.base', '15')}px;
+    font-size: ${themeGet('fontSizes.base', '20')}px;
+    font-weight: bold;
     font-weight: ${themeGet('fontWeights.regular', '400')};
-    color: ${themeGet('colors.text.regular', '#77798c')};
     padding: 5px 15px;
     height: 36px;
     border: 1px solid ${themeGet('colors.gray.700', '#e6e6e6')};
@@ -49,7 +52,7 @@ export const OrderReceivedContainer = styled.div`
     right: 15px;
     transition: 0.15s ease-in-out;
     @media (max-width: 767px) {
-      font-size: ${themeGet('fontSizes.sm', '13')}px;
+      font-size: ${themeGet('fontSizes.sm', '20')}px;
       height: 34px;
       padding: 5px 12px;
     }
