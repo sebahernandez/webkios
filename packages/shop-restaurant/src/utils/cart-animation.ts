@@ -17,7 +17,7 @@ export const cartAnimation = (event) => {
   let cartTop = viewCart.getBoundingClientRect().top;
   let image = imgToDragImage.cloneNode(true);
   image.style =
-    'z-index: 11111; width: 100px;opacity:1; position:fixed; top:' +
+    'z-index: 11; width: 500px;opacity:1; position:fixed; top:' +
     disTop +
     'px;left:' +
     disLeft +
@@ -26,11 +26,11 @@ export const cartAnimation = (event) => {
   setTimeout(function () {
     image.style.left = cartLeft + 'px';
     image.style.top = cartTop + 'px';
-    image.style.width = '40px';
+    image.style.width = '100px';
     image.style.opacity = '0';
-  }, 200);
+  }, 20);
   setTimeout(function () {
     reChange.parentNode.removeChild(reChange);
-  }, 1000);
+  }, 2000);
   // End Animation Block
 };

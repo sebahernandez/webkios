@@ -151,17 +151,21 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
      
   
      
-
-    if ( true
-      /*  !existeOrden() && calculatePrice() > 0 &&
-         cartItemsCount > 0  */
-        /*  address && address.length &&
-          contact && contact.length   */
+    alert(clienteData.contacts.length)
+    if ( 
+         cartItemsCount > 0   &&
+         clienteData.addresses && clienteData.addresses.length > 0 &&
+         clienteData.contacts && clienteData.contacts.length > 0
        ) {  
          setIsValid(true);
-       } 
+         setLoading(true);
+       } else 
+       {
+        setIsValid(false);
+        return
+       }
        
-    setLoading(true);
+   
     var today = new Date(),
     date = today.getDate() + "/" +
     (today.getMonth() + 1) + "/" +
@@ -392,7 +396,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
                 <Title>
                   <FormattedMessage
                     id='cartTitle'
-                    defaultMessage='Su Pedido'
+                    defaultMessage='Mis Pedidos'
                   />
                 </Title>
 

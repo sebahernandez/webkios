@@ -17,7 +17,7 @@
   "nav.order_received": "Factura de pedido",
   "nav.logout": "Cerrar sesión",
   "nav.login": "Iniciar sesión",
-  "nav.order": "Su pedido",
+  "nav.order": "Mis Pedidos",
 
   "groceriesTitle": "Tú Pedido en minutos",
   "groceriesSubTitle": "Disfrute todos nuestros productos saludables entregados en su puerta todo el día todos los días",
@@ -54,7 +54,7 @@
   "rmMedicineQuantity": "Cantidad",
   "rmPrescripttionUpload": "Sube tu receta",
   "rmUploadText": "Arrastra / sube tu archivo aquí.",
-  "cartTitle": "Su pedido",
+  "cartTitle": "Mis Pedidos",
   "discountText": "Descuento",
   "vatText": "Incl. IVA",
 
@@ -160,7 +160,7 @@
   "subTotal": "Subtotal",
   "intlOrderDetailsDiscount": "Descuento",
   "intlOrderDetailsDelivery": "Gastos de envío",
-  "intlOrderPageTitle": "Mi pedido",
+  "intlOrderPageTitle": "Mis Pedidos",
   "intlNoOrderFound": "No se ha encontrado ningún pedido.",
   "intlOrderPageDetails": "Detalles del pedido",
   "intlTableColTitle2": "Cantidad",

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Scrollbar } from 'components/scrollbar/scrollbar';
 import { useQuery, gql, useSubscription } from '@apollo/client';
+import Cookies  from 'universal-cookie';
 import {
   DesktopView,
   MobileView,
@@ -27,6 +28,7 @@ import { GET_CLIENTE_USERNAME } from 'utils/graphql/query/clients.query';
 import { GET_ORDERS_PUBLIC } from 'utils/graphql/query/orders.query';
 
 import config from 'setting/config'; 
+const cookie = new Cookies()
 const cid =  config().SUBSCRIPTION_ID;
 
 const progressData = ['Órden Recibida', 'En Preparación' , 'Órden en Camino', 'Órden Entregada'];
@@ -109,7 +111,7 @@ const OrdersContent: React.FC<{}> = () => {
   }); 
 
    useEffect(() => {
-    setMail(JSON.parse(localStorage.getItem('user_logged')).email)      
+    setMail(cookie.get('user_logged').email)      
 
     if (data1 && data1.cliente && data1.cliente.length > 0) {
       setId( data1.cliente[0].id )
@@ -158,7 +160,7 @@ const OrdersContent: React.FC<{}> = () => {
           <Title style={{ padding: '0 20px' }}>
             <FormattedMessage
               id='intlOrderPageTitle'
-              defaultMessage='Mi Pedido'
+              defaultMessage='Mis Pedido'
             />
           </Title>
           <Scrollbar className='order-scrollbar'>

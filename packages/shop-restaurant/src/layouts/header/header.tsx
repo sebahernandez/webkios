@@ -62,9 +62,10 @@ const Header: React.FC<Props> = ({ className, visible }) => {
       },
     });
   };
-/*   if(localStorage!==undefined){
-    console.log('header', localStorage.getItem('user_logged')) 
-  } */
+
+  if(cookie.get('user_logged')!==undefined){
+    console.log('header', cookie.get('user_logged')) 
+  }
   
   const showSearch = 
     isCategoryPage(query.type) ||

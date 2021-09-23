@@ -44,7 +44,7 @@ const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date
   return (
     <OrderReceivedWrapper>
       <OrderReceivedContainer>
-      <form action="https://cashier-oakce2khi-eserplog.vercel.app/checkout" method="POST">
+      <form action="https://cashier.tu-ecommerce.cl/checkout" method="POST">
            <input type="hidden" name="title" value={order} />
             <input type="hidden" name="price" value={total} />
             
