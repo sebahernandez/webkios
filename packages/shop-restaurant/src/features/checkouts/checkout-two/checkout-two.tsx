@@ -122,36 +122,12 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
       },
       notifyOnNetworkStatusChange: true,
     }
-  );
-
-  // SDK de Mercado Pago
-  // const mercadopago = require ('mercadopago');
-  // Agrega credenciales
-  /* mercadopago.configure({
-      access_token: 'APP_USR-2672568876104049-082402-83e0b9ceb2e982344cd6dfdfd7b48289-659002112'
-  });
-
-
-  mercadopago.preferences.create(preference)
-  .then(function(response){
-    // Este valor reemplazará el string "<%= global.id %>" en tu HTML
-    // global.id = response.body.id;
-  }).catch(function(error){
-    console.log(error);
-  });
-
-  const checkout = mercadopago.checkout({
-    preference
-  }); */
-
+  ); 
 
 
 
   const handleSubmit = async () => {
-     
-  
-     
-    alert(clienteData.contacts.length)
+      
     if ( 
          cartItemsCount > 0   &&
          clienteData.addresses && clienteData.addresses.length > 0 &&
