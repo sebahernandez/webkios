@@ -35,6 +35,11 @@ const MobileDrawer: React.FunctionComponent = () => {
   const isDrawerOpen = useAppState('isDrawerOpen');
   const dispatch = useAppDispatch();
   const cookie = new Cookies()
+  let image='/user.jpg';
+  let nombre='Invitado';
+  let user = null
+  let access_token  = null
+
   const {
     authState: { isAuthenticated },
     authDispatch,
@@ -53,6 +58,19 @@ const MobileDrawer: React.FunctionComponent = () => {
       Router.push('/');
     }
   };
+
+  if(isAuthenticated){
+    if( cookie.get('user_logged') ){
+      user = cookie.get('user_logged')
+      access_token = cookie.get('access_token')
+
+      if(user && access_token)  {
+          image =   user.image;
+          nombre = user.name; 
+      }
+    }
+  }
+   
 
   const signInOutForm = () => {
     dispatch({
@@ -104,11 +122,11 @@ const MobileDrawer: React.FunctionComponent = () => {
               {isAuthenticated ? (
                 <LoginView>
                   <UserAvatar>
-                    <img src={UserImage} alt='user_avatar' />
+                      <img src={image} alt={nombre} />
                   </UserAvatar>
                   <UserDetails>
-                    <h3>David Kinderson</h3>
-                    <span>+990 374 987</span>
+                    <h3>{nombre}</h3>
+        {/*             <span>+990 374 987</span> */}
                   </UserDetails>
                 </LoginView>
               ) : (

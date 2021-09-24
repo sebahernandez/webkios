@@ -20,6 +20,8 @@ const AuthMenu = ({ isAuthenticated, onJoin, onLogout, avatar }: Props) => {
   let access_token  = null;
   const cookie = new Cookies()
 
+ 
+
   if(isAuthenticated){
     if( cookie.get('user_logged') ){
       user = cookie.get('user_logged')
