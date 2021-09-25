@@ -60,7 +60,7 @@ const Address = ({
 
   useEffect(() => 
   {
-    console.log('direccion de origen:', address)
+    if(address) console.log('direccion de origen:', address)
   })
 
  

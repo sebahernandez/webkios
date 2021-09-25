@@ -107,8 +107,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
     isRestaurant,
     toggleRestaurant,
   } = useCart();
-  const [loading, setLoading] = useState(false);
-  const [isValid, setIsValid] = useState(false);
+  let [loading, setLoading] = useState(false); 
   let { card, schedules } = state;  
   const [address, setAddress] = useState(clienteData.addresses);
   const [contact, setContact] = useState(clienteData.contacts); 
@@ -127,20 +126,20 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
 
 
   const handleSubmit = async () => {
-      
+    
     if ( 
          cartItemsCount > 0   &&
          clienteData.addresses && clienteData.addresses.length > 0 &&
          clienteData.contacts && clienteData.contacts.length > 0
        ) {  
-         setIsValid(true);
+
          setLoading(true);
-       } else 
-       {
-        setIsValid(false);
-        return
+         await processOrder();
+        
        }
+} 
        
+const processOrder = async () => {       
    
     var today = new Date(),
     date = today.getDate() + "/" +
@@ -158,9 +157,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
     today.getFullYear() + "  " +
     today.getHours() + ":" +
     today.getMinutes() + ":" +
-    today.getSeconds();
-    console.log('isValid',isValid)
-    if (isValid) {
+    today.getSeconds(); 
        
       sessionStorage.setItem('items',JSON.stringify(items))
       sessionStorage.setItem('address',clienteData && clienteData.addresses.length > 0 ? clienteData.addresses[0].info: '[]')
@@ -176,7 +173,6 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
       clearCart();
       Router.push('/order-received');
       
-    }
     setLoading(false);
   };
 
@@ -372,7 +368,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
                 <Title>
                   <FormattedMessage
                     id='cartTitle'
-                    defaultMessage='Mis Pedidos'
+                    defaultMessage='Mi Pedido'
                   />
                 </Title>
 
