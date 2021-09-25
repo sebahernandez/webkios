@@ -49,6 +49,7 @@ import { ADD_ORDER } from 'utils/graphql/mutation/order';
 import { GET_ORDERS_OPEN } from 'utils/graphql/query/orders.query';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import config from 'setting/config';
+import Cookies  from 'universal-cookie';
 
 // The type of props Checkout Form receives
 interface MyFormProps {
@@ -91,6 +92,7 @@ type OrderReceivedProps = {
 };
 
 const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, deviceType }) => {
+  const cookie = new Cookies();
   const [hasCoupon, setHasCoupon] = useState(false);
   const { state } = useContext(ProfileContext);
   const { isRtl } = useLocale();
@@ -108,6 +110,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
     toggleRestaurant,
   } = useCart();
   let [loading, setLoading] = useState(false); 
+  const [clienteid] = useState(cookie.get('customer'))
   let { card, schedules } = state;  
   const [address, setAddress] = useState(clienteData.addresses);
   const [contact, setContact] = useState(clienteData.contacts); 
@@ -180,11 +183,12 @@ const processOrder = async () => {
  
       
     console.log('ingreando add_order 2')
+    console.log('clienteData.addresses[0].info',clienteData.addresses[0].info)
     sessionStorage.setItem('order',Date.now().toString())
     await addOrder({
       variables: {
                 clientid: config().SUBSCRIPTION_ID,
-                cliente: 1,
+                cliente: clienteid,
                 total: calculatePrice(), 
                 subtotal: calculateSubTotalPrice(), 
                 metodo_pago: 'card', 
@@ -194,7 +198,7 @@ const processOrder = async () => {
                 discount: calculateDiscount(),
                 delivery_date: sessionStorage.getItem('datedelivery'),
                 order_date: sessionStorage.getItem('date'),
-                delivery_address: sessionStorage.getItem('address'),
+                delivery_address: clienteData.addresses[0].info,
                 contacto: sessionStorage.getItem('contact'),
                 status: 'Procesando',
                 received: true,

@@ -53,7 +53,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
           <h3>
             <FormattedMessage
               id="deliveryAddressTitle"
-              defaultMessage="Dirección de Entrega"
+              defaultMessage="Entrega"
             />
           </h3>
           <Address>{delivery_address}</Address>

@@ -86,8 +86,7 @@ export const GET_CLIENTE_USERNAME = gql`
       contacts {
         id
         type
-        number
-        name
+        number 
       }
     }
   }
@@ -117,7 +116,6 @@ export const GET_CLIENTE_USERNAME_PASSWORD = gql`
         id
         type
         number
-        name
       }
     }
   }
@@ -145,7 +143,6 @@ export const GET_CLIENTE_ID = gql`
         id
         type
         number
-        name
       }
     }
   }
