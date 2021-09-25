@@ -9,7 +9,8 @@ import {
 } from './order-card.style';
 import { FormattedMessage } from 'react-intl';
 
-import { CURRENCY } from 'utils/constant';
+import { CURRENCY } from 'utils/constant'; 
+import Cookies  from 'universal-cookie';
 
 type OrderCardProps = {
   orderId?: any;
@@ -30,6 +31,7 @@ const OrderCard: React.FC<OrderCardProps> = ({
   deliveryTime,
   amount,
 }) => {
+  const cookie = new Cookies()
   return (
     <>
       <SingleOrderList onClick={onClick} className={className}>
@@ -45,6 +47,13 @@ const OrderCard: React.FC<OrderCardProps> = ({
         </OrderListHeader>
 
         <OrderMeta>
+        <Meta>
+            <FormattedMessage
+              id="customerlabel"
+              defaultMessage="Cliente"
+            />
+            : <span>{cookie.get('user_logged') && cookie.get('user_logged').name}</span>
+          </Meta>
           <Meta>
             <FormattedMessage
               id="intlOrderCardDateText"

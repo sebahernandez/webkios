@@ -178,52 +178,7 @@ export default function SignInModal({cid}) {
             defaultMessage='Login with your email &amp; password'
           />
         </SubHeading>
-        <form onSubmit={loginCallback}>
-          <Input
-            type='email'
-            placeholder={intl.formatMessage({
-              id: 'emailAddressPlaceholder',
-              defaultMessage: 'Email Address.',
-            })}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            height='48px'
-            backgroundColor='#F7F7F7'
-            mb='10px'
-          />
-
-          <Input
-            type='password'
-            placeholder={intl.formatMessage({
-              id: 'passwordPlaceholder',
-              defaultMessage: 'Password (min 6 characters)',
-            })}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            height='48px'
-            backgroundColor='#F7F7F7'
-            mb='10px'
-          />
-
-          <Button
-            variant='primary'
-            size='big'
-            style={{ width: '100%' }}
-            type='submit'
-          >
-            <FormattedMessage id='continueBtn' defaultMessage='Continue' />
-          </Button>
-        </form>
-        <Divider>
-          <span>
-            <FormattedMessage id='orText' defaultMessage='or' />
-          </span>
-        </Divider>
- 
-
-     
+         
 
        <GoogleButton isclosed={closed} />
         

@@ -24,7 +24,7 @@ import OrderCard from './order-card/order-card';
 import OrderCardMobile from './order-card/order-card-mobile';
 import useComponentSize from 'utils/useComponentSize';
 import { FormattedMessage } from 'react-intl';
-import { GET_CLIENTE_USERNAME } from 'utils/graphql/query/clients.query';
+import { GET_CLIENTE_ID } from 'utils/graphql/query/clients.query';
 import { GET_ORDERS_PUBLIC } from 'utils/graphql/query/orders.query';
 
 import config from 'setting/config'; 
@@ -45,7 +45,7 @@ const orderTableColumns = [
       return (
         <ItemWrapper>
           <ImageWrapper>
-            <img src={record.imageURL} alt={record.descripcion} />
+            <img src={record.gallery.split(',') && record.gallery.split(',')[0]} alt={record.descripcion} />
           </ImageWrapper>
 
           <ItemDetails>
@@ -81,21 +81,21 @@ const orderTableColumns = [
 
 const OrdersContent: React.FC<{}> = () => {
   const [order, setOrder] = useState(null);
-  const [active, setActive] = useState('');
-  const [id, setId] = useState(0);
-  const [mail, setMail] = useState('');
+  const [active, setActive] = useState(''); 
+  const [address, setAddress] = useState('');
+  const [contact, setContact] = useState('');
+  const [id] = useState(cookie.get('customer'));
+  const [mail] = useState(cookie.get('user_logged').email);
 
   const [targetRef, size] = useComponentSize();
   const orderListHeight = size.height - 79;
 
- 
-
   const { data:data1, error:error1, loading:loading1 } =  useQuery(
-    GET_CLIENTE_USERNAME,
+    GET_CLIENTE_ID,
     {
       variables: {
         clientid: cid,
-        username: mail
+        id: id
         
       } 
     }
@@ -105,17 +105,21 @@ const OrdersContent: React.FC<{}> = () => {
   const { data, error, loading } = useSubscription(GET_ORDERS_PUBLIC, {
     variables: {
       limit: 5,
-      user: id,
+      user: cookie.get('customer'),
       clientid: cid
     },
   }); 
 
    useEffect(() => {
-    setMail(cookie.get('user_logged').email)      
+    console.log(':',data1)    
 
-    if (data1 && data1.cliente && data1.cliente.length > 0) {
-      setId( data1.cliente[0].id )
+    if (data1 && data1.cliente.length > 0){
+      console.log('::::::::::::::',data1.cliente[0].addresses)
+      console.log('::::::::::::::',data1.cliente[0].contacts)
+      setAddress(data1.cliente[0].addresses[0].info)
+      setContact(data1.cliente[0].contacts[0].number)
     }
+
     if (data && data.pedido && data.pedido.length !== 0) {
       setOrder(data.pedido[0]);
       setActive(data.pedido[0].id);
@@ -160,7 +164,7 @@ const OrdersContent: React.FC<{}> = () => {
           <Title style={{ padding: '0 20px' }}>
             <FormattedMessage
               id='intlOrderPageTitle'
-              defaultMessage='Mis Pedido'
+              defaultMessage='Mis Pedidos'
             />
           </Title>
           <Scrollbar className='order-scrollbar'>
@@ -203,12 +207,14 @@ const OrdersContent: React.FC<{}> = () => {
             <OrderDetails
               progressStatus={currentStatus(order)+1}
               progressData={progressData}
-              delivery_address={order.delivery_address}
+              contacts={contact}
+              mail={mail}
+              delivery_address={address}
               subtotal={order.subtotal}
               discount={order.discount}
               deliveryFee={order.deliveryFee}
               grandTotal={order.total}
-              tableData={order.items.length > 0 ? JSON.parse(order.items):order.products}
+              tableData={order.items.length > 0 ? JSON.parse(order.items):[]}
               columns={orderTableColumns}
             />
           )}
