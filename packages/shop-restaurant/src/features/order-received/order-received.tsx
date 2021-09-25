@@ -15,13 +15,14 @@ import OrderReceivedWrapper, {
 } from './order-received.style';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'components/button/button';
+import Cookies  from 'universal-cookie';
 
 type OrderReceivedProps = {
   order: any,
   date: any,
   datedelivery: any,
   itemscount: any,
-  address: any,
+  delivery_address: any,
   contact: any,
   subtotal:  any,
   discount:  any,
@@ -31,9 +32,11 @@ type OrderReceivedProps = {
 /* Se debe tomar los datos de la orden en el checkout que se cargo en session 
  */
 
-const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date, datedelivery, itemscount, address, contact, subtotal, discount, total}) => {
+const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date, datedelivery, itemscount, delivery_address, contact, subtotal, discount, total}) => {
   const [loading, setLoading] = useState(false);
   
+  const cookie = new Cookies()
+
   const handleSubmit = async () => {
      
     setLoading(true);
@@ -114,6 +117,20 @@ const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date
               </Text>
               <Text>Efectivo</Text>
             </InfoBlock>
+
+
+            <InfoBlock>
+              <Text bold className="title">
+                <FormattedMessage
+                  id="databuyer"
+                  defaultMessage="Datos Comprador"
+                />
+              </Text>
+              <Text>{cookie.get('user_logged').name} </Text>
+              <Text>{cookie.get('user_logged').email} </Text>
+              <Text>{delivery_address} </Text>
+              <Text>{contact} </Text>
+            </InfoBlock>
           </InfoBlockWrapper>
         </OrderInfo>
 
@@ -178,7 +195,7 @@ const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date
             </ListTitle>
             <ListDes>
               <Text>
-                {address}
+                {delivery_address}
               </Text>
             </ListDes>
           </ListItem>

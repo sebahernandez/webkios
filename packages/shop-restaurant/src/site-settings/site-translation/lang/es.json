@@ -107,6 +107,7 @@
   "orderNumberText": "Número de orden",
   "orderDateText": "Fecha",
   "paymenMethodText": "Método de pago",
+  "databuyer": "Datos Cliente",
   "paymentMethodName": "Contra reembolso",
   "orderDetailsText": "Detalles del pedido",
   "totalItemText": "Artículo total",
