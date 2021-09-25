@@ -85,7 +85,7 @@ const OrdersContent: React.FC<{}> = () => {
   const [address, setAddress] = useState('');
   const [contact, setContact] = useState('');
   const [id] = useState(cookie.get('customer'));
-  const [mail] = useState(cookie.get('user_logged').email);
+  const [mail] = useState(cookie.get('user_logged') && cookie.get('user_logged').email);
 
   const [targetRef, size] = useComponentSize();
   const orderListHeight = size.height - 79;
