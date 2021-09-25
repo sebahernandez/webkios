@@ -126,8 +126,8 @@ const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date
                   defaultMessage="Datos Comprador"
                 />
               </Text>
-              <Text>{cookie.get('user_logged').name} </Text>
-              <Text>{cookie.get('user_logged').email} </Text>
+              <Text>{cookie.get('user_logged') && cookie.get('user_logged').name} </Text>
+              <Text>{cookie.get('user_logged') && cookie.get('user_logged').email} </Text>
               <Text>{delivery_address} </Text>
               <Text>{contact} </Text>
             </InfoBlock>
