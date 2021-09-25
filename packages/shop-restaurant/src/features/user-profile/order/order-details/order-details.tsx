@@ -20,7 +20,7 @@ type OrderDetailsProps = {
   columns?: any;
   progressData?: any;
   progressStatus?: any;
-  address?: string;
+  delivery_address?: string;
   contacts?: string;
   mail?: string;
   subtotal?: number;
@@ -36,7 +36,7 @@ const components = {
 const OrderDetails: React.FC<OrderDetailsProps> = ({
   tableData,
   columns,
-  address,
+  delivery_address,
   contacts,
   mail,
   progressStatus,
@@ -56,7 +56,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({
               defaultMessage="Dirección de Entrega"
             />
           </h3>
-          <Address>{address}</Address>
+          <Address>{delivery_address}</Address>
         </DeliveryAddress>
         <DeliveryAddress>
           <h3>

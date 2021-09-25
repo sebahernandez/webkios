@@ -51,7 +51,7 @@ export default function OrderReceivedPage() {
         date={date} 
         datedelivery={datedelivery} 
         itemscount={itemscount} 
-        address={address} 
+        delivery_address={address} 
         contact={contact} 
         subtotal={subtotal}
         discount={discount}
