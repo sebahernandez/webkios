@@ -203,7 +203,7 @@ const OrdersContent: React.FC<{}> = () => {
             <OrderDetails
               progressStatus={currentStatus(order)+1}
               progressData={progressData}
-              address={order.delivery_address}
+              delivery_address={order.delivery_address}
               subtotal={order.subtotal}
               discount={order.discount}
               deliveryFee={order.deliveryFee}
