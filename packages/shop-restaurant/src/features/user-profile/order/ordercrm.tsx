@@ -182,7 +182,7 @@ const OrdersCRMContent: React.FC<OrderProps> = ({orderid}) => {
             <OrderDetails
               progressStatus={currentStatus(order)+1}
               progressData={progressData}
-              address={order.delivery_address}
+              delivery_address={order.delivery_address}
               contacts={order.delivery_contacts}
               mail={order.clienteByCliente.username}
               subtotal={order.subtotal}
