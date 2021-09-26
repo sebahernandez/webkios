@@ -169,7 +169,7 @@ const OrdersContent: React.FC<{}> = () => {
           </Title>
           <Scrollbar className='order-scrollbar'>
             <OrderList>
-              {data.pedido.length !== 0 ? (
+              {data && data.pedido && data.pedido.length !== 0 ? (
                 data.pedido.map((current: any) => (
                   <OrderCard
                     key={current.id}

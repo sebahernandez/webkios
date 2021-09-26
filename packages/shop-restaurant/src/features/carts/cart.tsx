@@ -102,7 +102,7 @@ const Cart: React.FC<CartPropsType> = ({
               <NoProductMsg>
                 <FormattedMessage
                   id='noProductFound'
-                  defaultMessage='No products found'
+                  defaultMessage='No existen productos encontrados'
                 />
               </NoProductMsg>
             </>

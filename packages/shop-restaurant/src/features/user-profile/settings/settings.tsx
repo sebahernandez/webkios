@@ -19,6 +19,7 @@ import { Label } from 'components/forms/label';
 import Contact from 'features/contact/contact';
 import Address from 'features/address/address';
 import Payment from 'features/payment/payment';
+import Cookies  from 'universal-cookie';
 
 type SettingsContentProps = {
   deviceType?: {
@@ -31,7 +32,7 @@ type SettingsContentProps = {
 const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
   const { state, dispatch } = useContext(ProfileContext);
   const [updateMeMutation] = useMutation(UPDATE_ME);
-
+  const cookie = new Cookies()
   const handleChange = (e) => {
     const { value, name } = e.target;
     dispatch({
@@ -40,11 +41,11 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
     });
   };
 
-  const handleSave = async () => {
+  const handleSave = () => {
     const { name, email } = state;
-    await updateMeMutation({
-      variables: { meInput: JSON.stringify({ name, email }) },
-    });
+    // await updateMeMutation({
+    //  variables: { meInput: JSON.stringify({ name, email }) },
+    // });
   };
 
   return (
@@ -70,7 +71,7 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
               type="text"
               label="Name"
               name="name"
-              value={"alejandro"}
+              value={cookie.get('user_logged').name}
               onChange={handleChange}
               backgroundColor="#F7F7F7"
               height="48px"
@@ -89,7 +90,7 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
               type="email"
               name="email"
               label="Email Address"
-              value={"asandovalster@gmail.com"}
+              value={cookie.get('user_logged').email}
               onChange={handleChange}
               backgroundColor="#F7F7F7"
             />

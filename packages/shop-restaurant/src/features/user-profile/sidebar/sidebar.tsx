@@ -58,9 +58,7 @@ const SidebarCategory: React.FC<{}> = () => {
           {PROFILE_SIDEBAR_BOTTOM_MENU.map((item, index) => (
             <SidebarMenu href={item.href} key={index} intlId={item.id} />
           ))}
-          <LogoutButton type="button" onClick={handleLogout}>
-            <FormattedMessage id="nav.logout" defaultMessage="Logout" />
-          </LogoutButton>
+          
         </SidebarBottom>
       </SidebarWrapper>
     </>

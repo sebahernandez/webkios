@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect,  useContext } from 'react';
 import {
   LinkButton,
   Button, 
@@ -14,8 +14,7 @@ import { Facebook } from 'assets/icons/facebook';
 import { Google } from 'assets/icons/google';
 import { AuthContext } from 'contexts/auth/auth.context';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { closeModal } from '@redq/reuse-modal';
-import { Input } from 'components/forms/input';
+import { closeModal } from '@redq/reuse-modal'; 
 import { useQuery,useMutation } from '@apollo/client';
 import { GET_CLIENTE_USERNAME_PASSWORD } from '../../utils/graphql/query/clients.query';
 import { GET_CLIENTE_USERNAME } from '../../utils/graphql/query/clients.query';
@@ -35,7 +34,8 @@ export default function SignInModal({cid}) {
   const [password, setPassword] = React.useState('');
   const [addVisita] = useMutation(ADD_VISITA );
   const [setCliente] = useMutation(SET_CLIENTE );
-  
+  const cookie = new Cookies()
+ 
   const { data, error,loading } =  useQuery(
     GET_CLIENTE_USERNAME_PASSWORD,
     {
@@ -56,17 +56,18 @@ export default function SignInModal({cid}) {
     }
   ); 
 
+
     function GoogleButton ({isclosed}) {
     
       const responseGoogle = (response) => {
-           const cookie = new Cookies()
-           
            setUser(response.profileObj); 
            const user = {
              image: response.profileObj.imageUrl,
              email: response.profileObj.email,
              name: response.profileObj.name
            }
+           setEmail(user.email);
+           cookie.set('customer', data1.cliente[0].id)
            cookie.set('user_logged', user,{path: '/'})
            cookie.set('access_token', JSON.stringify(response.accessToken),{path: '/'})
            authDispatch({ type: 'SIGNIN_SUCCESS' });  
@@ -106,25 +107,7 @@ export default function SignInModal({cid}) {
       
     };
    }
-  
-  const setClienteUser = () => {
-      
-    if(data && data.cliente.length > 0){
-      console.log('usuario Encontrado')
-      setCliente({
-        variables: {
-                 clientid: cid,
-                  nombre: user.name + ' ' + user.familyName,
-                  email: user.email,
-                  imageURL: user.photoURL  
-                }
-      });
-  
-    
-  };
-  }
-
-
+   
 
   const toggleSignUpForm = () => {
     authDispatch({
@@ -156,8 +139,7 @@ export default function SignInModal({cid}) {
         closeModal();
       }
     } else {
-      console.log('usuario NO existe');
-      alert('usuario no encontrado');
+      console.log('usuario NO existe');     
     }
 
     

@@ -38,7 +38,8 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
     if (typeof window !== 'undefined') { 
       const cookie = new Cookies() 
       await cookie.remove('access_token');
-      await cookie.remove('user_logued'); 
+      await cookie.remove('customer'); 
+      await cookie.remove('user_logged'); 
       localForage.removeItem('@session');
       await deleteAllCookies(); 
       await clearCart(); 

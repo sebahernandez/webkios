@@ -4,6 +4,9 @@ import { Modal } from '@redq/reuse-modal';
 import { SEO } from 'components/seo';
 import Footer from 'layouts/footer';
 import Accordion from 'components/accordion/accordion';
+import { useQuery } from '@apollo/client';
+import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query'; 
+import config from 'setting/config';
 
 const accordionData = [
   {
@@ -71,9 +74,17 @@ export const HelpPageContainer = styled.div`
 `;
 
 export default function () {
+  const { data } = useQuery(GET_INFO_SHOP,
+    {
+        variables: {
+          clientid: config().SUBSCRIPTION_ID
+        }
+    }); 
+
   return (
     <Modal>
-      <SEO title="F.A.Q - PickBazar" description="F.A.Q Details" />
+      <SEO title={"Ayuda - " + (data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].site_name)} 
+       description={(data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].description)}  />
       <HelpPageWrapper>
         <HelpPageContainer>
           <Heading>F.A.Q</Heading>

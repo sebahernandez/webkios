@@ -27,7 +27,9 @@ import {
 import UserImage from 'assets/images/user.jpg';
 import {
   MOBILE_DRAWER_MENU,
+  MOBILE_AUTHORIZED_DRAWER_MENU,
   PROFILE_PAGE,
+  YOUR_ORDER_PAGE,
 } from 'site-settings/site-navigation';
 import { useAppState, useAppDispatch } from 'contexts/app/app.provider';
 
@@ -142,7 +144,18 @@ const MobileDrawer: React.FunctionComponent = () => {
             </DrawerProfile>
 
             <DrawerMenu>
-              {MOBILE_DRAWER_MENU.map((item) => (
+              {isAuthenticated && MOBILE_AUTHORIZED_DRAWER_MENU.map((item) => (
+                <DrawerMenuItem key={item.id}>
+                  <NavLink
+                    onClick={toggleHandler}
+                    href={item.href}
+                    label={item.defaultMessage}
+                    intlId={item.id}
+                    className='drawer_menu_item'
+                  />
+                </DrawerMenuItem>
+              ))}
+               {!isAuthenticated && MOBILE_DRAWER_MENU.map((item) => (
                 <DrawerMenuItem key={item.id}>
                   <NavLink
                     onClick={toggleHandler}
@@ -160,7 +173,7 @@ const MobileDrawer: React.FunctionComponent = () => {
                 <DrawerMenuItem>
                   <NavLink
                     href={PROFILE_PAGE}
-                    label='Your Account Settings'
+                    label='Configuración de mi cuenta'
                     className='drawer_menu_item'
                     intlId='navlinkAccountSettings'
                   />
@@ -170,7 +183,7 @@ const MobileDrawer: React.FunctionComponent = () => {
                     <span className='logoutBtn'>
                       <FormattedMessage
                         id='navlinkLogout'
-                        defaultMessage='Logout'
+                        defaultMessage='Cerrar sesión'
                       />
                     </span>
                   </div>

@@ -41,8 +41,14 @@ export const OFFER_MENU_ITEM = {
 export const ORDER_MENU_ITEM = {
   id: 'nav.order',
   href: YOUR_ORDER_PAGE,
-  defaultMessage: 'Order',
+  defaultMessage: 'Mis Pedidos',
 };
+export const ORDER_MENU_RECEIVED_ITEM = {
+  id: 'nav.order_received',
+  href: ORDER_RECEIVED_PAGE,
+  defaultMessage: 'Factura Pedido',
+};
+
 export const REQUEST_MEDICINE_MENU_ITEM = {
   id: 'nav.request_medicine',
   defaultMessage: 'Request Medicine',
@@ -53,24 +59,21 @@ export const PROFILE_MENU_ITEM = {
   defaultMessage: 'Profile',
   href: PROFILE_PAGE,
 };
-export const AUTHORIZED_MENU_ITEMS = [
-/*   PROFILE_MENU_ITEM,
+export const NOT_AUTHORIZED_MENU_ITEMS = [
   {
-    id: 'nav.checkout',
-    defaultMessage: 'Checkout',
-    href: CHECKOUT_PAGE,
-  }, */
-/*   {
-    id: 'alternativeCheckout',
-    href: CHECKOUT_PAGE_TWO,
-    defaultMessage: 'Checkout Alternative',
-  }, */
-  ORDER_MENU_ITEM,
-  {
-    id: 'nav.order_received',
-    href: ORDER_RECEIVED_PAGE,
-    defaultMessage: 'Order invoice',
+    id: 'nav.terms_and_services',
+    defaultMessage: 'Terms and Services',
+    href: TERMS_AND_SERVICES_PAGE,
   },
+  {
+    id: 'nav.privacy_policy',
+    defaultMessage: 'Privacy Policy',
+    href: PRIVACY_POLICY_PAGE,
+  },
+];
+export const AUTHORIZED_MENU_ITEMS = [
+  ORDER_MENU_ITEM,
+  ORDER_MENU_RECEIVED_ITEM,
   {
     id: 'nav.terms_and_services',
     defaultMessage: 'Terms and Services',
@@ -163,10 +166,17 @@ export const CATEGORY_MENU_ITEMS = [
 ];
 
 export const MOBILE_DRAWER_MENU = [
-  HOME_MENU_ITEM,
+  HOME_MENU_ITEM, // Inicio
+  ...NOT_AUTHORIZED_MENU_ITEMS,
+  HELP_MENU_ITEM,  // ayuda
+  OFFER_MENU_ITEM, // cupones
+];
+
+export const MOBILE_AUTHORIZED_DRAWER_MENU = [
+  HOME_MENU_ITEM, // Inicio
   ...AUTHORIZED_MENU_ITEMS,
-  HELP_MENU_ITEM,
-  OFFER_MENU_ITEM,
+  HELP_MENU_ITEM,  // ayuda
+  OFFER_MENU_ITEM, // cupones
 ];
 
 export const PROFILE_SIDEBAR_TOP_MENU = [ORDER_MENU_ITEM, HELP_MENU_ITEM];

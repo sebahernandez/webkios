@@ -36,8 +36,9 @@ const ProfilePage: NextPage<Props> = ({ deviceType }) => {
   }
   if (error) return <ErrorMessage message={error.message} />;
   return (
-    <>
-      <SEO title="Profile - PickBazar" description="Profile Details" />
+    <>       
+       <SEO title={"Mi Cuenta - " + (data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].site_name)} 
+       description={(data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].description)}  />
       <ProfileProvider initData={data.cliente[0]}>
         <Modal>
            <PageWrapper>

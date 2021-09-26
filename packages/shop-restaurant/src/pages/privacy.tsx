@@ -14,6 +14,9 @@ import { Element } from 'react-scroll';
 import { SEO } from 'components/seo';
 import { useMedia } from 'utils/use-media';
 import { sitePrivacyPolicy } from 'site-settings/site-privacy-policy';
+import { useQuery } from '@apollo/client';
+import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query'; 
+import config from 'setting/config';
 
 const PrivacyPage: NextPage<{}> = () => {
   const { title, date, content } = sitePrivacyPolicy;
@@ -22,11 +25,19 @@ const PrivacyPage: NextPage<{}> = () => {
   content.forEach((item) => {
     menuItems.push(item.title);
   });
+  const cid =  config().SUBSCRIPTION_ID;
+  var { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
+    {
+        variables: {
+          clientid: cid
+
+        }
+    }); 
 
   return (
     <>
-      <SEO title={title} description="PickBazar privacy page" />
-
+      <SEO title={"Privacidad - " + (data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].site_name)} 
+       description={(data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].description)}  />
       <StyledContainer>
         <Heading title={title} subtitle={`Last update: ${date}`} />
 
