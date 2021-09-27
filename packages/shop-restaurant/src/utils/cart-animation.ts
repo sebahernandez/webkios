@@ -17,11 +17,12 @@ export const cartAnimation = (event) => {
   let cartTop = viewCart.getBoundingClientRect().top;
   let image = imgToDragImage.cloneNode(true);
   image.style =
-    'z-index: 11; width: 500px;opacity:1; position:fixed; top:' +
+    'z-index: 11; width:100px;height:auto;opacity:1; position:fixed; top:' +
+    
     disTop +
     'px;left:' +
     disLeft +
-    'px;transition: left 1s, top 1s, width 1s, opacity 1s cubic-bezier(1, 1, 1, 1);border-radius: 50px; overflow: hidden; box-shadow: 0 21px 36px rgba(0,0,0,0.1)';
+    'px;transition: left 1s, top 1s, width 1s, opacity 1s cubic-bezier(1, 1, 1, 1);border-radius: 0px; overflow: hidden; box-shadow: 0 21px 36px rgba(0,0,0,0.1)';
   var reChange = document.body.appendChild(image);
   setTimeout(function () {
     image.style.left = cartLeft + 'px';
