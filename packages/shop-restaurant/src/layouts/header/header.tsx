@@ -31,9 +31,10 @@ const Header: React.FC<Props> = ({ className, visible }) => {
   const handleLogout = () => {
     if (typeof window !== 'undefined') {
       cookie.remove('access_token');
+      cookie.remove('customer');
       cookie.remove('user_logged');
       authDispatch({ type: 'SIGN_OUT' });
-      Router.push('/');
+      Router.push('/grocery');
     }
   };
   const { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,

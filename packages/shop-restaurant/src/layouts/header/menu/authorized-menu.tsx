@@ -43,8 +43,8 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
       localForage.removeItem('@session');
       await deleteAllCookies(); 
       await clearCart(); 
-      // authDispatch({ type: 'SIGN_OUT' });
-    
+      authDispatch({ type: 'SIGN_OUT' });
+      Router.push('/grocery');
   };
 
   return (

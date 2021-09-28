@@ -42,7 +42,7 @@ const SidebarCategory: React.FC<{}> = () => {
       await deleteAllCookies(); 
       await clearCart(); 
       authDispatch({ type: 'SIGN_OUT' });
-      Router.push('/');
+      Router.push('/grocery');
     }
   };
   return (

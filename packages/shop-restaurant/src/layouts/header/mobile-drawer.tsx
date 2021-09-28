@@ -59,8 +59,8 @@ const MobileDrawer: React.FunctionComponent = () => {
       cookie.remove('access_token');
       cookie.remove('customer');
       cookie.remove('user_logged');
-      // authDispatch({ type: 'SIGN_OUT' });
-      // Router.push();
+      authDispatch({ type: 'SIGN_OUT' });
+      Router.push('/grocery');
     }
   };
 

@@ -134,7 +134,7 @@ const PaymentGroup: React.FunctionComponent<PaymentGroupProps> = ({
                 value="cash-on-delivery"
                 onChange={handleChange}
               />
-              <span>Pago en Efectivo</span>
+              <span>Mercado Pago</span>
             </label>
           ) : (
             ''

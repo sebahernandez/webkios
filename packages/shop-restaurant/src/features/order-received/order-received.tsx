@@ -115,7 +115,7 @@ const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date
                   defaultMessage="Método de Pago"
                 />
               </Text>
-              <Text>Efectivo</Text>
+              <Text>Mercado Pago</Text>
             </InfoBlock>
 
 
@@ -230,7 +230,7 @@ const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date
               </Text>
             </ListTitle>
             <ListDes>
-              <Text>Efectivo</Text>
+              <Text>Mercado Pago</Text>
             </ListDes>
           </ListItem>
 

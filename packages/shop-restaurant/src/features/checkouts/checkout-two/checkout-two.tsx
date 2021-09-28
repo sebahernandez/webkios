@@ -110,7 +110,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
     toggleRestaurant,
   } = useCart();
   let [loading, setLoading] = useState(false); 
-  const [clienteid] = useState(cookie.get('customer').id)
+  const [clienteid] = useState(!!cookie.get('customer') ? cookie.get('customer').id: 0)
   let { card, schedules } = state;  
   const [address, setAddress] = useState(clienteData.addresses);
   const [contact, setContact] = useState(clienteData.contacts); 

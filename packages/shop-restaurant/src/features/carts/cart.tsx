@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React,  { useContext, useState } from 'react';
 import Link from 'next/link';
+import { openModal } from '@redq/reuse-modal';
 import {
   CartPopupBody,
   PopupHeader,
@@ -27,13 +28,11 @@ import { Scrollbar } from 'components/scrollbar/scrollbar';
 import { useCart } from 'contexts/cart/use-cart';
 import { CartItem } from 'components/cart-item/cart-item';
 import Coupon from 'features/coupon/coupon';
-
-
-
-
-
-
-
+import { AuthContext } from 'contexts/auth/auth.context';
+import AuthenticationForm from 'features/authentication-form';
+import Cookies  from 'universal-cookie';
+import { useAppState, useAppDispatch } from 'contexts/app/app.provider';
+ 
 
 
 type CartPropsType = {
@@ -60,6 +59,36 @@ const Cart: React.FC<CartPropsType> = ({
   } = useCart();
   const [hasCoupon, setCoupon] = useState(false);
   const { isRtl } = useLocale();
+  const cookie = new Cookies()
+  const dispatch = useAppDispatch();
+  const {
+    authState: { isAuthenticated },
+    authDispatch,
+  } = useContext<any>(AuthContext);
+
+  const signInOutForm = () => {
+   
+
+    authDispatch({
+      type: 'SIGNIN',
+    });
+
+    openModal({
+      show: true,
+      overlayClassName: 'quick-view-overlay',
+      closeOnClickOutside: true,
+      component: AuthenticationForm,
+      closeComponent: '',
+      config: {
+        enableResizing: false,
+        disableDragging: true,
+        className: 'quick-view-modal',
+        width: 458,
+        height: 'auto',
+      },
+    });
+  };
+
 
   return (
     <CartPopupBody className={className} style={style}>
@@ -145,7 +174,7 @@ const Cart: React.FC<CartPropsType> = ({
 
         {cartItemsCount !== 0 ? (
           <Link href='/checkout'>
-            <CheckoutButton onClick={onCloseBtnClick}>
+            <CheckoutButton onClick={signInOutForm}>
               <>
                 <Title>
                   <FormattedMessage
