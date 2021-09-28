@@ -48,7 +48,7 @@ const CreateOrUpdateContact: React.FC<Props> = ({ item }) => {
           variables: {
             "number": values.number,
             "type": "secondary",
-            "cliente": cookie.get('customer'),
+            "cliente": cookie.get('customer').id,
             "clientid": config().SUBSCRIPTION_ID
           }
       });  
@@ -60,7 +60,7 @@ const CreateOrUpdateContact: React.FC<Props> = ({ item }) => {
               "id": values.id,
               "number": values.number,
               "type": "secondary",
-              "cliente": cookie.get('customer'),
+              "cliente": cookie.get('customer').id,
               "clientid": config().SUBSCRIPTION_ID
             },
         }); 

@@ -78,7 +78,7 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
             "name": values.name,
             "info": values.info,
             "type": "secondary",
-            "cliente": cookie.get('customer'),
+            "cliente": cookie.get('customer').id,
             "clientid": config().SUBSCRIPTION_ID
           },
       });  
@@ -91,7 +91,7 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
               "name": values.name,
               "info": values.info,  
               "type": item.type,
-              "cliente": cookie.get('customer'),
+              "cliente": cookie.get('customer').id,
               "clientid": config().SUBSCRIPTION_ID
             },
         }); 

@@ -96,6 +96,44 @@ const SettingsContent: React.FC<SettingsContentProps> = ({ deviceType }) => {
             />
           </Col>
 
+          <Col xs={12} sm={5} md={5} lg={5}>
+            <Label>
+              <FormattedMessage
+                id="phoneField"
+                defaultMessage="Telefono"
+              />
+            </Label>
+            <Input
+              type="text"
+              label="Teléfono"
+              name="phone"
+              value={cookie.get('customer').contacts.length > 0 && cookie.get('customer').contacts[0].number}
+              onChange={handleChange}
+              backgroundColor="#F7F7F7"
+              height="48px"
+              // intlInputLabelId="profileNameField"
+            />
+          </Col>
+
+          <Col xs={12} sm={5} md={5} lg={5}>
+            <Label>
+              <FormattedMessage
+                id="deliveryAddresTitle"
+                defaultMessage="Direccion"
+              />
+            </Label>
+            <Input
+              type="text"
+              label="address"
+              name="address"
+              value={cookie.get('customer').addresses.length > 0 && cookie.get('customer').addresses[0].info}
+              onChange={handleChange}
+              backgroundColor="#F7F7F7"
+              height="48px"
+              // intlInputLabelId="profileNameField"
+            />
+          </Col>
+
           <Col xs={12} sm={2} md={2} lg={2}>
             <Button size="big" style={{ width: '100%' }} onClick={handleSave}>
               <FormattedMessage id="profileSaveBtn" defaultMessage="Save" />

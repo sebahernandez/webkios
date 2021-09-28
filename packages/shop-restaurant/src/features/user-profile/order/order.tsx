@@ -84,7 +84,7 @@ const OrdersContent: React.FC<{}> = () => {
   const [active, setActive] = useState(''); 
   const [address, setAddress] = useState('');
   const [contact, setContact] = useState('');
-  const [id] = useState(cookie.get('customer'));
+  const [id] = useState(cookie.get('customer').id);
   const [mail] = useState(cookie.get('user_logged') && cookie.get('user_logged').email);
 
   const [targetRef, size] = useComponentSize();
@@ -105,7 +105,7 @@ const OrdersContent: React.FC<{}> = () => {
   const { data, error, loading } = useSubscription(GET_ORDERS_PUBLIC, {
     variables: {
       limit: 5,
-      user: cookie.get('customer'),
+      user: cookie.get('customer').id,
       clientid: cid
     },
   }); 

@@ -34,8 +34,7 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
   }
   
   const handleLogout = async () => { 
-     
-    if (typeof window !== 'undefined') { 
+      alert(1)
       const cookie = new Cookies() 
       await cookie.remove('access_token');
       await cookie.remove('customer'); 
@@ -44,8 +43,7 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
       await deleteAllCookies(); 
       await clearCart(); 
       authDispatch({ type: 'SIGN_OUT' });
-      Router.push('/');
-    }
+    
   };
 
   return (

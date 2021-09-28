@@ -34,44 +34,60 @@ export default function SignInModal({cid}) {
   const [password, setPassword] = React.useState('');
   const [addVisita] = useMutation(ADD_VISITA );
   const [setCliente] = useMutation(SET_CLIENTE );
-  const cookie = new Cookies()
+  const cookie = new Cookies();
  
-  const { data, error,loading } =  useQuery(
-    GET_CLIENTE_USERNAME_PASSWORD,
-    {
-      variables: {
-        clientid: cid,
-        username: email,
-        password: password
+   
+   
+    function LoadUser() {
+      console.log('loadUser')
+      const { loading, error, data } = useQuery(GET_CLIENTE_USERNAME, {
+        variables: {
+          clientid: cid,
+          username: email
+        } 
+      });
+      if(error) {
+        console.log(error)
+        return <p>Error {error}</p>;
+      }
+      if (loading) {
+        
+        return <p>Loading ...</p>;
       } 
+
+      if ( data && data.cliente && data.cliente.length > 0 ) {
+        
+         addVisita({
+           variables: {
+                     cliente: data.cliente[0].id, 
+                    clientid: cid
+                   }
+         });
+        cookie.set('customer', data.cliente[0])
+        closeModal(); 
+      }
+     return null;
     }
-  ); 
-  const { data:data1,loading:loading1 } =  useQuery(
-    GET_CLIENTE_USERNAME,
-    {
-      variables: {
-        clientid: cid,
-        username: email
-      } 
-    }
-  ); 
+
+  
 
 
     function GoogleButton ({isclosed}) {
     
       const responseGoogle = (response) => {
+            console.log('responseGoogle');
            setUser(response.profileObj); 
            const user = {
              image: response.profileObj.imageUrl,
              email: response.profileObj.email,
              name: response.profileObj.name
            }
-           setEmail(user.email);
-           cookie.set('customer', data1.cliente[0].id)
+           setEmail(user.email);            
            cookie.set('user_logged', user,{path: '/'})
            cookie.set('access_token', JSON.stringify(response.accessToken),{path: '/'})
            authDispatch({ type: 'SIGNIN_SUCCESS' });  
-           closeModal(); 
+
+         
       }
     
      return (
@@ -92,57 +108,12 @@ export default function SignInModal({cid}) {
      
     
     }
-  const addVisitaUser = () => {
-    
-      if(data1 && data1.cliente.length > 0){
-        console.log('usuario Encontrado')
-        addVisita({
-          variables: {
-                    cliente: data.cliente[0].id, 
-                    clientid: cid
-                  }
-        });
-        
-  
-      
-    };
-   }
    
-
-  const toggleSignUpForm = () => {
-    authDispatch({
-      type: 'SIGNUP',
-    });
-  };
 
   const toggleForgotPassForm = () => {
     authDispatch({
       type: 'FORGOTPASS',
     });
-  };
-
-  const loginCallback = () => {
-    console.log('data...:',JSON.stringify(data))
-    // validamos username y password
-    if(data && data.cliente.length > 0){
-      console.log('usuario Encontrado')
-      addVisita({
-        variables: {
-                  cliente: data.cliente[0].id, 
-                  clientid: cid
-                }
-      });
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('access_token', `${data.cliente[0].last_seen}`);
-        localStorage.setItem('user_logged', JSON.stringify(data.cliente[0])); 
-        authDispatch({ type: 'SIGNIN_SUCCESS' });
-        closeModal();
-      }
-    } else {
-      console.log('usuario NO existe');     
-    }
-
-    
   };
 
   
@@ -164,16 +135,8 @@ export default function SignInModal({cid}) {
 
        <GoogleButton isclosed={closed} />
         
-
-        <Offer style={{ padding: '20px 0' }}>
-          <FormattedMessage
-            id='dontHaveAccount'
-            defaultMessage="Don't have any account?"
-          />{' '}
-          <LinkButton onClick={toggleSignUpForm}>
-            <FormattedMessage id='signUpBtnText' defaultMessage='Sign Up' />
-          </LinkButton>
-        </Offer>
+       <LoadUser />
+ 
       </Container>
 
       <OfferSection>

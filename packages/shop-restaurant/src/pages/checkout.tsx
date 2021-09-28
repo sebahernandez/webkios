@@ -69,7 +69,7 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
     useEffect(() => { 
               if(data2){              
                 setClient(data2.cliente[0])
-                cookie.set('customer',data2.cliente[0].id)
+                cookie.set('customer',data2.cliente[0])
               }  
     });
 

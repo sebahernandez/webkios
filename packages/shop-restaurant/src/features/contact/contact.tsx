@@ -50,7 +50,7 @@ const Contact = ({
     return await deleteContactMutation({
       variables: { 
         id: JSON.stringify(item.id),
-        cliente: cookie.get('customer'),
+        cliente: cookie.get('customer').id,
         clientid: config().SUBSCRIPTION_ID
       },
     });

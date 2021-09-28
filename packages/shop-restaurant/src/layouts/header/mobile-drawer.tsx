@@ -10,6 +10,7 @@ import { CloseIcon } from 'assets/icons/CloseIcon';
 import { AuthContext } from 'contexts/auth/auth.context';
 import AuthenticationForm from 'features/authentication-form';
 import Cookies  from 'universal-cookie';
+
 import {
   DrawerBody,
   HamburgerIcon,
@@ -128,7 +129,8 @@ const MobileDrawer: React.FunctionComponent = () => {
                   </UserAvatar>
                   <UserDetails>
                     <h3>{nombre}</h3>
-        {/*             <span>+990 374 987</span> */}
+                    <span>{user.email}</span>
+                    <span>{cookie.get('customer') && cookie.get('customer').contacts && cookie.get('customer').contacts.length > 0 && cookie.get('customer').contacts[0].number}</span>
                   </UserDetails>
                 </LoginView>
               ) : (
