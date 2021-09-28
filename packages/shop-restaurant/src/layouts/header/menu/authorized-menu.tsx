@@ -23,6 +23,7 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
   } = useCart();
 
   function deleteAllCookies() {
+  
     var cookies = document.cookie.split(";");
   
     for (var i = 0; i < cookies.length; i++) {
@@ -34,7 +35,7 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
   }
   
   const handleLogout = async () => { 
-      alert(1)
+      
       const cookie = new Cookies() 
       await cookie.remove('access_token');
       await cookie.remove('customer'); 
@@ -42,7 +43,7 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
       localForage.removeItem('@session');
       await deleteAllCookies(); 
       await clearCart(); 
-      authDispatch({ type: 'SIGN_OUT' });
+      // authDispatch({ type: 'SIGN_OUT' });
     
   };
 

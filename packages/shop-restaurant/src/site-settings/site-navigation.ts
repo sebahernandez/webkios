@@ -73,7 +73,7 @@ export const NOT_AUTHORIZED_MENU_ITEMS = [
 ];
 export const AUTHORIZED_MENU_ITEMS = [
   ORDER_MENU_ITEM,
-  ORDER_MENU_RECEIVED_ITEM,
+/*   ORDER_MENU_RECEIVED_ITEM, */
   {
     id: 'nav.terms_and_services',
     defaultMessage: 'Terms and Services',

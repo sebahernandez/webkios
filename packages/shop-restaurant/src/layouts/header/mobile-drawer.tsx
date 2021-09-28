@@ -57,8 +57,10 @@ const MobileDrawer: React.FunctionComponent = () => {
   const handleLogout = () => {
     if (typeof window !== 'undefined') {
       cookie.remove('access_token');
-      authDispatch({ type: 'SIGN_OUT' });
-      Router.push('/');
+      cookie.remove('customer');
+      cookie.remove('user_logged');
+      // authDispatch({ type: 'SIGN_OUT' });
+      // Router.push();
     }
   };
 
@@ -129,7 +131,7 @@ const MobileDrawer: React.FunctionComponent = () => {
                   </UserAvatar>
                   <UserDetails>
                     <h3>{nombre}</h3>
-                    <span>{user.email}</span>
+                    <span>{cookie.get('customer') && cookie.get('customer').nombre}</span>
                     <span>{cookie.get('customer') && cookie.get('customer').contacts && cookie.get('customer').contacts.length > 0 && cookie.get('customer').contacts[0].number}</span>
                   </UserDetails>
                 </LoginView>
