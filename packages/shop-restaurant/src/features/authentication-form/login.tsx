@@ -22,6 +22,7 @@ import { SET_CLIENTE } from '../../utils/graphql/mutation/register_client';
 import { ADD_VISITA } from '../../utils/graphql/mutation/visitas';
 import GoogleLogin from 'react-google-login'; 
 import Cookies  from 'universal-cookie';
+import { useRouter } from 'next/router';
 
 
 export default function SignInModal({cid}) { 
@@ -36,7 +37,7 @@ export default function SignInModal({cid}) {
   const [setCliente] = useMutation(SET_CLIENTE );
   const cookie = new Cookies();
  
-   
+  const router = useRouter();
    
     function LoadUser() {
       console.log('loadUser')
@@ -64,6 +65,7 @@ export default function SignInModal({cid}) {
                    }
          });
         cookie.set('customer', data.cliente[0])
+        router.push('/checkout')
         closeModal(); 
       }
      return null;
