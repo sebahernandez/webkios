@@ -18,7 +18,7 @@ export const siteTermsAndServices = {
       id: '3',
       title: 'Personal Data Collected',
       description:
-        '<p>Personal Data collected for the following purposes and using the following services:</p><ol><li>Google Analytics: Cookies; Usage Data</li><li>Contact form: email address; first name; phone number</li><li>Mailing list or newsletter: email address; first name</li></ol>',
+        '<p>Personal Data collected for the following s and using the following services:</p><ol><li>Google Analytics: Cookies; Usage Data</li><li>Contact form: email address; first name; phone number</li><li>Mailing list or newsletter: email address; first name</li></ol>',
     },
     {
       id: '4',
