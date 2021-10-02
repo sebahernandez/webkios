@@ -32,7 +32,7 @@ import { AuthContext } from 'contexts/auth/auth.context';
 import AuthenticationForm from 'features/authentication-form';
 import Cookies  from 'universal-cookie';
 import { useAppState, useAppDispatch } from 'contexts/app/app.provider';
- 
+import { useRouter } from 'next/router';
 
 
 type CartPropsType = {
@@ -57,6 +57,7 @@ const Cart: React.FC<CartPropsType> = ({
     cartItemsCount,
     calculatePrice,
   } = useCart();
+  const router = useRouter();
   const [hasCoupon, setCoupon] = useState(false);
   const { isRtl } = useLocale();
   const cookie = new Cookies()
@@ -66,27 +67,34 @@ const Cart: React.FC<CartPropsType> = ({
     authDispatch,
   } = useContext<any>(AuthContext);
 
+
+
+  
   const signInOutForm = () => {
    
+    if (isAuthenticated) {
+        router.push('/checkout');
+    } else {
+          authDispatch({
+            type: 'SIGNIN',
+          });
+          openModal({
+            show: true,
+            overlayClassName: 'quick-view-overlay',
+            closeOnClickOutside: true,
+            component: AuthenticationForm,
+            closeComponent: '',
+            config: {
+              enableResizing: false,
+              disableDragging: true,
+              className: 'quick-view-modal',
+              width: 458,
+              height: 'auto',
+            },
+          });
+          
+    }
 
-    authDispatch({
-      type: 'SIGNIN',
-    });
-
-    openModal({
-      show: true,
-      overlayClassName: 'quick-view-overlay',
-      closeOnClickOutside: true,
-      component: AuthenticationForm,
-      closeComponent: '',
-      config: {
-        enableResizing: false,
-        disableDragging: true,
-        className: 'quick-view-modal',
-        width: 458,
-        height: 'auto',
-      },
-    });
   };
 
 
@@ -173,7 +181,7 @@ const Cart: React.FC<CartPropsType> = ({
         </PromoCode>
 
         {cartItemsCount !== 0 ? (
-          <Link href='/checkout'>
+         /*  <Link href='/checkout'> */
             <CheckoutButton onClick={signInOutForm}>
               <>
                 <Title>
@@ -188,7 +196,7 @@ const Cart: React.FC<CartPropsType> = ({
                 </PriceBox>
               </>
             </CheckoutButton>
-          </Link>
+          /* </Link> */
         ) : (
           <CheckoutButton>
             <>
