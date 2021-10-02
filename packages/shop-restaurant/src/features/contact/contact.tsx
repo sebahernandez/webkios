@@ -71,7 +71,7 @@ const Contact = ({
             <RadioCard
               id={item.id}
               key={item.id}
-              title={item.type}
+              title={item.type === 'secondary'?'':item.type}
               content={item.number}
               checked={item.type === 'primary'}
               onChange={() =>
