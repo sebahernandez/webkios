@@ -41,7 +41,7 @@ const TermsPage: NextPage<{}> = () => {
       <SEO title={"Términos y Condiciones - " + (data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].site_name)} 
        description={(data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].description)}  />
       <StyledContainer>
-        <Heading title={title} subtitle={`Last update: ${date}`} />
+        <Heading title={title} />
 
         <StyledContent>
           <StyledLeftContent>
