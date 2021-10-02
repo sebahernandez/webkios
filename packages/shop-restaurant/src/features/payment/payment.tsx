@@ -8,6 +8,9 @@ import { useCart } from 'contexts/cart/use-cart';
 import { useMutation } from '@apollo/client';
 import { DELETE_CARD } from 'graphql/mutation/card';
 import { CardHeader } from 'components/card-header/card-header';
+import { Autoplay } from 'swiper';
+
+// Estilo al Metodo de Pago
 
 interface Props {
   deviceType: any;
@@ -17,8 +20,11 @@ interface Props {
 const Payment = ({ deviceType, increment = false }: Props) => {
   const [deletePaymentCardMutation] = useMutation(DELETE_CARD);
   const { calculatePrice } = useCart();
+  let image = '/mercadopago.jpg'
+  let nombre = 'Mercado Pago'
+  
 
-    
+
 
   const {
     state: { card },
@@ -37,8 +43,11 @@ const Payment = ({ deviceType, increment = false }: Props) => {
         <FormattedMessage
           id="selectPaymentText"
           defaultMessage="Select Payment Option"
-        />
+        /> 
       </CardHeader>
+        <div>
+          <img width="50%" src={image} alt={nombre} />
+       </div>
 
       
     </>
@@ -46,3 +55,5 @@ const Payment = ({ deviceType, increment = false }: Props) => {
 };
 
 export default Payment;
+ 
+ 
