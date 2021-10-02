@@ -50,6 +50,7 @@ import { GET_ORDERS_OPEN } from 'utils/graphql/query/orders.query';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import config from 'setting/config';
 import Cookies  from 'universal-cookie';
+import Payment from 'features/payment/payment';
 
 // The type of props Checkout Form receives
 interface MyFormProps {
@@ -289,9 +290,9 @@ const processOrder = async () => {
               className='paymentBox'
               style={{ paddingBottom: 30 }}
             >
-             {/*    
+             
               <Payment increment={true} deviceType={deviceType} />
- */}
+ 
               
               {coupon ? (
                 <CouponBoxWrapper>
