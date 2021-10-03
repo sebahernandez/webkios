@@ -334,7 +334,7 @@ const processOrder = async () => {
                   id='termAndConditionHelper'
                   defaultMessage='By making this purchase you agree to our'
                 />
-                <Link href='#'>
+                <Link href='/terms'>
                   <TermConditionLink>
                     <FormattedMessage
                       id='termAndCondition'
