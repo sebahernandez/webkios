@@ -219,6 +219,10 @@ export const GlobalStyle = createGlobalStyle(({ theme }) =>
     '.icon-whatsapp':{
       marginLeft:'10px',
     },
+
+    '.paymentBox': {
+      textAlign: 'center',
+    },
     //@ts-ignore
     ...theme.globals,
 
