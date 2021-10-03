@@ -22,9 +22,6 @@ const Payment = ({ deviceType, increment = false }: Props) => {
   const { calculatePrice } = useCart();
   let image = '/mercadopago.jpg'
   let nombre = 'Mercado Pago'
-  
-
-
 
   const {
     state: { card },
