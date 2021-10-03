@@ -221,7 +221,7 @@ export const GlobalStyle = createGlobalStyle(({ theme }) =>
     },
 
     '.paymentBox': {
-      textAling: 'center',
+      textAlign: 'center',
     },
     //@ts-ignore
     ...theme.globals,
