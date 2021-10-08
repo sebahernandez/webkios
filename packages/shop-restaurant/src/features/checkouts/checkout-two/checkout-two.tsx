@@ -111,7 +111,8 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
     toggleRestaurant,
   } = useCart();
   let [loading, setLoading] = useState(false); 
-  const [clienteid] = useState(!!cookie.get('customer') ? cookie.get('customer').id: 0)
+  const [clienteid] = useState(0);
+  console.log('>>>', cookie.get('customer'),'<<<<<<');
   let { card, schedules } = state;  
   const [address, setAddress] = useState(clienteData.addresses);
   const [contact, setContact] = useState(clienteData.contacts); 
@@ -126,25 +127,24 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
       notifyOnNetworkStatusChange: true,
     }
   ); 
-
+ 
 
 
   const handleSubmit = async () => {
-    
+     
     if ( 
          cartItemsCount > 0   &&
          clienteData.addresses && clienteData.addresses.length > 0 &&
          clienteData.contacts && clienteData.contacts.length > 0
-       ) {  
-
+       ) {   
          setLoading(true);
+ 
          await processOrder();
         
        }
 } 
        
-const processOrder = async () => {       
-   
+const processOrder = async () => {        
     var today = new Date(),
     date = today.getDate() + "/" +
     (today.getMonth() + 1) + "/" +
@@ -162,7 +162,6 @@ const processOrder = async () => {
     today.getHours() + ":" +
     today.getMinutes() + ":" +
     today.getSeconds(); 
-       
       sessionStorage.setItem('items',JSON.stringify(items))
       sessionStorage.setItem('address',clienteData && clienteData.addresses.length > 0 ? clienteData.addresses[0].info: '[]')
       sessionStorage.setItem('contact',clienteData && clienteData.contacts.length > 0 ? clienteData.contacts[0].number: '[]')
@@ -181,15 +180,14 @@ const processOrder = async () => {
   };
 
   const add_order = async () => {
- 
-      
+  
     console.log('ingreando add_order 2')
     console.log('clienteData.addresses[0].info',clienteData.addresses[0].info)
-    sessionStorage.setItem('order',Date.now().toString())
+    sessionStorage.setItem('order',Date.now().toString()) 
     await addOrder({
       variables: {
                 clientid: config().SUBSCRIPTION_ID,
-                cliente: clienteid,
+                cliente: cookie.get('customer').id,
                 total: calculatePrice(), 
                 subtotal: calculateSubTotalPrice(), 
                 metodo_pago: 'card', 

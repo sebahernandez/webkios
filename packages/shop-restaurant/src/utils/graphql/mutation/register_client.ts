@@ -1,14 +1,14 @@
 import { gql } from '@apollo/client';
 
 export const ADD_CLIENTE = gql`
-    mutation Registro_Cliente($clientid: String!, $username: String!, $password: String!) {
-        insert_cliente(objects: {password: $password, username: $username, clientid: $clientid }) {
-        affected_rows
-        returning {
-            id
+        mutation Registro_Cliente($clientid: String!, $username: String! ) {
+            insert_cliente(objects: { username: $username, clientid: $clientid }) {
+            affected_rows
+            returning {
+                id
+            }
+            }
         }
-        }
-    }
   `;
 
 
