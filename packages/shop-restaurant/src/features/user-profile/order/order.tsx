@@ -51,7 +51,7 @@ const orderTableColumns = [
           <ItemDetails>
             <ItemName>{record.nombre}</ItemName>
             <ItemSize>{record.cantidad}</ItemSize>
-            <ItemPrice>${record.precio_venta}</ItemPrice>
+            <ItemPrice>{record.precio_venta}</ItemPrice>
           </ItemDetails>
         </ItemWrapper>
       );
