@@ -38,6 +38,12 @@ export default function SignInModal({cid}) {
   const cookie = new Cookies();
  
   const router = useRouter();
+
+
+  useEffect(()=> {
+    console.log('xxx', cookie.get('user_logged'))
+  },[])
+
    
    function LoadUser ({email}) {
       console.log('loadUser 1')
