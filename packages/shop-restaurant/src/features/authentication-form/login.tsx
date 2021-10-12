@@ -46,14 +46,14 @@ export default function SignInModal({cid}) {
 
    
    function LoadUser ({email}) {
-      console.log('loadUser 1')
+       
       const { loading, error, data } = useQuery(GET_CLIENTE_USERNAME, {
         variables: {
           clientid: cid,
           username: email
         } 
       });
-      console.log('error 2')
+     
       if(error) {
         console.log(error)
         return <p>Error {error}</p>;
@@ -72,7 +72,9 @@ export default function SignInModal({cid}) {
                    }
          });
         cookie.set('customer', data.cliente[0])
-        router.push('/checkout')
+        if(cookie.get('login') === '2'){
+          router.push('/checkout')
+        }
         closeModal(); 
       } else {
         console.log('loadUser else')
@@ -99,8 +101,10 @@ export default function SignInModal({cid}) {
         {
         
           cookie.set('customer', data2.insert_cliente.returning[0].id)
-          setId(data2.insert_cliente.returning[0].id) 
-          router.push('/checkout')
+          setId(data2.insert_cliente.returning[0].id)        
+          if(cookie.get('login') === '2'){
+            router.push('/checkout')
+          } 
           closeModal(); 
         } 
       }

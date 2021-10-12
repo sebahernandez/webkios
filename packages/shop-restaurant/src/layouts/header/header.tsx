@@ -47,7 +47,7 @@ const Header: React.FC<Props> = ({ className, visible }) => {
     authDispatch({
       type: 'SIGNIN',
     });
-
+    cookie.set('login',1)
     openModal({
       show: true,
       overlayClassName: 'quick-view-overlay',

@@ -75,6 +75,7 @@ const Cart: React.FC<CartPropsType> = ({
     if (isAuthenticated) {
         router.push('/checkout');
     } else {
+          cookie.set('login',2)
           authDispatch({
             type: 'SIGNIN',
           });
