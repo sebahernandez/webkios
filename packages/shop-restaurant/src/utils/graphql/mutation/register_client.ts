@@ -13,8 +13,8 @@ export const ADD_CLIENTE = gql`
 
 
   export const SET_CLIENTE = gql`
-    mutation Set_Cliente($clientid: String!, $email: String!, $imageURL: String!, $nombre: String!) {
-        update_cliente(where: {clientid: {_eq: $clientid}, username: {_eq: $email}}, _set: {imageURL: $imageURL, nombre: $nombre}) {
+    mutation Set_Cliente($clientid: String!, $id: Int!, $imageURL: String!) {
+        update_cliente(where: {clientid: {_eq: $clientid}, id: {_eq: $id}}, _set: {imageURL: $imageURL}) {
         affected_rows
         returning {
             id

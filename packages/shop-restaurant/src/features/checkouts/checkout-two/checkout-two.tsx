@@ -47,6 +47,7 @@ import Address from 'features/address/address';
 import Contact from 'features/contact/contact';
 import { ADD_ORDER } from 'utils/graphql/mutation/order';
 import { GET_ORDERS_OPEN } from 'utils/graphql/query/orders.query';
+import { SET_CLIENTE } from 'utils/graphql/mutation/register_client';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import config from 'setting/config';
 import Cookies  from 'universal-cookie';
@@ -98,6 +99,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
   const { state } = useContext(ProfileContext);
   const { isRtl } = useLocale();
   const [addOrder, {error}] = useMutation(ADD_ORDER );
+  const [setCliente] = useMutation(SET_CLIENTE);
   const {
     items,
     removeCoupon,
@@ -138,8 +140,17 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
          clienteData.contacts && clienteData.contacts.length > 0
        ) {   
          setLoading(true);
- 
-         await processOrder();
+
+         // Set Client
+         await setCliente({
+          variables: {
+                    clientid: config().SUBSCRIPTION_ID,
+                    id: cookie.get('customer').id,
+                    imageURL: cookie.get('user_logged').image
+                    }
+        });
+
+       await processOrder();
         
        }
 } 
