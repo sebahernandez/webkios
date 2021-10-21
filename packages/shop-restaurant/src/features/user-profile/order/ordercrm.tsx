@@ -42,13 +42,13 @@ const orderTableColumns = [
       return (
         <ItemWrapper>
           <ImageWrapper>
-            <img src={record.imageURL} alt={record.descripcion} />
+            <img src={record.gallery.split(',') && record.gallery.split(',')[0]} alt={record.descripcion} />
           </ImageWrapper>
 
           <ItemDetails>
             <ItemName>{record.nombre}</ItemName>
             <ItemSize>{record.cantidad}</ItemSize>
-            <ItemPrice>${record.precio_venta}</ItemPrice>
+            <ItemPrice>{record.precio_venta}</ItemPrice>
           </ItemDetails>
         </ItemWrapper>
       );
@@ -68,7 +68,7 @@ const orderTableColumns = [
     dataIndex: '',
     key: 'price',
     align: 'right',
-    width: 100,
+    width: 200,
     render: (text, record) => {
       return <p>${record.total}</p>;
     },
@@ -141,6 +141,10 @@ const OrdersCRMContent: React.FC<OrderProps> = ({orderid}) => {
           <Title style={{ padding: '0 20px' }}>
              <img src={imageURL} />
              <h1>{title}</h1>
+             <FormattedMessage
+              id='intlOrderPageTitle'
+              defaultMessage='Mis Pedidos'
+            />
           </Title>
           <Scrollbar className='order-scrollbar'>
             <OrderList>
