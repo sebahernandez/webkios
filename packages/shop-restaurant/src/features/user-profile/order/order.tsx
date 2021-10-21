@@ -51,7 +51,7 @@ const orderTableColumns = [
           <ItemDetails>
             <ItemName>{record.nombre}</ItemName>
             <ItemSize>{record.cantidad}</ItemSize>
-            <ItemPrice>${record.precio_venta}</ItemPrice>
+            {/* <ItemPrice>${record.precio_venta}</ItemPrice> */}
           </ItemDetails>
         </ItemWrapper>
       );
@@ -73,7 +73,7 @@ const orderTableColumns = [
     align: 'right',
     width: 100,
     render: (text, record) => {
-      return <p>${record.total}</p>;
+      return <p>${record.precio_venta}</p>;
     },
   },
 ];
@@ -159,6 +159,7 @@ const OrdersContent: React.FC<{}> = () => {
   return (
     <OrderBox>
       <DesktopView>
+        {/* Caja de ordenes*/}
         <OrderListWrapper style={{ height: size.height }}>
           <Title style={{ padding: '0 20px' }}>
             <FormattedMessage
