@@ -7,6 +7,11 @@ import Cookies  from 'universal-cookie';
 import { AuthContext } from 'contexts/auth/auth.context';
 import Router from 'next/router';
 import localForage from 'localforage';
+import config from 'setting/config'; 
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_ABANDONADOS } from 'utils/graphql/query/abandonados.query';
+import { AGREGAR_ABANDONADO } from 'utils/graphql/mutation/abandonados';
+import { UPGRADE_ABANDONADO } from 'utils/graphql/mutation/abandonados';
 
 type Props = {
   onLogout: () => void;
@@ -15,9 +20,22 @@ type Props = {
 
 export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
 
-
+  const cookie = new Cookies()
   const { authDispatch } = useContext<any>(AuthContext);
-  
+  const carrito = localForage.getItem('@session');
+  const [insert_abandonado] = useMutation(AGREGAR_ABANDONADO); 
+  const [upgrade_abandonado] = useMutation(UPGRADE_ABANDONADO); 
+
+  const { data } = useQuery(
+    GET_ABANDONADOS,
+    {
+      variables: { 
+        clientid: config().SUBSCRIPTION_ID,
+        customerid: cookie.get('customer') &&  cookie.get('customer').id
+      }
+    }
+  );
+
   const { 
     clearCart,
   } = useCart();
@@ -34,9 +52,48 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
     }
   }
   
+
+
+  const push = async () => {
+    await insert_abandonado({
+      variables: { 
+        clientid: config().SUBSCRIPTION_ID,
+        customerid: cookie.get('customer') && cookie.get('customer').id,
+        data_json: '{}'
+      },
+  });  
+  }
+
+  const put = async () => {
+    await upgrade_abandonado({
+      variables: { 
+        "clientid": config().SUBSCRIPTION_ID,
+        "customerid": cookie.get('customer') && cookie.get('customer').id,
+        "data_json": carrito
+      },
+  });  
+  }
+
+  const displayLog = () =>{ 
+     console.log('0101:::::::::::::::::::')
+     console.log('0101:::::::::::::::::::','data',data )
+     console.log('0101:::::::::::::::::::','customerid',cookie.get('customer').id )
+     console.log('0101:::::::::::::::::::','json_data',carrito )
+     console.log('0101:::::::::::::::::::')
+  }
+
+
+
   const handleLogout = async () => { 
-      
-      const cookie = new Cookies() 
+ 
+    displayLog()
+
+     if ( data.carritos_abandonados && data.carritos_abandonados.length > 0 ) {
+        await put()
+     } else { 
+        await push()
+     }  
+     
       await cookie.remove('access_token');
       await cookie.remove('customer'); 
       await cookie.remove('user_logged'); 

@@ -1,5 +1,4 @@
 import React,  { useContext, useState } from 'react';
-import Link from 'next/link';
 import { openModal } from '@redq/reuse-modal';
 import {
   CartPopupBody,
@@ -31,8 +30,9 @@ import Coupon from 'features/coupon/coupon';
 import { AuthContext } from 'contexts/auth/auth.context';
 import AuthenticationForm from 'features/authentication-form';
 import Cookies  from 'universal-cookie';
-import { useAppState, useAppDispatch } from 'contexts/app/app.provider';
+import { useAppDispatch } from 'contexts/app/app.provider';
 import { useRouter } from 'next/router';
+import localForage from 'localforage';
 
 
 type CartPropsType = {
@@ -67,12 +67,14 @@ const Cart: React.FC<CartPropsType> = ({
     authDispatch,
   } = useContext<any>(AuthContext);
 
-
+  const carrito = localForage.getItem('@session');
 
   
   const signInOutForm = () => {
    
     if (isAuthenticated) {
+         console.log('JSON CARRITO CART:', carrito)
+
         router.push('/checkout');
     } else {
           cookie.set('login',2)

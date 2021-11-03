@@ -7,38 +7,31 @@ import {
   Heading,
   SubHeading,
   OfferSection,
-  Offer, 
-  Divider,
-} from './authentication-form.style';
-import { Facebook } from 'assets/icons/facebook';
-import { Google } from 'assets/icons/google';
+  Offer,  
+} from './authentication-form.style'; 
 import { AuthContext } from 'contexts/auth/auth.context';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { closeModal } from '@redq/reuse-modal'; 
 import { useQuery,useMutation } from '@apollo/client';
-import { GET_CLIENTE_USERNAME_PASSWORD } from '../../utils/graphql/query/clients.query';
-import { GET_CLIENTE_USERNAME } from '../../utils/graphql/query/clients.query';
-import { SET_CLIENTE, ADD_CLIENTE } from '../../utils/graphql/mutation/register_client';
+ import { GET_CLIENTE_USERNAME } from '../../utils/graphql/query/clients.query';
+import {  ADD_CLIENTE } from '../../utils/graphql/mutation/register_client';
 import { ADD_VISITA } from '../../utils/graphql/mutation/visitas';
 import GoogleLogin from 'react-google-login'; 
 import Cookies  from 'universal-cookie';
 import { useRouter } from 'next/router';
+import localForage from 'localforage';
 
-
-export default function SignInModal({cid}) { 
-  const intl = useIntl();
+export default function SignInModal({cid}) {  
   const { authDispatch } = useContext<any>(AuthContext);
-  const [id, setId] = React.useState(0);
-  const [user, setUser] = React.useState(null);
+  const [id, setId] = React.useState(0); 
   const [closed, setClosed] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = React.useState(''); 
   const [addVisita] = useMutation(ADD_VISITA );
   const [addCliente,{ data:data2, loading, error:error2 }] = useMutation(ADD_CLIENTE );
   const cookie = new Cookies();
  
   const router = useRouter();
-
+  const carrito = localForage.getItem('@session');
 
   useEffect(()=> {
     console.log('xxx', cookie.get('user_logged'))
@@ -73,6 +66,7 @@ export default function SignInModal({cid}) {
          });
         cookie.set('customer', data.cliente[0])
         if(cookie.get('login') === '2'){
+          console.log('JSON CARRITO CART:', carrito)
           router.push('/checkout')
         }
         closeModal(); 
@@ -103,6 +97,7 @@ export default function SignInModal({cid}) {
           cookie.set('customer', data2.insert_cliente.returning[0].id)
           setId(data2.insert_cliente.returning[0].id)        
           if(cookie.get('login') === '2'){
+            console.log('JSON CARRITO LOGIN:', carrito)
             router.push('/checkout')
           } 
           closeModal(); 

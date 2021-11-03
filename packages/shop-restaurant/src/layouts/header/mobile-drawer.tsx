@@ -10,6 +10,8 @@ import { CloseIcon } from 'assets/icons/CloseIcon';
 import { AuthContext } from 'contexts/auth/auth.context';
 import AuthenticationForm from 'features/authentication-form';
 import Cookies  from 'universal-cookie';
+import localForage from 'localforage';
+import config from 'setting/config';
 
 import {
   DrawerBody,
@@ -33,6 +35,11 @@ import {
   YOUR_ORDER_PAGE,
 } from 'site-settings/site-navigation';
 import { useAppState, useAppDispatch } from 'contexts/app/app.provider';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_ABANDONADOS } from 'utils/graphql/query/abandonados.query';
+import { AGREGAR_ABANDONADO } from 'utils/graphql/mutation/abandonados';
+import { UPGRADE_ABANDONADO } from 'utils/graphql/mutation/abandonados';
+
 
 const MobileDrawer: React.FunctionComponent = () => {
   const isDrawerOpen = useAppState('isDrawerOpen');
@@ -42,6 +49,19 @@ const MobileDrawer: React.FunctionComponent = () => {
   let nombre='Invitado';
   let user = null
   let access_token  = null
+  const carrito = localForage.getItem('@session');
+  const [insert_abandonado] = useMutation(AGREGAR_ABANDONADO); 
+  const [upgrade_abandonado] = useMutation(UPGRADE_ABANDONADO); 
+
+  const { data } = useQuery(
+    GET_ABANDONADOS,
+    {
+      variables: { 
+        clientid: config().SUBSCRIPTION_ID,
+        customerid: cookie.get('customer') &&  cookie.get('customer').id
+      }
+    }
+  );
 
   const {
     authState: { isAuthenticated },
@@ -53,9 +73,47 @@ const MobileDrawer: React.FunctionComponent = () => {
       type: 'TOGGLE_DRAWER',
     });
   }, [dispatch]);
+ 
+   const push = async () => {
+    await insert_abandonado({
+      variables: { 
+        clientid: config().SUBSCRIPTION_ID,
+        customerid: cookie.get('customer') && cookie.get('customer').id,
+        data_json: '{}'
+      },
+  });  
+  }
 
-  const handleLogout = () => {
+  const put = async () => {
+    await upgrade_abandonado({
+      variables: { 
+        "clientid": config().SUBSCRIPTION_ID,
+        "customerid": cookie.get('customer') && cookie.get('customer').id,
+        "data_json": carrito
+      },
+  });  
+  }
+
+  const displayLog = () =>{ 
+     console.log('0101:::::::::::::::::::')
+     console.log('0101:::::::::::::::::::','data',data )
+     console.log('0101:::::::::::::::::::','customerid',cookie.get('customer').id )
+     console.log('0101:::::::::::::::::::','json_data',carrito )
+     console.log('0101:::::::::::::::::::')
+  }
+
+
+  const handleLogout = async () => {
+     
     if (typeof window !== 'undefined') {
+      
+    displayLog()
+
+     if ( data.carritos_abandonados && data.carritos_abandonados.length > 0 ) {
+        await put()
+     } else { 
+        await push()
+     }  
       cookie.remove('access_token');
       cookie.remove('customer');
       cookie.remove('user_logged');

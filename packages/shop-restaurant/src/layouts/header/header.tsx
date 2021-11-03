@@ -11,7 +11,7 @@ import UserImage from 'assets/images/user.jpg';
 import { isCategoryPage } from '../is-home-page';
 import Search from 'features/search/search';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import config from 'setting/config';
 import Cookies  from 'universal-cookie';
 
