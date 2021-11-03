@@ -24,6 +24,7 @@ import localForage from 'localforage';
 export default function SignInModal({cid}) {  
   const { authDispatch } = useContext<any>(AuthContext);
   const [id, setId] = React.useState(0); 
+  const [user, setUser] = React.useState(null);
   const [closed, setClosed] = React.useState(false);
   const [email, setEmail] = React.useState(''); 
   const [addVisita] = useMutation(ADD_VISITA );
