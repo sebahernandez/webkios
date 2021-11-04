@@ -1,4 +1,4 @@
-import React, { useEffect,  useContext } from 'react';
+import React, { useEffect,  useContext, useState } from 'react';
 import {
   LinkButton,
   Button, 
@@ -13,35 +13,64 @@ import { AuthContext } from 'contexts/auth/auth.context';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { closeModal } from '@redq/reuse-modal'; 
 import { useQuery,useMutation } from '@apollo/client';
- import { GET_CLIENTE_USERNAME } from '../../utils/graphql/query/clients.query';
-import {  ADD_CLIENTE } from '../../utils/graphql/mutation/register_client';
+import { GET_CLIENTE_USERNAME } from '../../utils/graphql/query/clients.query';
+import { GET_ABANDONADOS } from '../../utils/graphql/query/abandonados.query';
+import { ADD_CLIENTE } from '../../utils/graphql/mutation/register_client';
 import { ADD_VISITA } from '../../utils/graphql/mutation/visitas';
 import GoogleLogin from 'react-google-login'; 
 import Cookies  from 'universal-cookie';
 import { useRouter } from 'next/router';
-import localForage from 'localforage';
+import localforage from 'localforage';
 
 export default function SignInModal({cid}) {  
   const { authDispatch } = useContext<any>(AuthContext);
   const [id, setId] = React.useState(0); 
+
   const [user, setUser] = React.useState(null);
   const [closed, setClosed] = React.useState(false);
   const [email, setEmail] = React.useState(''); 
+  const [customerid, setCustomerid] = React.useState(0); 
   const [addVisita] = useMutation(ADD_VISITA );
   const [addCliente,{ data:data2, loading, error:error2 }] = useMutation(ADD_CLIENTE );
   const cookie = new Cookies();
  
   const router = useRouter();
-  const carrito = localForage.getItem('@session');
+  const [carrito, setCarrito] = useState('')
 
   useEffect(()=> {
-    console.log('xxx', cookie.get('user_logged'))
-  },[])
+    console.log('cookie', cookie.get('user_logged'))
+    console.log('localforage', localforage.getItem('@session'))
+ 
+  },[cookie,localforage])
+
+   // Ingresando function de carga de Carrito Abandonado  
+   function LoadCarritoAbandonado({customerid}){
+
+    console.log('....... 1')  
+    console.log('....... 1.1 ', 'customerid:', customerid)  
+    let { data } =  useQuery(GET_ABANDONADOS, {
+      variables: {
+        clientid: cid,
+        customerid: customerid
+      } 
+    });
+    console.log('....... 2')  
+    if ( data && data.carritos_abandonados && data.carritos_abandonados.length > 0 ) {
+       
+        localforage.setItem('@session',data.carritos_abandonados[0].data_json)
+    }
+    console.log('checkout...')
+    if( data &&  data.carritos_abandonados[0].data_json !== '' && data.carritos_abandonados[0].data_json !== '{\"isOpen\":false,\"items\":[],\"isRestaurant\":false,\"coupon\":null}')
+      router.push('/checkout')
+
+    return null;
+  } 
+     
 
    
-   function LoadUser ({email}) {
+    function LoadUser ({email}) {
        
-      const { loading, error, data } = useQuery(GET_CLIENTE_USERNAME, {
+      let { loading, error, data } = useQuery(GET_CLIENTE_USERNAME, {
         variables: {
           clientid: cid,
           username: email
@@ -56,20 +85,19 @@ export default function SignInModal({cid}) {
         
         return <p>Loading ...</p>;
       } 
-
+      console.log('data:',data)
       if ( data && data.cliente && data.cliente.length > 0 ) {
+        setCustomerid(data.cliente[0].id)
         
+        console.log(',,,,',customerid)
          addVisita({
            variables: {
-                     cliente: data.cliente[0].id, 
-                    clientid: cid
+                     cliente: customerid, 
+                     clientid: cid
                    }
          });
         cookie.set('customer', data.cliente[0])
-        if(cookie.get('login') === '2'){
-          console.log('JSON CARRITO CART:', carrito)
-          router.push('/checkout')
-        }
+        
         closeModal(); 
       } else {
         console.log('loadUser else')
@@ -98,7 +126,6 @@ export default function SignInModal({cid}) {
           cookie.set('customer', data2.insert_cliente.returning[0].id)
           setId(data2.insert_cliente.returning[0].id)        
           if(cookie.get('login') === '2'){
-            console.log('JSON CARRITO LOGIN:', carrito)
             router.push('/checkout')
           } 
           closeModal(); 
@@ -175,6 +202,8 @@ export default function SignInModal({cid}) {
        <GoogleButton isclosed={closed} />
         
        {closed && ( <LoadUser email={email}/> )}
+
+       {closed && ( <LoadCarritoAbandonado customerid={328}/> )}
  
       </Container>
 

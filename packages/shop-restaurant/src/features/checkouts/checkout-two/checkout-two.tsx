@@ -113,8 +113,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
     toggleRestaurant,
   } = useCart();
   let [loading, setLoading] = useState(false); 
-  const [clienteid] = useState(0);
-  console.log('>>>', cookie.get('customer'),'<<<<<<');
+  const [clienteid] = useState(0); 
   let { card, schedules } = state;  
   const [address, setAddress] = useState(clienteData.addresses);
   const [contact, setContact] = useState(clienteData.contacts); 
@@ -183,7 +182,6 @@ const processOrder = async () => {
       sessionStorage.setItem('discount',calculateDiscount())
       sessionStorage.setItem('subtotal',calculateSubTotalPrice()) 
       await add_order() // backend
-      console.log('viajando a la orden recibida')
       clearCart();
       Router.push('/order-received');
       
@@ -192,8 +190,6 @@ const processOrder = async () => {
 
   const add_order = async () => {
   
-    console.log('ingreando add_order 2')
-    console.log('clienteData.addresses[0].info',clienteData.addresses[0].info)
     sessionStorage.setItem('order',Date.now().toString()) 
     await addOrder({
       variables: {
@@ -236,9 +232,6 @@ const processOrder = async () => {
  
 
   useEffect(() => {
-    console.log('!existeOrden() :', !existeOrden() )
-    console.log('calculatePrice() > 0 :', calculatePrice() > 0 )
-    console.log('cartItemsCount > 0 :', cartItemsCount > 0 )
     return () => {
       if (isRestaurant) {
         toggleRestaurant();

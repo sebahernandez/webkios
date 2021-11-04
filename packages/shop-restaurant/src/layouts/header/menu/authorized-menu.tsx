@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import NavLink from 'components/nav-link/nav-link';
 import { AUTHORIZED_MENU_ITEMS } from 'site-settings/site-navigation';
@@ -22,7 +22,8 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
 
   const cookie = new Cookies()
   const { authDispatch } = useContext<any>(AuthContext);
-  const carrito = localForage.getItem('@session');
+  var [carrito, setCarrito] = useState('');
+
   const [insert_abandonado] = useMutation(AGREGAR_ABANDONADO); 
   const [upgrade_abandonado] = useMutation(UPGRADE_ABANDONADO); 
 
@@ -40,6 +41,25 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
     clearCart,
   } = useCart();
 
+  const init = async ()=> {
+    if (localForage) {
+      var keys = await localForage.keys()
+      console.log('key',keys)
+      return Promise.all(keys.map(async key => {
+        if(key==='@session'){
+          console.log('|||||', await localForage.getItem(key))
+          setCarrito(await localForage.getItem(key))
+        }  
+      }))
+     }
+  }
+
+
+  useEffect(() => {
+     init()
+  })
+
+
   function deleteAllCookies() {
   
     var cookies = document.cookie.split(";");
@@ -51,46 +71,45 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
   }
-  
-
-
+ 
   const push = async () => {
-    await insert_abandonado({
-      variables: { 
-        clientid: config().SUBSCRIPTION_ID,
-        customerid: cookie.get('customer') && cookie.get('customer').id,
-        data_json: '{}'
-      },
-  });  
-  }
+
+    console.log('push!', carrito)  
+    if(carrito !== '' && carrito !== '{\"isOpen\":false,\"items\":[],\"isRestaurant\":false,\"coupon\":null}')
+    {
+      await insert_abandonado({
+        variables: { 
+          clientid: config().SUBSCRIPTION_ID,
+          customerid: cookie.get('customer') && cookie.get('customer').id,
+          data_json: carrito
+        },
+      });  
+    }  
+  
+}
 
   const put = async () => {
-    await upgrade_abandonado({
-      variables: { 
-        "clientid": config().SUBSCRIPTION_ID,
-        "customerid": cookie.get('customer') && cookie.get('customer').id,
-        "data_json": carrito
-      },
-  });  
+    if(carrito !== '' && carrito !== '{\"isOpen\":false,\"items\":[],\"isRestaurant\":false,\"coupon\":null}')
+    {
+      await upgrade_abandonado({
+        variables: { 
+          "clientid": config().SUBSCRIPTION_ID,
+          "customerid": cookie.get('customer') && cookie.get('customer').id,
+          "data_json": carrito
+        },
+      });  
+   } 
   }
 
-  const displayLog = () =>{ 
-     console.log('0101:::::::::::::::::::')
-     console.log('0101:::::::::::::::::::','data',data )
-     console.log('0101:::::::::::::::::::','customerid',cookie.get('customer').id )
-     console.log('0101:::::::::::::::::::','json_data',carrito )
-     console.log('0101:::::::::::::::::::')
-  }
-
-
+   
 
   const handleLogout = async () => { 
- 
-    displayLog()
+  
 
-     if ( data.carritos_abandonados && data.carritos_abandonados.length > 0 ) {
+     if ( data && data.carritos_abandonados && data.carritos_abandonados.length > 0 ) {
         await put()
-     } else { 
+     } 
+     if ( data && data.carritos_abandonados && data.carritos_abandonados.length === 0 ) {
         await push()
      }  
      
