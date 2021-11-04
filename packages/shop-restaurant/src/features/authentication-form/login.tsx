@@ -61,7 +61,7 @@ export default function SignInModal({cid}) {
     }
     console.log('checkout...')
     if( data &&  data.carritos_abandonados[0].data_json !== '' && data.carritos_abandonados[0].data_json !== '{\"isOpen\":false,\"items\":[],\"isRestaurant\":false,\"coupon\":null}')
-      router.push('/checkout')
+      router.push('/')
 
     return null;
   } 
