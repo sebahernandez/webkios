@@ -51,12 +51,15 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
     }); 
  
   React.useEffect(() => {
+    console.log('hostname:', window.location.hostname)
     if (query.text || query.category) {
       scroll();
     }
   }, [query.text, query.category]);
   const PAGE_TYPE: any = query.type;
   const page = sitePages[PAGE_TYPE];
+
+
    
   return (
     <>
