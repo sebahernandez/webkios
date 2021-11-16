@@ -24,6 +24,10 @@ import { ModalProvider } from 'contexts/modal/modal.provider';
 import { useQuery } from '@apollo/client';
 import config from 'setting/config';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query'; 
+/**
+ * Agregando HEART BUSINESS 
+ */
+import { GET_SUSCRIPCION_X_HOST } from 'utils/graphql/query/suscripcion_host.query'; 
 
 const Sidebar = dynamic(() => import('layouts/sidebar/sidebar'));
 const Products = dynamic(() =>
@@ -49,9 +53,19 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
 
         }
     }); 
+
+    var { data:data2 } = useQuery(GET_SUSCRIPCION_X_HOST,
+      {
+          variables: {
+            host: "%"+window.location.hostname+"%"
+          }
+    }); 
+
+
  
   React.useEffect(() => {
-    alert(window.location.hostname)
+   
+    if(data2) alert(JSON.stringify(data2))
     if (query.text || query.category) {
       scroll();
     }
