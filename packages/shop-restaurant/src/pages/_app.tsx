@@ -7,7 +7,7 @@ import { LanguageProvider } from "contexts/language/language.provider";
 import { CartProvider } from "contexts/cart/use-cart";
 import { useApollo } from "utils/apollo";
 import { useMedia } from "utils/use-media";
-import { ApolloClient, ApolloProvider, InMemoryCache, HttpLink } from '@apollo/client';
+import { ApolloProvider, useQuery } from '@apollo/client';
 
 // External CSS import here
 import "rc-drawer/assets/index.css";
@@ -25,19 +25,25 @@ import { GlobalStyle } from "assets/styles/global.style";
 import { messages } from "site-settings/site-translation/messages";
 import "typeface-lato";
 import "typeface-poppins";
+import { GET_SUSCRIPCION_X_HOST } from 'utils/graphql/query/suscripcion.query'; 
+import Cookies  from 'universal-cookie'; 
+import { useEffect, useState } from "react";
+
 // need to provide types
 const DemoSwitcher = dynamic(
   () => import("components/demo-switcher/switcher-btn")
 );
 
-
+const cookie = new Cookies()
 const AppLayout = dynamic(() => import("layouts/app-layout"));
 
 export default function ExtendedApp({ Component, pageProps }) {
+  let host = ''
   const mobile = useMedia("(max-width: 580px)");
   const tablet = useMedia("(max-width: 991px)");
   const desktop = useMedia("(min-width: 992px)");
   const apolloClient = useApollo(pageProps.initialApolloState);
+  
   
   return (
     <ApolloProvider client={apolloClient}>

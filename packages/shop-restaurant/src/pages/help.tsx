@@ -86,8 +86,8 @@ export default function () {
 
   return (
     <Modal>
-      <SEO title={"Ayuda - " + (data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].site_name)} 
-       description={(data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].description)}  />
+      <SEO title={"Ayuda - " + (data !== undefined && data.info_shop_view !== undefined && data.info_shop_view.length > 0 &&  data.info_shop_view[0].site_name)} 
+       description={(data !== undefined && data.info_shop_view !== undefined && data.info_shop_view.length > 0 &&  data.info_shop_view[0].description)}  />
       <HelpPageWrapper>
         <HelpPageContainer>
           <Heading>F.A.Q</Heading>

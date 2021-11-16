@@ -1,7 +1,9 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { AuthContext } from './auth.context';
 const isBrowser = typeof window !== 'undefined';
 import Cookies  from 'universal-cookie';
+import { GET_SUSCRIPCION_X_HOST } from 'utils/graphql/query/suscripcion.query'; 
+import { useQuery } from '@apollo/client';
 
 const cookie = new Cookies()
 
@@ -45,6 +47,30 @@ function reducer(state: any, action: any) {
 }
 
 export const AuthProvider: React.FunctionComponent = ({ children }) => {
+
+  const [host, setHost] = useState('localhost')
+  const { data } = useQuery(GET_SUSCRIPCION_X_HOST,
+    {
+        variables: {
+          host: host
+        }
+  }); 
+ 
+   useEffect(() => {
+    if(window) {
+      setHost("%".concat(window.location.hostname).concat("%"))
+            
+    }     
+    if(host){  
+      if(data && data.suscripciones.length > 0) {  
+        cookie.remove('cid')  
+        cookie.set('cid',data.suscripciones[0].clientid)          
+      } 
+    }
+
+  }, [ host, data ]);
+
+
   const [authState, authDispatch] = useReducer(reducer, INITIAL_STATE);
   return (
     <AuthContext.Provider value={{ authState, authDispatch }}>

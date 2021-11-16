@@ -66,7 +66,7 @@ export const Products: React.FC<ProductsProps> = ({
   
   if(data1){ 
     
-    categoria = (query.category===undefined?data1.categorias_view_cid[0].name:query.category);    
+    categoria = (query.category===undefined?data1.categorias_view_cid.length >0 && data1.categorias_view_cid[0].name:query.category);    
   }
  
   const { data, error, loading, fetchMore, networkStatus } = useQuery(

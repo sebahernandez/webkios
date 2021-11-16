@@ -85,8 +85,8 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
 
   return (
     <>
-      <SEO title={"Checkout - " + (data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].site_name)} 
-       description={(data !== undefined && data.info_shop_view !== undefined && data.info_shop_view[0].description)}  />
+      <SEO title={"Checkout - " + (data !== undefined && data.info_shop_view !== undefined && data.info_shop_view.length > 0 && data.info_shop_view[0].site_name)} 
+       description={(data !== undefined && data.info_shop_view !== undefined && data.info_shop_view.length > 0 && data.info_shop_view[0].description)}  />
        <ProfileProvider initData={client===null?data1.me:client}>
         <Modal> 
           <Checkout token={token} clienteData={client} deviceType={deviceType} />

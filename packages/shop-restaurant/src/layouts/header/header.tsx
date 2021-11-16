@@ -76,7 +76,7 @@ const Header: React.FC<Props> = ({ className, visible }) => {
   return (
   
    visible && <HeaderWrapper className={className} id="layout-header">
-      <LeftMenu logo={data && data.info_shop_view[0].img_site_url} />
+      <LeftMenu logo={data && data.info_shop_view.length > 0 &&  data.info_shop_view[0].img_site_url} />
       {showSearch && <Search minimal={true} className="headerSearch" />}
       <RightMenu
         isAuthenticated={isAuthenticated}
