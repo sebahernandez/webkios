@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -35,7 +35,7 @@ const CartPopUp = dynamic(() => import('features/carts/cart-popup'), {
 });
 
 const CategoryPage: React.FC<any> = ({ deviceType }) => {
-  let myhost = ''
+  const [host, setHost] = useState('')
   const { query } = useRouter();
   const { elRef: targetRef, scroll } = useRefScroll({
     percentOfElement: 0,
@@ -52,27 +52,28 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
         }
     }); 
  
-
+ 
     var { data:data2 } = useQuery(GET_SUSCRIPCION_X_HOST,
       {
           variables: {
-            host: myhost
+            host: host
           }
     }); 
+ 
 
     
     
  
   React.useEffect(() => {
-   
     
     if(window) {
       
-      myhost = "%".concat(window.location.hostname).concat("%")
-    } 
-    if(myhost){ 
+      setHost("%".concat(window.location.hostname).concat("%"))
+     
+    }  
+    if(host){  
       if(data2 && data2.suscripciones.length > 0) {  
-        cookie.set('cid',data2.suscripciones[0].clientid) 
+        cookie.set('cid',data2.suscripciones[0].clientid)  
       } 
     }
 
@@ -90,7 +91,7 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
   return (
     <>
        {data && data.info_shop_view.length > 0}
-       <SEO title={data && data.info_shop_view[0].site_name} description={data && data.info_shop_view[0].description + ' - Detalle'} />
+       <SEO title={data && data.info_shop_view.length > 0 && data.info_shop_view[0].site_name} description={data && data.info_shop_view.length > 0 && data.info_shop_view[0].description + ' - Detalle'} />
       <ModalProvider>
         <Modal>
          {/*  <MobileBanner intlTitleId={page?.banner_title_id} type={PAGE_TYPE} /> */}
