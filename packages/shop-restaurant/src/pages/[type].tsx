@@ -71,6 +71,7 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
       setHost("%".concat(window.location.hostname).concat("%"))
      
     }  
+    console.log('host:'+host)
     if(host){  
       if(data2 && data2.suscripciones.length > 0) {  
         cookie.set('cid',data2.suscripciones[0].clientid)  
