@@ -65,7 +65,7 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
     
  
   React.useEffect(() => {
-    
+    alert(window.location.hostname)
     if(window) {
       
       setHost("%".concat(window.location.hostname).concat("%"))
