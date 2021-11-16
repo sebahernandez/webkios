@@ -36,6 +36,7 @@ const CartPopUp = dynamic(() => import('features/carts/cart-popup'), {
 
 const CategoryPage: React.FC<any> = ({ deviceType }) => {
   const [host, setHost] = useState('')
+  const [cid, setCid] = useState('')
   const { query } = useRouter();
   const { elRef: targetRef, scroll } = useRefScroll({
     percentOfElement: 0,
@@ -43,7 +44,6 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
     offsetPX: -110,
   });
 
-  const cid = cookie.get('cid')?cookie.get('cid'):'';
   var { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {
@@ -75,6 +75,7 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
     if(host){  
       if(data2 && data2.suscripciones.length > 0) {  
         cookie.set('cid',data2.suscripciones[0].clientid)  
+        setCid(data2.suscripciones[0].clientid)
       } 
     }
 
