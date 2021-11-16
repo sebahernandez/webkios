@@ -35,8 +35,8 @@ const CartPopUp = dynamic(() => import('features/carts/cart-popup'), {
 });
 
 const CategoryPage: React.FC<any> = ({ deviceType }) => {
-  const [host, setHost] = useState('')
-  const [cid, setCid] = useState('')
+  let [host, setHost] = useState('')
+  let [cid, setCid] = useState('')
   const { query } = useRouter();
   const { elRef: targetRef, scroll } = useRefScroll({
     percentOfElement: 0,
@@ -65,13 +65,13 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
     
  
   React.useEffect(() => {
-    alert(window.location.hostname)
+    
     if(window) {
       
       setHost("%".concat(window.location.hostname).concat("%"))
-     
+      console.log('host:'+host)
     }  
-    console.log('host:'+host)
+   
     if(host){  
       if(data2 && data2.suscripciones.length > 0) {  
         cookie.set('cid',data2.suscripciones[0].clientid)  
