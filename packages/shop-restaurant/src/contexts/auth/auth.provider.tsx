@@ -48,7 +48,7 @@ function reducer(state: any, action: any) {
 
 export const AuthProvider: React.FunctionComponent = ({ children }) => {
 
-  const [host, setHost] = useState('localhost')
+  const [host, setHost] = useState(null)
   const { data } = useQuery(GET_SUSCRIPCION_X_HOST,
     {
         variables: {
@@ -61,8 +61,11 @@ export const AuthProvider: React.FunctionComponent = ({ children }) => {
       setHost("%".concat(window.location.hostname).concat("%"))
             
     }     
-    if(host){  
+    console.log('>>>>>>>>>>> host1:' , host)
+    if(host !== null){  
+      console.log('>>>>>>>>>>> host2:' , host)
       if(data && data.suscripciones.length > 0) {  
+        console.log('>>>>>>>>>>> cid data:' , JSON.stringify(data))
         cookie.remove('cid')  
         cookie.set('cid',data.suscripciones[0].clientid)          
       } 
