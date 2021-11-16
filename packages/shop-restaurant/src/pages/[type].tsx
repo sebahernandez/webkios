@@ -51,7 +51,7 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
     }); 
  
   React.useEffect(() => {
-    console.log('hostname:', window.location.hostname)
+    alert(window.location.hostname)
     if (query.text || query.category) {
       scroll();
     }
