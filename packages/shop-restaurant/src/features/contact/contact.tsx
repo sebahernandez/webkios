@@ -12,8 +12,7 @@ import { DELETE_CONTACT } from 'utils/graphql/mutation/contact';
 import { CardHeader } from 'components/card-header/card-header';
 import { ButtonGroup } from 'components/button-group/button-group';
 import { Box } from 'components/box';
-import { Plus } from 'assets/icons/PlusMinus';
-import config from 'setting/config';
+import { Plus } from 'assets/icons/PlusMinus'; 
 import Cookies  from 'universal-cookie';
 
 interface Props {
@@ -44,14 +43,14 @@ const Contact = ({
   } = useContext(ProfileContext);
 
   const cookie = new Cookies()
-
+  const cid = cookie.get('cid')
   const handleOnDelete = async (item) => { 
  
     return await deleteContactMutation({
       variables: { 
         id: JSON.stringify(item.id),
         cliente: cookie.get('customer').id,
-        clientid: config().SUBSCRIPTION_ID
+        clientid: cid
       },
     });
 

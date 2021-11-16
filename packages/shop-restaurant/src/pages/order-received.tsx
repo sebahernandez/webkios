@@ -2,13 +2,14 @@ import React ,  { useEffect } from 'react';
 import { SEO } from 'components/seo';
 import OrderReceived from 'features/order-received/order-received';
 
-import { useQuery, gql } from '@apollo/client';
-import config from 'setting/config';
+import { useQuery, gql } from '@apollo/client'; 
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
+import Cookies  from 'universal-cookie';
 
 export default function OrderReceivedPage() {
 
-  const cid =  config().SUBSCRIPTION_ID;
+  const cookie = new Cookies()
+  const cid = cookie.get('cid')
   var { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {

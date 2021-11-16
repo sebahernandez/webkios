@@ -6,8 +6,7 @@ import { useCart } from 'contexts/cart/use-cart';
 import Cookies  from 'universal-cookie';
 import { AuthContext } from 'contexts/auth/auth.context';
 import Router from 'next/router';
-import localForage from 'localforage';
-import config from 'setting/config'; 
+import localForage from 'localforage'; 
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ABANDONADOS } from 'utils/graphql/query/abandonados.query';
 import { AGREGAR_ABANDONADO } from 'utils/graphql/mutation/abandonados';
@@ -21,6 +20,7 @@ type Props = {
 export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
 
   const cookie = new Cookies()
+  const cid = cookie.get('cid')
   const { authDispatch } = useContext<any>(AuthContext);
   var [carrito, setCarrito] = useState('');
 
@@ -31,7 +31,7 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
     GET_ABANDONADOS,
     {
       variables: { 
-        clientid: config().SUBSCRIPTION_ID,
+        clientid: cid,
         customerid: cookie.get('customer') &&  cookie.get('customer').id
       }
     }
@@ -79,7 +79,7 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
     {
       await insert_abandonado({
         variables: { 
-          clientid: config().SUBSCRIPTION_ID,
+          clientid: cid,
           customerid: cookie.get('customer') && cookie.get('customer').id,
           data_json: carrito
         },
@@ -93,7 +93,7 @@ export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
     {
       await upgrade_abandonado({
         variables: { 
-          "clientid": config().SUBSCRIPTION_ID,
+          "clientid": cid,
           "customerid": cookie.get('customer') && cookie.get('customer').id,
           "data_json": carrito
         },

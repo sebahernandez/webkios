@@ -16,10 +16,9 @@ import Fade from 'react-reveal/Fade';
 import NoResultFound from 'components/no-result/no-result';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'components/button/loadmore-button';
-import config from '../../../setting/config'; 
 import { GET_CATEGORIAS } from 'utils/graphql/query/categorias.query';
 import { GET_PRODUCTS_X_CATEGORIA } from 'utils/graphql/query/products.query';
- 
+import Cookies  from 'universal-cookie';
 
 const ErrorMessage = dynamic(() =>
   import('components/error-message/error-message')
@@ -49,7 +48,8 @@ export const Products: React.FC<ProductsProps> = ({
   type 
 }) => {
   const router = useRouter();
-  const cid =  config().SUBSCRIPTION_ID;
+  const cookie = new Cookies()
+  const cid =  cookie.get('cid');
   let categoria = "%%"; 
   let titulo = "%%"
   const { query } = useRouter();

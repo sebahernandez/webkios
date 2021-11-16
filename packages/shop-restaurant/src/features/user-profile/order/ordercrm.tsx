@@ -24,9 +24,10 @@ import OrderCardMobile from './order-card/order-card-mobile';
 import useComponentSize from 'utils/useComponentSize';
 import { FormattedMessage } from 'react-intl'; 
 import { GET_ORDERS_CRM_PUBLIC } from 'utils/graphql/query/orders.query';
+import Cookies  from 'universal-cookie';
 
-import config from 'setting/config'; 
-const cid =  config().SUBSCRIPTION_ID;
+const cookie = new Cookies();
+const cid = cookie.get('cid')  
 
 const progressData = ['Órden Recibida', 'En Preparación' , 'Órden en Camino', 'Órden Entregada'];
 

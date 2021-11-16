@@ -7,8 +7,7 @@ import { Scrollbar } from 'components/scrollbar/scrollbar';
 import CheckoutWrapper, {
   CheckoutContainer,
   CheckoutInformation,
-  InformationBox,
-  DeliverySchedule,
+  InformationBox, 
   CheckoutSubmit,
   HaveCoupon,
   CouponBoxWrapper,
@@ -49,7 +48,6 @@ import { ADD_ORDER } from 'utils/graphql/mutation/order';
 import { GET_ORDERS_OPEN } from 'utils/graphql/query/orders.query';
 import { SET_CLIENTE } from 'utils/graphql/mutation/register_client';
 import { useQuery, useMutation, gql } from '@apollo/client';
-import config from 'setting/config';
 import Cookies  from 'universal-cookie';
 import Payment from 'features/payment/payment';
 
@@ -95,6 +93,7 @@ type OrderReceivedProps = {
 
 const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, deviceType }) => {
   const cookie = new Cookies();
+  const cid = cookie.get('cid')  
   const [hasCoupon, setHasCoupon] = useState(false);
   const { state } = useContext(ProfileContext);
   const { isRtl } = useLocale();
@@ -122,7 +121,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
     GET_ORDERS_OPEN,
     {
       variables: {
-        clientid: config().SUBSCRIPTION_ID,
+        clientid: cid,
         cliente: clienteData.id
       },
       notifyOnNetworkStatusChange: true,
@@ -143,7 +142,7 @@ const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, device
          // Set Client
          await setCliente({
           variables: {
-                    clientid: config().SUBSCRIPTION_ID,
+                    clientid: cid,
                     id: cookie.get('customer').id,
                     imageURL: cookie.get('user_logged').image
                     }
@@ -193,7 +192,7 @@ const processOrder = async () => {
     sessionStorage.setItem('order',Date.now().toString()) 
     await addOrder({
       variables: {
-                clientid: config().SUBSCRIPTION_ID,
+                clientid: cid,
                 cliente: cookie.get('customer').id,
                 total: calculatePrice(), 
                 subtotal: calculateSubTotalPrice(), 

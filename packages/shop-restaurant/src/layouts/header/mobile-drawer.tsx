@@ -11,7 +11,7 @@ import { AuthContext } from 'contexts/auth/auth.context';
 import AuthenticationForm from 'features/authentication-form';
 import Cookies  from 'universal-cookie';
 import localForage from 'localforage';
-import config from 'setting/config';
+ 
 
 import {
   DrawerBody,
@@ -44,7 +44,8 @@ import { UPGRADE_ABANDONADO } from 'utils/graphql/mutation/abandonados';
 const MobileDrawer: React.FunctionComponent = () => {
   const isDrawerOpen = useAppState('isDrawerOpen');
   const dispatch = useAppDispatch();
-  const cookie = new Cookies()
+  const cookie = new Cookies();
+  const cid = cookie.get('cid')  
   let image='/user.jpg';
   let nombre='Invitado';
   let user = null
@@ -57,7 +58,7 @@ const MobileDrawer: React.FunctionComponent = () => {
     GET_ABANDONADOS,
     {
       variables: { 
-        clientid: config().SUBSCRIPTION_ID,
+        clientid: cid,
         customerid: cookie.get('customer') &&  cookie.get('customer').id
       }
     }
@@ -77,7 +78,7 @@ const MobileDrawer: React.FunctionComponent = () => {
    const push = async () => {
     await insert_abandonado({
       variables: { 
-        clientid: config().SUBSCRIPTION_ID,
+        clientid: cid,
         customerid: cookie.get('customer') && cookie.get('customer').id,
         data_json: '{}'
       },
@@ -87,7 +88,7 @@ const MobileDrawer: React.FunctionComponent = () => {
   const put = async () => {
     await upgrade_abandonado({
       variables: { 
-        "clientid": config().SUBSCRIPTION_ID,
+        "clientid": cid,
         "customerid": cookie.get('customer') && cookie.get('customer').id,
         "data_json": carrito
       },

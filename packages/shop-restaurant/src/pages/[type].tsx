@@ -11,8 +11,7 @@ import {
   ContentSection,
   OfferSection,
   MobileCarouselDropdown,
-} from 'assets/styles/pages.style';
-// Static Data Import Here
+} from 'assets/styles/pages.style'; 
 import { siteOffers } from 'site-settings/site-offers';
 import { sitePages } from 'site-settings/site-pages';
 import { SEO } from 'components/seo';
@@ -22,13 +21,11 @@ import { GET_PRODUCTS } from 'graphql/query/products.query';
 import { GET_CATEGORIES } from 'graphql/query/category.query';
 import { ModalProvider } from 'contexts/modal/modal.provider';
 import { useQuery } from '@apollo/client';
-import config from 'setting/config';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query'; 
-/**
- * Agregando HEART BUSINESS 
- */
-import { GET_SUSCRIPCION_X_HOST } from 'utils/graphql/query/suscripcion_host.query'; 
+import { GET_SUSCRIPCION_X_HOST } from 'utils/graphql/query/suscripcion.query'; 
+import Cookies  from 'universal-cookie'; 
 
+const cookie = new Cookies()
 const Sidebar = dynamic(() => import('layouts/sidebar/sidebar'));
 const Products = dynamic(() =>
   import('components/product-grid/product-list/product-list')
@@ -38,14 +35,15 @@ const CartPopUp = dynamic(() => import('features/carts/cart-popup'), {
 });
 
 const CategoryPage: React.FC<any> = ({ deviceType }) => {
-
+  let myhost = ''
   const { query } = useRouter();
   const { elRef: targetRef, scroll } = useRefScroll({
     percentOfElement: 0,
     percentOfContainer: 0,
     offsetPX: -110,
   });
-  const cid =  config().SUBSCRIPTION_ID;
+
+  const cid = cookie.get('cid')?cookie.get('cid'):'';
   var { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {
@@ -53,19 +51,33 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
 
         }
     }); 
+ 
 
     var { data:data2 } = useQuery(GET_SUSCRIPCION_X_HOST,
       {
           variables: {
-            host: "%"+window.location.hostname+"%"
+            host: myhost
           }
     }); 
 
-
+    
+    
  
   React.useEffect(() => {
    
-    if(data2) alert(JSON.stringify(data2))
+    
+    if(window) {
+      
+      myhost = "%".concat(window.location.hostname).concat("%")
+    } 
+    if(myhost){ 
+      if(data2 && data2.suscripciones.length > 0) {  
+        cookie.set('cid',data2.suscripciones[0].clientid) 
+      } 
+    }
+
+
+   
     if (query.text || query.category) {
       scroll();
     }
@@ -77,7 +89,7 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
    
   return (
     <>
-       {data && window.sessionStorage.setItem('cid',cid)}
+       {data && data.info_shop_view.length > 0}
        <SEO title={data && data.info_shop_view[0].site_name} description={data && data.info_shop_view[0].description + ' - Detalle'} />
       <ModalProvider>
         <Modal>

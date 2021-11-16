@@ -4,9 +4,7 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import ErrorMessage from 'components/error-message/error-message';
 import SwiperCore, { Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Text } from 'components/text';
-import Image from 'components/image/image';
+import { Swiper, SwiperSlide } from 'swiper/react'; 
 import { ArrowNext } from 'assets/icons/ArrowNext';
 import { ArrowPrev } from 'assets/icons/ArrowPrev';
 import {
@@ -17,7 +15,7 @@ import {
   Title,
   SliderNav,
 } from './horizontal-category-card-menu.style';
-import config from '../../setting/config';
+import Cookies  from 'universal-cookie';
 
 SwiperCore.use([Navigation]);
 
@@ -27,7 +25,9 @@ interface Props {
 
 export const HorizontalCategoryCardMenu = ({ type }: Props) => {
   const router = useRouter();
-  const cid =  config().SUBSCRIPTION_ID;
+  const cookie = new Cookies()
+  const cid = cookie.get('cid')
+
   const { data, loading, error } = useQuery(GET_CATEGORIAS, {
     variables: { 
         clientid: cid

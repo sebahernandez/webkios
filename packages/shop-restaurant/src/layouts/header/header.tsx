@@ -11,8 +11,7 @@ import UserImage from 'assets/images/user.jpg';
 import { isCategoryPage } from '../is-home-page';
 import Search from 'features/search/search';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
-import { useQuery } from '@apollo/client';
-import config from 'setting/config';
+import { useQuery } from '@apollo/client'; 
 import Cookies  from 'universal-cookie';
 
 type Props = {
@@ -26,6 +25,7 @@ const Header: React.FC<Props> = ({ className, visible }) => {
     authDispatch,
   } = React.useContext<any>(AuthContext);
   const cookie = new Cookies()
+  const cid = cookie.get('cid')
   const defaultValue = { first: 'Ron', last: 'Burgundy' };
   const { pathname, query } = useRouter();
   const handleLogout = () => {
@@ -40,7 +40,7 @@ const Header: React.FC<Props> = ({ className, visible }) => {
   const { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {
-          clientid: config().SUBSCRIPTION_ID
+          clientid: cid
         }
     }); 
   const handleJoin = () => {

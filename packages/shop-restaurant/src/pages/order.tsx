@@ -1,8 +1,7 @@
 import React, {useEffect } from 'react';
 import { NextPage } from 'next';
 import { SEO } from 'components/seo';
-import { useQuery, gql } from '@apollo/client';
-import config from 'setting/config';
+import { useQuery } from '@apollo/client'; 
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
 import Order from 'features/user-profile/order/order';
 import {
@@ -11,7 +10,7 @@ import {
 } from 'features/user-profile/user-profile.style';
 import Sidebar from 'features/user-profile/sidebar/sidebar';
 import { Modal } from '@redq/reuse-modal';
-
+import Cookies  from 'universal-cookie';
 
 export interface Site {
   site_name: string,
@@ -20,10 +19,13 @@ export interface Site {
 
 const OrderPage: NextPage = () => {
   let mySite: Site = null
+  const cookie = new Cookies()
+  const cid = cookie.get('cid')
+
   const { data:data1, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {
-          clientid: config().SUBSCRIPTION_ID
+          clientid: cid
         }
     }); 
     if(data1) {

@@ -15,8 +15,8 @@ import { SEO } from 'components/seo';
 import { useMedia } from 'utils/use-media';
 import { siteTermsAndServices } from 'site-settings/site-terms-and-services';
 import { useQuery } from '@apollo/client';
-import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query'; 
-import config from 'setting/config';
+import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';  
+import Cookies  from 'universal-cookie';
 
 const TermsPage: NextPage<{}> = () => {
   const { title, date, content } = siteTermsAndServices;
@@ -26,8 +26,8 @@ const TermsPage: NextPage<{}> = () => {
   content.forEach((item) => {
     menuItems.push(item.title);
   });
-
-  const cid =  config().SUBSCRIPTION_ID;
+  const cookie = new Cookies()
+  const cid = cookie.get('cid')
   var { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {

@@ -10,7 +10,6 @@ import { ProfileContext } from 'contexts/profile/profile.context';
 import { FormattedMessage } from 'react-intl';
 import { UPDATE_ADDRESS } from 'utils/graphql/mutation/address';
 import { INSERT_ADDRESS } from 'utils/graphql/mutation/address';
-import config from 'setting/config';
 import Cookies  from 'universal-cookie';
 
 // Shape of form values
@@ -64,6 +63,7 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
     name: values.name,
     info: values.info,
   }; 
+  const {cid} = cookie.get('cid');
   const { state, dispatch } = useContext(ProfileContext);
 
   const [addressMutation, { data }] = useMutation(UPDATE_ADDRESS);
@@ -79,7 +79,7 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
             "info": values.info,
             "type": "secondary",
             "cliente": cookie.get('customer').id,
-            "clientid": config().SUBSCRIPTION_ID
+            "clientid": cid
           },
       });  
       closeModal();
@@ -92,7 +92,7 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
               "info": values.info,  
               "type": item.type,
               "cliente": cookie.get('customer').id,
-              "clientid": config().SUBSCRIPTION_ID
+              "clientid": cid
             },
         }); 
            /* dispatch({ type: 'ADD_OR_UPDATE_ADDRESS', payload: addressValue });  */

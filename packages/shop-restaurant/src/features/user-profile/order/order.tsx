@@ -27,9 +27,8 @@ import { FormattedMessage } from 'react-intl';
 import { GET_CLIENTE_ID } from 'utils/graphql/query/clients.query';
 import { GET_ORDERS_PUBLIC } from 'utils/graphql/query/orders.query';
 
-import config from 'setting/config'; 
 const cookie = new Cookies()
-const cid =  config().SUBSCRIPTION_ID;
+const cid =  cookie.get('cid')
 
 const progressData = ['Órden Recibida', 'En Preparación' , 'Órden en Camino', 'Órden Entregada'];
 

@@ -11,8 +11,7 @@ import { Button } from 'components/button/button';
 import { UPDATE_CONTACT } from 'utils/graphql/mutation/contact';
 import { INSERT_CONTACT } from 'utils/graphql/mutation/contact';
 import { FieldWrapper, Heading } from './contact-card.style';
-import { FormattedMessage } from 'react-intl';
-import config from 'setting/config';
+import { FormattedMessage } from 'react-intl'
 import Cookies  from 'universal-cookie';
 
 
@@ -40,6 +39,7 @@ const CreateOrUpdateContact: React.FC<Props> = ({ item }) => {
   const [addContactMutation] = useMutation(INSERT_CONTACT);
   const { state, dispatch } = useContext(ProfileContext);
   const cookie = new Cookies() 
+  const cid =  cookie.get('cid')
   const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
 
 
@@ -49,7 +49,7 @@ const CreateOrUpdateContact: React.FC<Props> = ({ item }) => {
             "number": values.number,
             "type": "secondary",
             "cliente": cookie.get('customer').id,
-            "clientid": config().SUBSCRIPTION_ID
+            "clientid": cid
           }
       });  
      
@@ -61,14 +61,10 @@ const CreateOrUpdateContact: React.FC<Props> = ({ item }) => {
               "number": values.number,
               "type": "secondary",
               "cliente": cookie.get('customer').id,
-              "clientid": config().SUBSCRIPTION_ID
+              "clientid": cid
             },
-        }); 
-        
-       
-    } 
-
-
+        });   
+    }  
      closeModal();
   };
   return (

@@ -8,21 +8,21 @@ import {
   Heading,
 } from './footer.style';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query'; 
-import { useQuery, gql } from '@apollo/client';
-import config from 'setting/config';
+import { useQuery } from '@apollo/client';
 import { Facebook } from 'assets/icons/facebook';
 import { Instagram } from 'assets/icons/Instagram';
 import { Whatsapp } from 'assets/icons/Whatsapp';
 import { Heart } from 'assets/icons/Heart';
-
+import Cookies  from 'universal-cookie';
 
 export const Footer = ( ) => {
 
-
+  const cookie = new Cookies()
+  const cid = cookie.get('cid')
   const { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {
-          clientid: config().SUBSCRIPTION_ID
+          clientid: cid
         }
     }); 
 

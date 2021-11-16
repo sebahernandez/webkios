@@ -12,8 +12,8 @@ import {
 } from 'features/user-profile/user-profile.style';
 import Sidebar from 'features/user-profile/sidebar/sidebar';
 import { SEO } from 'components/seo'; 
-import ErrorMessage from 'components/error-message/error-message';
-import config from 'setting/config'; 
+import ErrorMessage from 'components/error-message/error-message'; 
+import Cookies  from 'universal-cookie';
 
 type Props = {
   deviceType?: {
@@ -22,7 +22,8 @@ type Props = {
     desktop: boolean;
   };
 };
-const cid =  config().SUBSCRIPTION_ID;
+const cookie = new Cookies()
+const cid = cookie.get('cid')
 const ProfilePage: NextPage<Props> = ({ deviceType }) => {
   const { data, error, loading } = useQuery(GET_CLIENTE_ID, 
     {

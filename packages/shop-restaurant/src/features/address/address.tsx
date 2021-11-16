@@ -12,8 +12,7 @@ import { CardHeader } from 'components/card-header/card-header';
 import { ButtonGroup } from 'components/button-group/button-group';
 import { Box } from 'components/box';
 import { Plus } from 'assets/icons/PlusMinus';
-import { useEffect } from 'react';
-import config from 'setting/config';
+import { useEffect } from 'react'; 
 import Cookies  from 'universal-cookie';
 
 interface Props {
@@ -47,13 +46,14 @@ const Address = ({
 
   const handleOnDelete = async (item) => {
     const cookie = new Cookies() 
+    const cid = cookie.get('cid')
     dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
       return await deleteAddressMutation(
         {
         variables: { 
           id: JSON.stringify(item.id) ,
           cliente: cookie.get('customer').id,
-          clientid: config().SUBSCRIPTION_ID
+          clientid: cid
         },
      }); 
   };

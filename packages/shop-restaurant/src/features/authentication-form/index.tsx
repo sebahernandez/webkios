@@ -2,12 +2,16 @@ import React, { useContext } from 'react';
 import SignInForm from './login';
 import SignOutForm from './register';
 import ForgotPassForm from './forgot-password';
-import { AuthContext } from 'contexts/auth/auth.context'; 
-import config from '../../setting/config';   
+import { AuthContext } from 'contexts/auth/auth.context';  
+import Cookies  from 'universal-cookie';
 
 export default function AuthenticationForm() {
+
+
+  const cookie = new Cookies();
+  const cid = cookie.get('cid')  
   const { authState } = useContext<any>(AuthContext);
-  const cid =  config().SUBSCRIPTION_ID;
+  
   let RenderForm;
 
   if (authState.currentForm === 'signIn') {

@@ -3,10 +3,9 @@ import { NextPage, GetStaticProps } from 'next';
 import { useQuery, gql } from '@apollo/client';
 import { SEO } from 'components/seo';
 import CartPopUp from 'features/carts/cart-popup';
-import { Modal } from '@redq/reuse-modal';
-import config from 'setting/config';
+import { Modal } from '@redq/reuse-modal'; 
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
-
+import Cookies  from 'universal-cookie';
 import {
   OfferPageWrapper,
   ProductsRow,
@@ -40,12 +39,14 @@ type GiftCardProps = {
     desktop: boolean;
   };
 };
-const cid = config().SUBSCRIPTION_ID;
+const cookie = new Cookies()
+const cid = cookie.get('cid')
+
 const GiftCardPage: NextPage<GiftCardProps> = ({ deviceType }) => {
   const { data, error } = useQuery(GET_COUPON,
     {
       variables: {
-        clientid: config().SUBSCRIPTION_ID
+        clientid: cid
       }
     });
     var { data:data1,   } = useQuery(GET_INFO_SHOP,

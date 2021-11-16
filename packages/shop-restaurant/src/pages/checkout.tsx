@@ -4,8 +4,7 @@ import { Modal } from '@redq/reuse-modal';
 import { SEO } from 'components/seo';
 import Checkout from 'features/checkouts/checkout-two/checkout-two';
 import { ProfileProvider } from 'contexts/profile/profile.provider'; 
-import { useQuery, useSubscription } from '@apollo/client';
-import config from 'setting/config';
+import { useQuery, useSubscription } from '@apollo/client'; 
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query';
 import { SUBSCRIPTION_CLIENTE_USERNAME } from 'utils/graphql/query/clients.query';
 import Cookies  from 'universal-cookie';
@@ -49,19 +48,20 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
   
   const [client, setClient] = React.useState('')
   const cookie = new Cookies()
+  const cid = cookie.get('cid')
   const [email] = React.useState(cookie.get('user_logged') && cookie.get('user_logged').email)
 
   const { data } = useQuery(GET_INFO_SHOP,
     {
         variables: {
-          clientid: config().SUBSCRIPTION_ID
+          clientid: cid
         }
     }); 
 
   const { data:data2, error } = useSubscription(SUBSCRIPTION_CLIENTE_USERNAME,
     {
         variables: {  
-          clientid: config().SUBSCRIPTION_ID,
+          clientid: cid,
           username: email
         }
     }); 
