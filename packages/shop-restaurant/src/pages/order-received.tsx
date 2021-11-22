@@ -9,7 +9,7 @@ import Cookies  from 'universal-cookie';
 export default function OrderReceivedPage() {
 
   const cookie = new Cookies()
-  const cid = cookie.get('cid')
+  const cid = cookie.get('clientid')
   var { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {

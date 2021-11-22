@@ -40,7 +40,7 @@ type GiftCardProps = {
   };
 };
 const cookie = new Cookies()
-const cid = cookie.get('cid')
+const cid = cookie.get('clientid')
 
 const GiftCardPage: NextPage<GiftCardProps> = ({ deviceType }) => {
   const { data, error } = useQuery(GET_COUPON,

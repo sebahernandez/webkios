@@ -46,7 +46,7 @@ const Address = ({
 
   const handleOnDelete = async (item) => {
     const cookie = new Cookies() 
-    const cid = cookie.get('cid')
+    const cid = cookie.get('clientid')
     dispatch({ type: 'DELETE_ADDRESS', payload: item.id });
       return await deleteAddressMutation(
         {

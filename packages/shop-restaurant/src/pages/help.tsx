@@ -76,7 +76,7 @@ export const HelpPageContainer = styled.div`
 export default function () {
 
   const cookie = new Cookies()
-  const cid = cookie.get('cid')
+  const cid = cookie.get('clientid')
   const { data } = useQuery(GET_INFO_SHOP,
     {
         variables: {

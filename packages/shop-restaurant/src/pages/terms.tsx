@@ -27,7 +27,7 @@ const TermsPage: NextPage<{}> = () => {
     menuItems.push(item.title);
   });
   const cookie = new Cookies()
-  const cid = cookie.get('cid')
+  const cid = cookie.get('clientid')
   var { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {

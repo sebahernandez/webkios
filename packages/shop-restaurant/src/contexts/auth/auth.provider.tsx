@@ -65,9 +65,9 @@ export const AuthProvider: React.FunctionComponent = ({ children }) => {
     if(host !== null){  
       console.log('>>>>>>>>>>> host2:' , host)
       if(data && data.suscripciones.length > 0) {  
-        console.log('>>>>>>>>>>> cid data:' , JSON.stringify(data))
-        cookie.remove('cid')  
-        cookie.set('cid',data.suscripciones[0].clientid)          
+        console.log('>>>>>>>>>>> clientid data:' , JSON.stringify(data))
+        cookie.remove('clientid')  
+        cookie.set('clientid',data.suscripciones[0].clientid)          
       } 
     }
 

@@ -20,7 +20,7 @@ export interface Site {
 const OrderPage: NextPage = () => {
   let mySite: Site = null
   const cookie = new Cookies()
-  const cid = cookie.get('cid')
+  const cid = cookie.get('clientid')
 
   const { data:data1, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {

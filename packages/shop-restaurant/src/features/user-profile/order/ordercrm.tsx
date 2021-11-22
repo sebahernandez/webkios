@@ -27,7 +27,7 @@ import { GET_ORDERS_CRM_PUBLIC } from 'utils/graphql/query/orders.query';
 import Cookies  from 'universal-cookie';
 
 const cookie = new Cookies();
-const cid = cookie.get('cid')  
+const cid = cookie.get('clientid')  
 
 const progressData = ['Órden Recibida', 'En Preparación' , 'Órden en Camino', 'Órden Entregada'];
 

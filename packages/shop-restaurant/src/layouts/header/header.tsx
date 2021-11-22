@@ -25,7 +25,7 @@ const Header: React.FC<Props> = ({ className, visible }) => {
     authDispatch,
   } = React.useContext<any>(AuthContext);
   const cookie = new Cookies()
-  const cid = cookie.get('cid')
+  const cid = cookie.get('clientid')
   const defaultValue = { first: 'Ron', last: 'Burgundy' };
   const { pathname, query } = useRouter();
   const handleLogout = () => {

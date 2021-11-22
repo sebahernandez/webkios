@@ -9,7 +9,7 @@ export default function AuthenticationForm() {
 
 
   const cookie = new Cookies();
-  const cid = cookie.get('cid')  
+  const cid = cookie.get('clientid')  
   const { authState } = useContext<any>(AuthContext);
   
   let RenderForm;

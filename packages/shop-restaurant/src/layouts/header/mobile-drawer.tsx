@@ -45,7 +45,7 @@ const MobileDrawer: React.FunctionComponent = () => {
   const isDrawerOpen = useAppState('isDrawerOpen');
   const dispatch = useAppDispatch();
   const cookie = new Cookies();
-  const cid = cookie.get('cid')  
+  const cid = cookie.get('clientid')  
   let image='/user.jpg';
   let nombre='Invitado';
   let user = null

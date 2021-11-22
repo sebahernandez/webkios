@@ -63,7 +63,7 @@ const UpdateAddress = (props: FormikProps<FormValues> & MyFormProps) => {
     name: values.name,
     info: values.info,
   }; 
-  const {cid} = cookie.get('cid');
+  const {cid} = cookie.get('clientid');
   const { state, dispatch } = useContext(ProfileContext);
 
   const [addressMutation, { data }] = useMutation(UPDATE_ADDRESS);

@@ -26,7 +26,7 @@ interface Props {
 export const HorizontalCategoryCardMenu = ({ type }: Props) => {
   const router = useRouter();
   const cookie = new Cookies()
-  const cid = cookie.get('cid')
+  const cid = cookie.get('clientid')
 
   const { data, loading, error } = useQuery(GET_CATEGORIAS, {
     variables: { 

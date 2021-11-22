@@ -48,7 +48,7 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
   
   const [client, setClient] = React.useState('')
   const cookie = new Cookies()
-  const cid = cookie.get('cid')
+  const cid = cookie.get('clientid')
   const [email] = React.useState(cookie.get('user_logged') && cookie.get('user_logged').email)
 
   const { data } = useQuery(GET_INFO_SHOP,

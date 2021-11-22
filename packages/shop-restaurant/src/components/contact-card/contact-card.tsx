@@ -39,7 +39,7 @@ const CreateOrUpdateContact: React.FC<Props> = ({ item }) => {
   const [addContactMutation] = useMutation(INSERT_CONTACT);
   const { state, dispatch } = useContext(ProfileContext);
   const cookie = new Cookies() 
-  const cid =  cookie.get('cid')
+  const cid =  cookie.get('clientid')
   const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
 
 

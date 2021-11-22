@@ -43,7 +43,7 @@ const Contact = ({
   } = useContext(ProfileContext);
 
   const cookie = new Cookies()
-  const cid = cookie.get('cid')
+  const cid = cookie.get('clientid')
   const handleOnDelete = async (item) => { 
  
     return await deleteContactMutation({

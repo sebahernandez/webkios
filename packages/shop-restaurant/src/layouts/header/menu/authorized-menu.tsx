@@ -20,7 +20,7 @@ type Props = {
 export const AuthorizedMenu: React.FC<Props> = ({ onLogout }) => {
 
   const cookie = new Cookies()
-  const cid = cookie.get('cid')
+  const cid = cookie.get('clientid')
   const { authDispatch } = useContext<any>(AuthContext);
   var [carrito, setCarrito] = useState('');
 

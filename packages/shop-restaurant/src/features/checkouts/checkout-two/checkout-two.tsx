@@ -93,7 +93,7 @@ type OrderReceivedProps = {
 
 const CheckoutWithSidebar: React.FC<MyFormProps> = ({ clienteData, token, deviceType }) => {
   const cookie = new Cookies();
-  const cid = cookie.get('cid')  
+  const cid = cookie.get('clientid')  
   const [hasCoupon, setHasCoupon] = useState(false);
   const { state } = useContext(ProfileContext);
   const { isRtl } = useLocale();

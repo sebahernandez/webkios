@@ -23,7 +23,7 @@ type Props = {
   };
 };
 const cookie = new Cookies()
-const cid = cookie.get('cid')
+const cid = cookie.get('clientid')
 const ProfilePage: NextPage<Props> = ({ deviceType }) => {
   const { data, error, loading } = useQuery(GET_CLIENTE_ID, 
     {

@@ -18,7 +18,7 @@ import Cookies  from 'universal-cookie';
 export const Footer = ( ) => {
 
   const cookie = new Cookies()
-  const cid = cookie.get('cid')
+  const cid = cookie.get('clientid')
   const { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {
