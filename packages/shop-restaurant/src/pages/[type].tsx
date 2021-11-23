@@ -22,7 +22,6 @@ import { GET_CATEGORIES } from 'graphql/query/category.query';
 import { ModalProvider } from 'contexts/modal/modal.provider';
 import { useQuery } from '@apollo/client';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query'; 
-import { GET_SUSCRIPCION_X_HOST } from 'utils/graphql/query/suscripcion.query'; 
 import Cookies  from 'universal-cookie'; 
 
 const cookie = new Cookies()
@@ -54,10 +53,13 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
   
  
   React.useEffect(() => {
+
+    setCid(cookie.get('clientid'))
+
     if (query.text || query.category) {
       scroll();
     }
-  }, [query.text, query.category]);
+  }, [cid, query.text, query.category]);
   const PAGE_TYPE: any = query.type;
   const page = sitePages[PAGE_TYPE];
 
