@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Container,
@@ -19,7 +19,9 @@ import Link from 'next/link';
 export const Footer = ( ) => {
 
   const cookie = new Cookies()
-  const cid = cookie.get('clientid')
+  const [facebook, setFacebook] = useState('#')
+  const [instagram, setInstagram] = useState('#')
+  const [cid, setCid] = useState('')
   const { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {
@@ -27,23 +29,34 @@ export const Footer = ( ) => {
         }
     }); 
 
-   
+   useEffect(() => {
+    if(cookie.get('clientid')){
+      setCid(cookie.get('clientid'))
+    }    
+    if(data && data.suscripciones.length > 0 && data.suscripciones[0].facebook){
+      setFacebook(data.suscripciones[0].facebook)
+    }
+    if(data && data.suscripciones.length > 0 && data.suscripciones[0].instagram){
+      setInstagram(data.suscripciones[0].instagram)
+    }
+   })
+
 
   return (
     <Box>
       
-      {data && data.suscripciones && data.suscripciones.length > 0 }
+     
       <Container>
         <Row>
           <Column>
             <Heading>Redes Sociales</Heading>
             <div className="d-flex">
               
-              <a href={data.suscripciones[0].facebook===null?'#':data.suscripciones[0].facebook} >
+              <a href={facebook} >
                  <Facebook/>
               </a>
               
-              <a href={data.suscripciones[0].instagram===null?'#':data.suscripciones[0].instagram} >
+              <a href={instagram} >
                <Instagram/>
               </a> 
               <Whatsapp/>
