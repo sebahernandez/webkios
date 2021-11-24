@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 
 export const GET_INFO_SHOP = gql`
   query MyQuery ($clientid: String!){
-  info_shop_view(where: {clientid: {_eq: $clientid}}) {
+  suscripciones(where: {clientid: {_eq: $clientid}}) {
       id
       clientid
       usuario
