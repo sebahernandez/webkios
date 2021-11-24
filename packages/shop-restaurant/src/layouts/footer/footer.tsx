@@ -14,6 +14,7 @@ import { Instagram } from 'assets/icons/Instagram';
 import { Whatsapp } from 'assets/icons/Whatsapp';
 import { Heart } from 'assets/icons/Heart';
 import Cookies  from 'universal-cookie';
+import Link from 'next/link';
 
 export const Footer = ( ) => {
 
@@ -26,16 +27,25 @@ export const Footer = ( ) => {
         }
     }); 
 
+   
+
   return (
     <Box>
       
+      {data && data.suscripciones && data.suscripciones.length > 0 }
       <Container>
         <Row>
           <Column>
             <Heading>Redes Sociales</Heading>
             <div className="d-flex">
-              <Facebook/>
-              <Instagram/>
+              
+              <a href={data.suscripciones[0].facebook===null?'#':data.suscripciones[0].facebook} >
+                 <Facebook/>
+              </a>
+              
+              <a href={data.suscripciones[0].instagram===null?'#':data.suscripciones[0].instagram} >
+               <Instagram/>
+              </a> 
               <Whatsapp/>
              </div>
           </Column>
