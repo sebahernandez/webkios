@@ -1,4 +1,4 @@
-import GroceryImg from './image/grocery.png';
+import GroceryImg from './image/furniture.png';
 import MakeupImg from './image/makeup.png';
 import BagImg from './image/bag.png';
 import ClothingImg from './image/clothing.png';

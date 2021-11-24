@@ -46,7 +46,7 @@ export default function OrderReceivedPage() {
  
   return (
     <>
-      <SEO title={data && data.info_shop_view.length > 0 && data.info_shop_view[0].site_name} description={data && data.info_shop_view.length > 0 && data.info_shop_view[0].description + ' - Detalle'} />
+      <SEO title={data && data.suscripciones.length > 0 && data.suscripciones[0].descripcion} description={data && data.suscripciones.length > 0 && data.suscripciones[0].description + ' - Detalle'} />
       <OrderReceived 
         order={order} 
         date={date} 

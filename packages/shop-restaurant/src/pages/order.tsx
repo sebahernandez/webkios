@@ -29,7 +29,7 @@ const OrderPage: NextPage = () => {
         }
     }); 
     if(data1) {
-      mySite = data1.info_shop_view[0] 
+      mySite = data1.suscripciones[0] 
     }
 
   return (

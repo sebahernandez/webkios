@@ -38,8 +38,8 @@ const TermsPage: NextPage<{}> = () => {
 
   return (
     <>
-      <SEO title={"Términos y Condiciones - " + (data !== undefined && data.info_shop_view !== undefined && data.info_shop_view.length > 0 && data.info_shop_view[0].site_name)} 
-       description={(data !== undefined && data.info_shop_view !== undefined && data.info_shop_view.length > 0 && data.info_shop_view[0].description)}  />
+      <SEO title={"Términos y Condiciones - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 && data.suscripciones[0].descripcion)} 
+       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 && data.suscripciones[0].description)}  />
       <StyledContainer>
         <Heading title={title} />
 
