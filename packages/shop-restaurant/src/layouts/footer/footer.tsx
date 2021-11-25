@@ -52,11 +52,11 @@ export const Footer = ( ) => {
             <Heading>Redes Sociales</Heading>
             <div className="d-flex">
               
-              <a href={facebook} >
+              <a href={facebook} target="_blanck" >
                  <Facebook/>
               </a>
               
-              <a href={instagram} >
+              <a href={instagram} target="_blanck" >
                <Instagram/>
               </a> 
               <Whatsapp/>

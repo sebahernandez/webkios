@@ -48,7 +48,8 @@ const Search: React.FC<Props> = ({ onSubmit, ...props }) => {
     }
   };
   return (
-    <SearchBox
+    <h1></h1>
+ /*    <SearchBox
       onEnter={onSearch}
       onChange={handleOnChange}
       value={searchTerm}
@@ -63,7 +64,7 @@ const Search: React.FC<Props> = ({ onSubmit, ...props }) => {
         defaultMessage: 'Search',
       })}
       {...props}
-    />
+    /> */
   );
 };
 
