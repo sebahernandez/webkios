@@ -57,7 +57,7 @@ export default function BakeryPage({ deviceType }) {
 
   return (
     <Modal>
-      <MobileBanner intlTitleId={page?.banner_title_id} type={PAGE_TYPE} />
+      <MobileBanner intlTitleId={page?.banner_title_id} type={PAGE_TYPE} imageUrl=''/>
       <Banner
         intlTitleId={page?.banner_title_id}
         intlDescriptionId={page?.banner_description_id}
