@@ -38,8 +38,11 @@ const ProfilePage: NextPage<Props> = ({ deviceType }) => {
   if (error) return <ErrorMessage message={error.message} />;
   return (
     <>       
-       <SEO title={"Mi Cuenta - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 && data.suscripciones[0].descripcion)} 
-       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 && data.suscripciones[0].titulo)}  />
+       <SEO title={"Profile - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].titulo)} 
+       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].descripcion)}
+       nombre={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].nombre)}
+       tags={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].tags)}  />     
+   
       <ProfileProvider initData={data.cliente[0]}>
         <Modal>
            <PageWrapper>

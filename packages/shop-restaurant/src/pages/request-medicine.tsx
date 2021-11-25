@@ -26,10 +26,11 @@ const RequestMedicinePage: NextPage<Props> = ({ deviceType }) => {
 
   return (
     <>
-      <SEO
-        title="Request Medicine - PickBazar"
-        description="Request Medicine Details"
-      />
+      <SEO title={"Medicine - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].titulo)} 
+       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].descripcion)}
+       nombre={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].nombre)}
+       tags={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].tags)}  />     
+   
       <ProfileProvider initData={data.me}>
         <Modal>
           <RequestMedicine token={token} deviceType={deviceType} />

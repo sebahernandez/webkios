@@ -22,21 +22,23 @@ const OrderPage: NextPage = () => {
   const cookie = new Cookies()
   const cid = cookie.get('clientid')
 
-  const { data:data1, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
+  const { data, error, refetch, fetchMore } = useQuery(GET_INFO_SHOP,
     {
         variables: {
           clientid: cid
         }
     }); 
-    if(data1) {
-      mySite = data1.suscripciones[0] 
+    if(data) {
+      mySite = data.suscripciones[0] 
     }
 
   return (
     <>
-       <SEO title={"Pedido - " + (mySite &&  mySite.site_name)} 
-        description={mySite && mySite.description} />
-
+         <SEO title={"Pedido - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].titulo)} 
+       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].descripcion)}
+       nombre={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].nombre)}
+       tags={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].tags)}  />     
+   
       <Modal>
         <PageWrapper>
           <SidebarSection>

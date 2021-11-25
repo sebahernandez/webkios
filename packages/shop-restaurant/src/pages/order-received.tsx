@@ -46,7 +46,10 @@ export default function OrderReceivedPage() {
  
   return (
     <>
-      <SEO title={data && data.suscripciones.length > 0 && data.suscripciones[0].descripcion} description={data && data.suscripciones.length > 0 && data.suscripciones[0].description + ' - Detalle'} />
+      <SEO title={"Orden Recibida - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].titulo)} 
+       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].descripcion)}
+       nombre={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].nombre)}
+       tags={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].tags)}  />     
       <OrderReceived 
         order={order} 
         date={date} 

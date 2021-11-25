@@ -60,7 +60,10 @@ const GiftCardPage: NextPage<GiftCardProps> = ({ deviceType }) => {
 
   return (
     <Modal>
-      <SEO title={data1 && data1.suscripciones[0].descripcion} description={data1 && data1.suscripciones[0].description + ' - Detalle'} />      
+      <SEO title={"Cupones - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].titulo)} 
+       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].descripcion)}
+       nombre={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].nombre)}
+       tags={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].tags)}  />     
       <OfferPageWrapper>
         <MainContentArea>
           <div style={{ width: '100%' }}>
