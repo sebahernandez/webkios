@@ -23,6 +23,7 @@ import { ModalProvider } from 'contexts/modal/modal.provider';
 import { useQuery } from '@apollo/client';
 import { GET_INFO_SHOP } from 'utils/graphql/query/infoshop.query'; 
 import Cookies  from 'universal-cookie'; 
+import { MobileBanner } from 'components/banner/mobile-banner';
 
 const cookie = new Cookies()
 const Sidebar = dynamic(() => import('layouts/sidebar/sidebar'));
@@ -74,17 +75,17 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
             />
       <ModalProvider>
         <Modal>
-         {/*  <MobileBanner intlTitleId={page?.banner_title_id} type={PAGE_TYPE} /> */}
+         <MobileBanner intlTitleId={page?.banner_title_id} type={PAGE_TYPE} imageUrl={data && data.suscripciones.length > 0 && data.suscripciones[0].shop_image_body}   /> 
           <Banner
             intlTitleId={page?.banner_title_id}
             intlDescriptionId={page?.banner_description_id}
             imageUrl={data && data.suscripciones.length > 0 && data.suscripciones[0].shop_image_body}  
           />
-          <OfferSection>
+          {/* <OfferSection>
             <div style={{ margin: '0 -10px' }}>
               <Carousel deviceType={deviceType} data={siteOffers} />
             </div>
-          </OfferSection>
+          </OfferSection> */}
           <MobileCarouselDropdown>
           {/*   <Sidebar type={PAGE_TYPE} deviceType={deviceType} /> */}
           </MobileCarouselDropdown>
