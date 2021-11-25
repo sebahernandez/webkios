@@ -7,6 +7,8 @@ import furnitureImage from 'assets/images/banner/furniture.png';
 import medicineImage from 'assets/images/banner/medicine.png';
 import bakeryImage from 'assets/images/banner/bakery.jpg';
 
+
+
 export const sitePages = {
   grocery: {
     page_title: 'Grocery - PickBazar',

@@ -75,7 +75,7 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
           <Banner
             intlTitleId={page?.banner_title_id}
             intlDescriptionId={page?.banner_description_id}
-            imageUrl={page?.banner_image_url}
+            imageUrl={data && data.suscripciones.length > 0 && data.suscripciones[0].shop_image_body}  
           />
           <OfferSection>
             <div style={{ margin: '0 -10px' }}>
