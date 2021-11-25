@@ -60,7 +60,7 @@ export default function SignInModal({cid}) {
         localforage.setItem('@session',data.carritos_abandonados[0].data_json)
     }
     console.log('checkout...')
-    if( data &&  data.carritos_abandonados[0].data_json !== '' && data.carritos_abandonados[0].data_json !== '{\"isOpen\":false,\"items\":[],\"isRestaurant\":false,\"coupon\":null}')
+    if( data &&  data.carritos_abandonados.length > 0 && data.carritos_abandonados[0].data_json !== '' && data.carritos_abandonados[0].data_json !== '{\"isOpen\":false,\"items\":[],\"isRestaurant\":false,\"coupon\":null}')
       router.push('/')
 
     return null;

@@ -4,6 +4,8 @@ import Head from 'next/head';
 type SeoProps = {
   title: string;
   description: string;
+  tags: string;
+  nombre: string;
   canonical?: string;
   css?: string;
   js?: string;
@@ -13,6 +15,8 @@ type SeoProps = {
 export const SEO: React.FC<SeoProps> = ({
   title,
   description,
+  tags,
+  nombre,
   canonical,
   css,
   js,
@@ -36,6 +40,8 @@ export const SEO: React.FC<SeoProps> = ({
     <meta property="og:url" content={`${canonical}`} />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
+    <meta name="keywords" content={tags}/>
+    <meta name="author" content={nombre}/>
     <meta name="twitter:description" content={description} />
     <meta name="twitter:site" content="@propernounco" />
     <meta name="twitter:creator" content="@propernounco" />

@@ -37,8 +37,8 @@ const PrivacyPage: NextPage<{}> = () => {
 
   return (
     <>
-      <SEO title={"Privacidad - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].descripcion)} 
-       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].description)}  />
+      <SEO title={"Privacidad - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].titulo)} 
+       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].titulo)}  />
       <StyledContainer>
         <Heading title={title} />
 

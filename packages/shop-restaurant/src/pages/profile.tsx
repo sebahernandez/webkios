@@ -39,7 +39,7 @@ const ProfilePage: NextPage<Props> = ({ deviceType }) => {
   return (
     <>       
        <SEO title={"Mi Cuenta - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 && data.suscripciones[0].descripcion)} 
-       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 && data.suscripciones[0].description)}  />
+       description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 && data.suscripciones[0].titulo)}  />
       <ProfileProvider initData={data.cliente[0]}>
         <Modal>
            <PageWrapper>

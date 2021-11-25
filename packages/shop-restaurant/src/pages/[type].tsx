@@ -67,8 +67,11 @@ const CategoryPage: React.FC<any> = ({ deviceType }) => {
    
   return (
     <>
-       {data && data.suscripciones.length > 0}
-       <SEO title={data && data.suscripciones.length > 0 && data.suscripciones[0].descripcion} description={data && data.suscripciones.length > 0 && data.suscripciones[0].description + ' - Detalle'} />
+       <SEO title={data && data.suscripciones.length > 0 && data.suscripciones[0].titulo} 
+            description={data && data.suscripciones.length > 0 && data.suscripciones[0].descripcion + ' - Detalle'}
+            nombre={data && data.suscripciones.length > 0 && data.suscripciones[0].nombre } 
+            tags={data && data.suscripciones.length > 0 && data.suscripciones[0].tags } 
+            />
       <ModalProvider>
         <Modal>
          {/*  <MobileBanner intlTitleId={page?.banner_title_id} type={PAGE_TYPE} /> */}

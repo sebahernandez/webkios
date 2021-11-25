@@ -80,7 +80,7 @@ export const Footer = ( ) => {
       </Container>
       
       <h6 style={{ color: 'gray', textAlign: 'center', padding: '20px 10px', borderTop: '1px solid #009E7F' }}>
-      {data && data.suscripciones.length > 0 &&  data.suscripciones[0].descripcion} | <Heart /> Por Tu-ecommerce.cl
+      {data && data.suscripciones.length > 0 &&  data.suscripciones[0].titulo} | <Heart /> Por Tu-ecommerce.cl
       </h6>
      
     </Box>
