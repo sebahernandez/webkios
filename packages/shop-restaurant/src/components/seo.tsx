@@ -30,12 +30,6 @@ export const SEO: React.FC<SeoProps> = ({
       content="width=device-width,maximum-scale=1,initial-scale=1"
     />
     <meta property="og:type" content="website" />
-    <meta name="og:title" property="og:title" content={title} />
-    <meta
-      name="og:description"
-      property="og:description"
-      content={description}
-    />
     <meta property="og:site_name" content="Proper Noun" />
     <meta property="og:url" content={`${canonical}`} />
     <meta name="twitter:card" content="summary" />

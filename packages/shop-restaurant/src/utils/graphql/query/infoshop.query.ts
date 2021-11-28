@@ -17,6 +17,7 @@ export const GET_INFO_SHOP = gql`
       titulo
       descripcion
       tags
+      canonical
       fecha_suscripcion
       fecha_vencimiento
       negocio_web

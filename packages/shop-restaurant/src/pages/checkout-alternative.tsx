@@ -31,6 +31,7 @@ const CheckoutPage: NextPage<Props> = ({ deviceType }) => {
         description="Checkout Details"
         nombre='' 
         tags='' 
+        canonical=''
       />
       <ProfileProvider initData={data.me}>
         <Modal>

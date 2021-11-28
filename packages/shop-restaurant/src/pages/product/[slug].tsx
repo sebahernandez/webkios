@@ -47,6 +47,7 @@ const ProductPage: NextPage<Props> = ({ data, deviceType }) => {
         description={`${data.product.title} Details`}
         tags= ''
         nombre=''
+        canonical=''
       />
 
       <Modal>

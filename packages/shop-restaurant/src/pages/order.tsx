@@ -37,7 +37,9 @@ const OrderPage: NextPage = () => {
          <SEO title={"Pedido - " + (data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].titulo)} 
        description={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].descripcion)}
        nombre={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].nombre)}
-       tags={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].tags)}  />     
+       tags={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 &&  data.suscripciones[0].tags)} 
+       canonical={(data !== undefined && data.suscripciones !== undefined && data.suscripciones.length > 0 && (data.suscripciones[0].canonical))}  
+      />
    
       <Modal>
         <PageWrapper>
