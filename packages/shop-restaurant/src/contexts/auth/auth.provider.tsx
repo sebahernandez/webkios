@@ -71,7 +71,9 @@ export const AuthProvider: React.FunctionComponent = ({ children }) => {
       if(data && data.suscripciones.length > 0) {  
         console.log('>>>>>>>>>>> clientid data:' , JSON.stringify(data))
         cookie.remove('clientid')  
-        cookie.set('clientid',data.suscripciones[0].clientid)          
+        cookie.set('clientid',data.suscripciones[0].clientid)    
+        cookie.set('host',data.suscripciones[0].negocio_web)    
+        cookie.set('tmp',data.suscripciones[0].token_mercado)                  
       } 
     }
 

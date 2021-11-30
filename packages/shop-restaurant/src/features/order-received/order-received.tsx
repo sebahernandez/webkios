@@ -33,10 +33,12 @@ type OrderReceivedProps = {
  */
 
 const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date, datedelivery, itemscount, delivery_address, contact, subtotal, discount, total}) => {
-  const [loading, setLoading] = useState(false);
-  
   const cookie = new Cookies()
 
+  const [loading, setLoading] = useState(false);
+  const [host] = useState(cookie.get('host'))
+  const [token_mercado] = useState(cookie.get('tmp'))
+  
   const handleSubmit = async () => {
      
     setLoading(true);
@@ -48,7 +50,9 @@ const OrderReceived: React.FunctionComponent<OrderReceivedProps> = ({order, date
     <OrderReceivedWrapper>
       <OrderReceivedContainer>
       <form action="https://cashier.tu-ecommerce.cl/checkout" method="POST">
-           <input type="hidden" name="title" value={order} />
+            <input type="hidden" name="host" value={host} />
+            <input type="hidden" name="token" value={token_mercado} />
+            <input type="hidden" name="title" value={order} />
             <input type="hidden" name="price" value={total} />
             
                 <Button
