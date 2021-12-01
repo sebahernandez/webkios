@@ -57,25 +57,25 @@ export const AuthProvider: React.FunctionComponent = ({ children }) => {
   }); 
  
    useEffect(() => {
-     console.log('alerta window location')
     if(window.location.hostname==='localhost')
     {
-      setHost("https://entreteres.cl/")
+      setHost("%".concat('entreteres').concat("%"))
     } else 
     if(window) {
-      setHost(window.location.hostname)            
-    }     
-    console.log('>>>>>>>>>>> host1:' , host)
-    if(host !== null){  
-      console.log('>>>>>>>>>>> host2:' , host)
-      if(data && data.suscripciones.length > 0) {  
-        console.log('>>>>>>>>>>> clientid data:' , JSON.stringify(data))
-        cookie.remove('clientid')  
-        cookie.set('clientid',data.suscripciones[0].clientid)    
-        cookie.set('host',JSON.stringify(data.suscripciones[0].negocio_web))    
-        cookie.set('tmp',data.suscripciones[0].token_mercado)                  
-      } 
-    }
+      setHost("%".concat(window.location.hostname).concat("%"))
+
+      if(host !== null){  
+        console.log('>>>>>>>>>>> host2:' , host)
+        if(data && data.suscripciones.length > 0) {  
+          console.log('SUCCESFULL >>>>>>>>>>> clientid data:' , JSON.stringify(data))
+          cookie.remove('clientid')  
+          cookie.set('clientid',data.suscripciones[0].clientid)    
+          cookie.set('host',JSON.stringify(data.suscripciones[0].negocio_web))    
+          cookie.set('tmp',data.suscripciones[0].token_mercado)                  
+        } 
+      }
+            
+    }      
 
   }, [ host, data ]);
 
