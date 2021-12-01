@@ -5,6 +5,7 @@ export const GET_SUSCRIPCION_X_HOST = gql`
     suscripciones(where: {is_root: {_neq: true}, negocio_web: {_like: $host}}) {
       clientid
       negocio_web
+      token_mercado
     }
   }
 `;

@@ -201,9 +201,9 @@ export default function SignInModal({cid}) {
 
        <GoogleButton isclosed={closed} />
         
-       {closed && ( <LoadUser email={email}/> )}
+    {closed && ( <LoadUser email={email}/> )}
 
-       {closed && ( <LoadCarritoAbandonado customerid={328}/> )}
+    {/*    {closed && ( <LoadCarritoAbandonado customerid={328}/> )}   */}
  
       </Container>
 
