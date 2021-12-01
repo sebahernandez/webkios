@@ -57,13 +57,13 @@ export const AuthProvider: React.FunctionComponent = ({ children }) => {
   }); 
  
    useEffect(() => {
+     console.log('alerta window location')
     if(window.location.hostname==='localhost')
     {
-      setHost("%".concat('entreteres').concat("%"))
+      setHost("https://entreteres.cl/")
     } else 
     if(window) {
-      setHost("%".concat(window.location.hostname).concat("%"))
-            
+      setHost(window.location.hostname)            
     }     
     console.log('>>>>>>>>>>> host1:' , host)
     if(host !== null){  
