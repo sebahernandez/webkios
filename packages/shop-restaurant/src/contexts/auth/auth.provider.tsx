@@ -49,41 +49,52 @@ function reducer(state: any, action: any) {
 export const AuthProvider: React.FunctionComponent = ({ children }) => {
 
   const [host, setHost] = useState(null)
-  const { data } = useQuery(GET_SUSCRIPCION_X_HOST,
+  const { data, loading } = useQuery(GET_SUSCRIPCION_X_HOST,
     {
         variables: {
           host: host
         }
   }); 
  
+  
    useEffect(() => {
-    if(window.location.hostname==='localhost')
-    {
-      setHost("%".concat('entreteres').concat("%"))
-    } else 
-    if(window) {
-      setHost("%".concat(window.location.hostname).concat("%"))
-
-      if(host !== null){  
-        console.log('>>>>>>>>>>> host2:' , host)
-        if(data && data.suscripciones.length > 0) {  
+   
+        if(window.location.hostname==='localhost')
+        {
+          setHost("%".concat('shop').concat("%"))
+        } else 
+        if(window) {
+          setHost("%".concat(window.location.hostname).concat("%"))
+         }  
+         
+         if(data && data.suscripciones.length > 0) {  
           console.log('SUCCESFULL >>>>>>>>>>> clientid data:' , JSON.stringify(data))
           cookie.remove('clientid')  
+          cookie.set('suscriptor',data.suscripciones[0])
           cookie.set('clientid',data.suscripciones[0].clientid)    
           cookie.set('host',JSON.stringify(data.suscripciones[0].negocio_web))    
           cookie.set('tmp',data.suscripciones[0].token_mercado)                  
-        } 
-      }
-            
-    }      
+        }  
 
   }, [ host, data ]);
 
 
   const [authState, authDispatch] = useReducer(reducer, INITIAL_STATE);
-  return (
-    <AuthContext.Provider value={{ authState, authDispatch }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  
+  
+  if( loading ) {
+
+    return (<h1>Loading</h1>)
+        
+  } else {
+
+    return (
+      data && data.suscripciones.length > 0 && (<AuthContext.Provider value={{ authState, authDispatch }}>
+        {children}
+      </AuthContext.Provider>)
+    );
+
+  }
+  
+ 
 };

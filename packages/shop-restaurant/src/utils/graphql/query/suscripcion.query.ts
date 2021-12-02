@@ -6,6 +6,7 @@ export const GET_SUSCRIPCION_X_HOST = gql`
       clientid
       negocio_web
       token_mercado
+      token_google
     }
   }
 `;
