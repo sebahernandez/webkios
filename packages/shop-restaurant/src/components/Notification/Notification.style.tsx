@@ -1,5 +1,3 @@
-import { styled } from 'baseui';
-
 const getTitleStyle = ({ $theme }) => {
   return $theme.typography.fontBold14;
 };
