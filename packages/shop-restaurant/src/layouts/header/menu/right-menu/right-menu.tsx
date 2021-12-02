@@ -5,8 +5,19 @@ import { OFFER_MENU_ITEM, HELP_MENU_ITEM } from 'site-settings/site-navigation';
 import LanguageSwitcher from '../language-switcher/language-switcher';
 import { HelpIcon } from 'assets/icons/HelpIcon';
 import { RightMenuBox } from './right-menu.style';
-const AuthMenu = dynamic(() => import('../auth-menu'), { ssr: false });
+import Notification from 'components/Notification/Notification';
+import { AlertDotIcon } from 'assets/icons/AlertDotIcon';
+import { NotificationIcon } from 'assets/icons/NotificationIcon';
 
+import {
+
+  AlertDot,
+  NotificationIconWrapper,
+
+}from './Topbar/Topbar.style'; 
+
+
+const AuthMenu = dynamic(() => import('../auth-menu'), { ssr: false });
 type Props = {
   onLogout: () => void;
   onJoin: () => void;
@@ -36,7 +47,12 @@ export const RightMenu: React.FC<Props> = ({
         iconClass="menu-icon"
         icon={<HelpIcon />}
       />
-      <LanguageSwitcher />
+     <NotificationIconWrapper>
+            <NotificationIcon />
+            <AlertDot>
+              <AlertDotIcon />
+            </AlertDot>
+    </NotificationIconWrapper>
 
       <AuthMenu
         avatar={avatar}
