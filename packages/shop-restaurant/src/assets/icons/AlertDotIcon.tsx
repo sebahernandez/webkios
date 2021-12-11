@@ -3,8 +3,8 @@ export const AlertDotIcon = () => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='10'
-      height='10'
+      width='16'
+      height='16'
       viewBox='0 0 10 10'
     >
       <g data-name='Group 2830' transform='translate(-1598 -32)'>
