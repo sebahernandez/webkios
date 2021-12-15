@@ -4,6 +4,7 @@ const isBrowser = typeof window !== 'undefined';
 import Cookies  from 'universal-cookie';
 import { GET_SUSCRIPCION_X_HOST } from 'utils/graphql/query/suscripcion.query'; 
 import { useQuery } from '@apollo/client';
+import LoadingWrapper from '../../components/Loading/loading'
 
 const cookie = new Cookies()
 
@@ -84,7 +85,7 @@ export const AuthProvider: React.FunctionComponent = ({ children }) => {
   
   if( loading ) {
 
-    return (<h1>Loading</h1>)
+    return (<LoadingWrapper></LoadingWrapper>)
         
   } else {
 
