@@ -5,10 +5,22 @@
       "static/chunks/4.js"
     ]
   },
+  "../components/banner/mobile-banner.tsx -> components/spring-modal/spring-modal": {
+    "id": "./src/components/spring-modal/spring-modal.tsx",
+    "files": [
+      "static/chunks/5.js"
+    ]
+  },
+  "../components/banner/mobile-banner.tsx -> components/type-nav/type-nav": {
+    "id": "./src/components/type-nav/type-nav.tsx",
+    "files": [
+      "static/chunks/11.js"
+    ]
+  },
   "../components/product-card/product-card-one/product-card-one.tsx -> features/quick-view/quick-view-mobile": {
     "id": "./src/features/quick-view/quick-view-mobile.tsx",
     "files": [
-      "static/chunks/11.js"
+      "static/chunks/8.js"
     ]
   },
   "../components/product-grid/product-list/product-list.tsx -> components/error-message/error-message": {
@@ -18,19 +30,19 @@
   "../components/product-grid/product-list/product-list.tsx -> components/product-card/product-card-one/product-card-one": {
     "id": "./src/components/product-card/product-card-one/product-card-one.tsx",
     "files": [
-      "static/chunks/7.js"
+      "static/chunks/9.js"
     ]
   },
   "../contexts/modal/modal.provider.tsx -> components/modal/center-modal": {
     "id": "./src/components/modal/center-modal.tsx",
     "files": [
-      "static/chunks/9.js"
+      "static/chunks/12.js"
     ]
   },
   "../contexts/modal/modal.provider.tsx -> components/spring-modal/spring-modal": {
     "id": "./src/components/spring-modal/spring-modal.tsx",
     "files": [
-      "static/chunks/10.js"
+      "static/chunks/5.js"
     ]
   },
   "../layouts/app-layout.tsx -> ./header/mobile-header": {
@@ -48,19 +60,19 @@
   "[type].tsx -> components/product-grid/product-list/product-list": {
     "id": "./src/components/product-grid/product-list/product-list.tsx",
     "files": [
-      "static/chunks/8.js"
+      "static/chunks/10.js"
     ]
   },
   "[type].tsx -> features/carts/cart-popup": {
     "id": "./src/features/carts/cart-popup.tsx",
     "files": [
-      "static/chunks/6.js"
+      "static/chunks/7.js"
     ]
   },
   "[type].tsx -> layouts/sidebar/sidebar": {
     "id": "./src/layouts/sidebar/sidebar.tsx",
     "files": [
-      "static/chunks/5.js"
+      "static/chunks/6.js"
     ]
   },
   "_app.tsx -> components/demo-switcher/switcher-btn": {
